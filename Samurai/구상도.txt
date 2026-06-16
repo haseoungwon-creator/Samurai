@@ -1,0 +1,35 @@
+사무라이: https://xzany.itch.io/samurai-3-2d-pixel-art
+
+일본 배경: https://slavarbuz.itch.io/japanese-house
+
+일본 배경 흑백: https://alakon-studio.itch.io/japan-pixelart
+
+일본 배경: https://macktipton.itch.io/sidescroller-assets-pack
+
+숲 배경: https://brullov.itch.io/oak-woods
+
+보스: https://xzany.itch.io/samurai-2-2d-pixel-art
+
+스승: https://xzany.itch.io/samurai-2d-pixel-art
+
+적: https://xzany.itch.io/samurai-5-2d-pixel-art
+
+적: https://pozac.itch.io/feudal-japan-temple-2d-pixel-art-platformer-asset-pack?utm_source=chatgpt.com
+
+병사: https://kbpixelart.itch.io/ninja-enemy-pack
+
+병사: https://hajileee.itch.io/hajileees-fantasy-characters-pack-japan-set
+
+적: https://xzany.itch.io/samurai-6-2d-pixel-art
+
+
+
+
+
+
+
+유니티 4 할 때 만들 게임을 변경해도 될까요?
+에셋을 구하는 데 어려움이 있고, 포트폴리오로 만들기에는 적합하지 않은 것 같아서 다른 주제로 변경하고 싶습니다.
+2D 액션 플랫포머를 만들 생각입니다.
+참고할 게임은 아직 정하지 못했지만, 전체적인 분위기는 사무라이 느낌으로 구성할 예정입니다.
+에셋은 유니티 에셋 스토어가 아닌 itch.io에서 찾아 사용해도 괜찮을까요?
