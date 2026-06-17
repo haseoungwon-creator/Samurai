@@ -1,35 +1,33 @@
-사무라이: https://xzany.itch.io/samurai-3-2d-pixel-art
+사무라이: https://xzany.itch.io/samurai-3-2d-pixel-art (구매)
 
-일본 배경: https://slavarbuz.itch.io/japanese-house
+일본 배경: https://slavarbuz.itch.io/japanese-house (3,029.38원)
 
-일본 배경 흑백: https://alakon-studio.itch.io/japan-pixelart
+일본 배경 흑백: https://alakon-studio.itch.io/japan-pixelart(8,788.05원)
 
-일본 배경: https://macktipton.itch.io/sidescroller-assets-pack
+일본 배경: https://macktipton.itch.io/sidescroller-assets-pack(구매)
 
-숲 배경: https://brullov.itch.io/oak-woods
+숲 배경: https://brullov.itch.io/oak-woods(구매)
 
-보스: https://xzany.itch.io/samurai-2-2d-pixel-art
+보스: https://xzany.itch.io/samurai-2-2d-pixel-art(4,543.59원)
 
-스승: https://xzany.itch.io/samurai-2d-pixel-art
+스승: https://xzany.itch.io/samurai-2d-pixel-art(4,543.59원)
 
-적: https://xzany.itch.io/samurai-5-2d-pixel-art
+적: https://xzany.itch.io/samurai-5-2d-pixel-art(4,543.59원)
 
-적: https://pozac.itch.io/feudal-japan-temple-2d-pixel-art-platformer-asset-pack?utm_source=chatgpt.com
+적: https://pozac.itch.io/feudal-japan-temple-2d-pixel-art-platformer-asset-pack?utm_source=chatgpt.com(구매)
 
-병사: https://kbpixelart.itch.io/ninja-enemy-pack
+병사: https://kbpixelart.itch.io/ninja-enemy-pack (3,029.51원)
 
-병사: https://hajileee.itch.io/hajileees-fantasy-characters-pack-japan-set
+병사: https://hajileee.itch.io/hajileees-fantasy-characters-pack-japan-set(9,087.72원)
 
-적: https://xzany.itch.io/samurai-6-2d-pixel-art
-
-
+적: https://xzany.itch.io/samurai-6-2d-pixel-art(4,543.59원)
 
 
 
+-스토리-
+주인공은 스승 아래에서 친구와 함께 수령하며 인정받기 이한 경쟁을 시작하고, 튜토리얼을 통해 기본기를 배우게 된다. 이후 스승에게 임무를 받아 여러 지여으로 이동해 적과 보스를 처치하고사원으로 돌아오는 과정을 반복하면서 점점 실력을 인정받지만, 친구는 계속된 비교와 인정받지 못하는 상황 속에서 점차 불만과 열등감을 쌓아간다. 마지막 임무를 마치고 돌아온 주인공은 불타버린 마을과 죽은 스승을 마주하게 되고, 그 원인이 친구의 배신임을 알게 된다. 이휴 친구와의 전투가 시작되며, 전투 도중 체력이 일정 이하로 내려가면 과거 스승이 친구에게 기본기의 중요성을 꾸짖던 장면이 회상되고, 감정이 촉발한 친구는 더욱 거칠게 공격한다. 마지막에는 주인공이 수련 때 배운 기술을 활용해 친구의 뒤로 이동해 일격을 가하며 싸움을 끝내고 이야기가 마무리된다.
+(파 끼리 싸움)
 
 
-유니티 4 할 때 만들 게임을 변경해도 될까요?
-에셋을 구하는 데 어려움이 있고, 포트폴리오로 만들기에는 적합하지 않은 것 같아서 다른 주제로 변경하고 싶습니다.
-2D 액션 플랫포머를 만들 생각입니다.
-참고할 게임은 아직 정하지 못했지만, 전체적인 분위기는 사무라이 느낌으로 구성할 예정입니다.
-에셋은 유니티 에셋 스토어가 아닌 itch.io에서 찾아 사용해도 괜찮을까요?
+-기술-
+게임은 사원을 중심으로 임무를 받고 NPC를 통해 전투 맵으로 이동한 디 다시 귀환하는 구조로 반복되며 진행된다. 각 전투 맵에서는 처음부터 약한 상태의 보스가 등장해 플레이어와 전투를 벌이다가 체력이 일정 이하로 감소하면 플레이어의 반대 방향으로 빠르게 도망쳐 화면 밖으로 사라지고, 이휴 플레이어는 남은 병사들을 처리하며 맵 끝까지 이동하게 된다. 앱 끝의 트리거에 도달하면 보스가 다시 등장하며 이때는 강화되 ㄴ상태로 2페이즈 전투가 시작되고, 이를 처치하면 임무가 완료된다. 전투 시스템은 플레이어의 공격 시 히트박스를 잠시 활성화하여 적과 충돌하면 데미지를 주는 방식이며, 적과 보스는 각각 HP를 가지고 있어 일정 데미지를 받으면 감소하고 0 이하가 되면 죽는 구조로 이루어져 있다.
