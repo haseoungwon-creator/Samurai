@@ -10,11 +10,12 @@
 
 보스: https://xzany.itch.io/samurai-2-2d-pixel-art(4,543.59원)
 
-스승: https://xzany.itch.io/samurai-2d-pixel-art(4,543.59원)
+스승: https://xzany.itch.io/samurai-2d-pixel-art(4,543.59원) (구매)
 
 적: https://xzany.itch.io/samurai-5-2d-pixel-art(4,543.59원)
 
-적: https://pozac.itch.io/feudal-japan-temple-2d-pixel-art-platformer-asset-pack?utm_source=chatgpt.com(구매)
+적: https://pozac.itch.io/feudal-japan-temple-2d-pixel-art-platformer-asset-pack?utm_source=chatgpt.com(구매) 다른버전도
+
 
 병사: https://kbpixelart.itch.io/ninja-enemy-pack (3,029.51원)
 
@@ -22,7 +23,11 @@
 
 적: https://xzany.itch.io/samurai-6-2d-pixel-art(4,543.59원)
 
+버프  UI: https://assetstore.unity.com/packages/2d/gui/icons/skill-and-potions-icon-pack-82233\
 
+중국풍 UI: https://wningningw.itch.io/visual-novel-gui-pack-013
+
+픽셸 우드 UI: https://oinky55.itch.io/fantasy-ui
 
 -스토리-
 주인공은 스승 아래에서 친구와 함께 수령하며 인정받기 이한 경쟁을 시작하고, 튜토리얼을 통해 기본기를 배우게 된다. 이후 스승에게 임무를 받아 여러 지여으로 이동해 적과 보스를 처치하고사원으로 돌아오는 과정을 반복하면서 점점 실력을 인정받지만, 친구는 계속된 비교와 인정받지 못하는 상황 속에서 점차 불만과 열등감을 쌓아간다. 마지막 임무를 마치고 돌아온 주인공은 불타버린 마을과 죽은 스승을 마주하게 되고, 그 원인이 친구의 배신임을 알게 된다. 이휴 친구와의 전투가 시작되며, 전투 도중 체력이 일정 이하로 내려가면 과거 스승이 친구에게 기본기의 중요성을 꾸짖던 장면이 회상되고, 감정이 촉발한 친구는 더욱 거칠게 공격한다. 마지막에는 주인공이 수련 때 배운 기술을 활용해 친구의 뒤로 이동해 일격을 가하며 싸움을 끝내고 이야기가 마무리된다.
