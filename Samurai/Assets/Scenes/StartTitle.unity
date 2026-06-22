@@ -421,8 +421,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8706a79d040b13b4ea7f9e6c1af2981e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadeManager
-  fadePrefab: {fileID: 7945867767030185385, guid: 5e1a90fe2d96b8641816d1796a0effe1, type: 3}
-  fadeDuration: 2
 --- !u!4 &560932162
 Transform:
   m_ObjectHideFlags: 0
@@ -568,8 +566,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TitleManager
   nextSceneName: FIrstStory
-  fadeManager: {fileID: 560932161}
-  audioManager: {fileID: 488196335}
   audioSource: {fileID: 910265627}
 --- !u!82 &910265627
 AudioSource:

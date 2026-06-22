@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class StoryManager : MonoBehaviour
 {
 
+    public static StoryManager instance;
+
     private string storytext;
 
     public bool isTyping { get; private set; }
@@ -14,6 +16,19 @@ public class StoryManager : MonoBehaviour
     Text textbox;
     float speed;
     string storyline;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     private IEnumerator TypeText()
     {
         isTyping = true;

@@ -4,8 +4,6 @@ using UnityEngine.SceneManagement;
 public class TitleManager : MonoBehaviour
 {
     [SerializeField] string nextSceneName = "";
-    [SerializeField]FadeManager fadeManager;
-    [SerializeField] AudioManager audioManager;
     [SerializeField] AudioSource audioSource;
     float delay = 1f;
     bool canInput = false;
@@ -13,7 +11,7 @@ public class TitleManager : MonoBehaviour
 
     void Start()
     {
-        audioManager.PlayBgm(audioSource);
+        AudioManager.instance.PlayBgm(audioSource);
         Invoke("EnableInput", delay);
     }
 
@@ -26,9 +24,9 @@ public class TitleManager : MonoBehaviour
     {
         if (canInput && Input.GetKeyDown(KeyCode.Space)&& onetouch)
         {
-            fadeManager.FadeIn();
+            FadeManager.instance.FadeIn(2f);
             Invoke("NextScene", 3f);
-            audioManager.StopBgm();
+            AudioManager.instance.StopBgm();
             onetouch = false;
            
             

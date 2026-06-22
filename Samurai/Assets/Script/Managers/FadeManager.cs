@@ -5,29 +5,46 @@ using static UnityEditor.Experimental.GraphView.Port;
 
 public class FadeManager : MonoBehaviour
 {
-    [SerializeField] GameObject fadePrefab;
-
-    GameObject fadeObject;
+    public static FadeManager instance;
+    static GameObject fadeInstance;
     Image fadeImage;
-    [SerializeField] float fadeDuration = 1f;
+    float fadeDuration = 1f;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
-        fadeObject = Instantiate(fadePrefab);
 
-        fadeImage = fadeObject.GetComponentInChildren<Image>();
+        fadeInstance = Instantiate(Resources.Load<GameObject>("FadePrefab"));
+        
+        fadeImage = fadeInstance.GetComponentInChildren<Image>();
 
         Color c = fadeImage.color;
         fadeImage.color = c;
+
+        DontDestroyOnLoad(fadeInstance);
     }
 
-    public void FadeIn()
+    public void FadeIn(float fadeDurations)
     {
+        fadeDuration = fadeDurations;
         StartCoroutine(Fade(0, 1, fadeDuration));
     }
 
-    public void FadeOut()
+    public void FadeOut(float fadeDurations)
     {
+        fadeDuration = fadeDurations;
         StartCoroutine(Fade(1, 0, fadeDuration));
     }
 

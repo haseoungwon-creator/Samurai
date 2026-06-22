@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,9 +8,7 @@ public class FirstStory : MonoBehaviour
 {
     [SerializeField] AudioSource fireBgm;
     [SerializeField] AudioSource heartbit;
-    [SerializeField]StoryManager storyManager;
-    [SerializeField] AudioManager audioManager;
-    [SerializeField] FadeManager fadeManager;
+    bool spacebarEndingOneClick = true;
 
     private Text storybox;
 
@@ -17,7 +16,7 @@ public class FirstStory : MonoBehaviour
     public int index;
     
 
-    string[] storytext =
+    string[] firststorytext =
         {
             "난세의 불꽃이 온 세상을 집어삼키던 날",
             "사원의 검은 꺾였고, 스승의 서약은 잿더미가 되었다.",
@@ -26,19 +25,21 @@ public class FirstStory : MonoBehaviour
 
     private void Start()
     {
-        audioManager.PlayBgm(fireBgm);
+        GameManager.instance.SetState(GameState.Story);
+        FadeManager.instance.FadeOut(0.1f);
+        AudioManager.instance.PlayBgm(fireBgm);
         storybox = GetComponent<Text>();
         index = 0;
 
-        storyManager.StartTyping(storytext[0], storybox, textspeed);
+        StoryManager.instance.StartTyping(firststorytext[0], storybox, textspeed);
     }
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            if (storyManager.isTyping)
+            if (StoryManager.instance.isTyping)
             {
-                storyManager.skip();
+                StoryManager.instance.skip();
             }
             else
             {
@@ -50,15 +51,22 @@ public class FirstStory : MonoBehaviour
     void NextLine()
     {
         index++;
-        if(index < storytext.Length)
+        if (index < firststorytext.Length)
         {
-            storyManager.StartTyping(storytext[index], storybox, textspeed);
+            StoryManager.instance.StartTyping(firststorytext[index], storybox, textspeed);
         }
 
         else
         {
-            fadeManager.FadeIn();
-            audioManager.EndingAudio(heartbit, fireBgm, false);     
+            if (spacebarEndingOneClick)
+            {
+                FadeManager.instance.FadeIn(0.1f);
+                AudioManager.instance.EndingAudio(heartbit, fireBgm, false);
+
+                GameManager.instance.SetState(GameState.Playing);
+
+                spacebarEndingOneClick = false;
+            }
         }
     }
    

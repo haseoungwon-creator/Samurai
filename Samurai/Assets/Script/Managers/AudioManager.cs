@@ -4,10 +4,23 @@ using static UnityEditor.MaterialProperty;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager instance;
     AudioSource BgmSource;
     AudioSource EffectSource;
     AudioSource sfxSource;
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     public void PlayBgm(AudioSource source)
     {
         BgmSource = source;
