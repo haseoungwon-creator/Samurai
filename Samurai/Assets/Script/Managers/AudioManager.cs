@@ -44,6 +44,13 @@ public class AudioManager : MonoBehaviour
         sourcestart.Play();
     }
 
+    public void EndingAudio(AudioSource sourcestart, AudioSource sourceending, bool looptype)
+    {
+        sourceending.Stop();
+        sourcestart.loop = looptype;
+        sourcestart.Play();
+    }
+
     public IEnumerator EndingAuido(AudioSource sourcestart, float stoptime, bool looptype)
     {
         sourcestart.Stop();

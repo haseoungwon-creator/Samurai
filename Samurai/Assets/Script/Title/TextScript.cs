@@ -3,10 +3,12 @@ using UnityEngine.UI;
 
 public class TextScript : MonoBehaviour
 {
+    
     private Text text;
     float time;
     void Start()
     {
+        
         text = GetComponent<Text>();
     }
 

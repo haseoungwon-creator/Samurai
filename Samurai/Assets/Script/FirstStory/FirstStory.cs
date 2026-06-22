@@ -9,6 +9,7 @@ public class FirstStory : MonoBehaviour
     [SerializeField] AudioSource heartbit;
     [SerializeField]StoryManager storyManager;
     [SerializeField] AudioManager audioManager;
+    [SerializeField] FadeManager fadeManager;
 
     private Text storybox;
 
@@ -37,7 +38,7 @@ public class FirstStory : MonoBehaviour
         {
             if (storyManager.isTyping)
             {
-                storyManager.skip(storytext[index], storybox);
+                storyManager.skip();
             }
             else
             {
@@ -56,7 +57,8 @@ public class FirstStory : MonoBehaviour
 
         else
         {
-            StartCoroutine(audioManager.EndingAuido(fireBgm, heartbit, 2f, false));
+            fadeManager.FadeIn();
+            audioManager.EndingAudio(heartbit, fireBgm, false);     
         }
     }
    

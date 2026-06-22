@@ -11,9 +11,10 @@ public class StoryManager : MonoBehaviour
 
     public bool isTyping { get; private set; }
     Coroutine typingcoroutine;
-
-
-    private IEnumerator TypeText(string storyline, Text textbox, float speed)
+    Text textbox;
+    float speed;
+    string storyline;
+    private IEnumerator TypeText()
     {
         isTyping = true;
         storytext = "";
@@ -26,24 +27,28 @@ public class StoryManager : MonoBehaviour
         isTyping=false;
     }
 
-    public void StartTyping(string typingstorytext, Text textbox, float speed)
+    public void StartTyping(string typingstorytext, Text textbox_, float speed_)
     {
+        storyline = typingstorytext;
+        textbox = textbox_;
+        speed = speed_;
+
         StopAllCoroutines();
         if (typingcoroutine != null) 
         { 
             StopCoroutine(typingcoroutine);
         }
-        typingcoroutine = StartCoroutine(TypeText(typingstorytext, textbox, speed));
+        typingcoroutine = StartCoroutine(TypeText());
 
     }
 
-    public void skip(string fulltext, Text textbox)
+    public void skip()
     {
         if (typingcoroutine != null)
         {
             StopCoroutine(typingcoroutine);
         }
-        textbox.text = fulltext;
+        textbox.text = storyline;
         isTyping = false;
     }
 

@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/StartTitle.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/Scenes/Aimation.unity
-    guid: 2adaaca31a654c44e9a2ae683e244062
+    path: Assets/Scenes/FIrstStory.unity
+    guid: 1dc9c5d8f85fcc44686fc983c683ac8a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

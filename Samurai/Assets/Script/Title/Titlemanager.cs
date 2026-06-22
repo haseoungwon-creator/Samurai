@@ -3,13 +3,17 @@ using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour
 {
-    public string nextSceneName = "Aimation";
-
-    float delay = 2f;
+    [SerializeField] string nextSceneName = "";
+    [SerializeField]FadeManager fadeManager;
+    [SerializeField] AudioManager audioManager;
+    [SerializeField] AudioSource audioSource;
+    float delay = 1f;
     bool canInput = false;
+    bool onetouch = true;
 
     void Start()
     {
+        audioManager.PlayBgm(audioSource);
         Invoke("EnableInput", delay);
     }
 
@@ -20,9 +24,13 @@ public class TitleManager : MonoBehaviour
 
     void Update()
     {
-        if (canInput && Input.GetKeyDown(KeyCode.Space))
+        if (canInput && Input.GetKeyDown(KeyCode.Space)&& onetouch)
         {
+            fadeManager.FadeIn();
             Invoke("NextScene", 3f);
+            audioManager.StopBgm();
+            onetouch = false;
+           
             
         }
     }
