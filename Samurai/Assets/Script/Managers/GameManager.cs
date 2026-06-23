@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager Instance;
 
-    public GameState currentstate;
+    public GameState Currentstate;
     private void Awake()
     {
-        if(instance == null)
+        if(Instance == null)
         {
-            instance = this;
+            Instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -21,6 +21,6 @@ public class GameManager : MonoBehaviour
 
     public void SetState(GameState state)
     {
-        currentstate = state;
+        Currentstate = state;
     }
 }

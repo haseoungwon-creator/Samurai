@@ -10,7 +10,7 @@ public class FirstStory : MonoBehaviour
 {
     [SerializeField] AudioSource fireBgm;
     [SerializeField] AudioSource heartbit;
-    bool spacebarEndingOneClick = true;
+    bool isEndingTriggered = true;
 
     private Text storybox;
 
@@ -18,7 +18,7 @@ public class FirstStory : MonoBehaviour
     public int index;
     
 
-    string[] firststorytext =
+    string[] IntroStoryController =
         {
             "난세의 불꽃이 온 세상을 집어삼키던 날",
             "사원의 검은 꺾였고, 스승의 서약은 잿더미가 되었다.",
@@ -27,13 +27,13 @@ public class FirstStory : MonoBehaviour
 
     private void Start()
     {
-        GameManager.instance.SetState(GameState.Story);
-        FadeManager.instance.FadeOut(0.1f);
-        AudioManager.instance.PlayBgm(fireBgm);
+        GameManager.Instance.SetState(GameState.Story);
+        FadeManager.Instance.FadeOut(0.1f);
+        AudioManager.Instance.PlayBgm(fireBgm);
         storybox = GetComponent<Text>();
         index = 0;
 
-        StoryManager.instance.StartTyping(firststorytext[0], storybox, textspeed);
+        StoryManager.instance.StartTyping(IntroStoryController[0], storybox, textspeed);
     }
     private void Update()
     {
@@ -41,26 +41,26 @@ public class FirstStory : MonoBehaviour
         {
             if (StoryManager.instance.isTyping)
             {
-                StoryManager.instance.skip();
+                StoryManager.instance.SkipTyping();
             }
             else
             {
-                NextLine();
+                ShowNextLine();
             }
         }
     }
 
-    void NextLine()
+    void ShowNextLine()
     {
         index++;
-        if (index < firststorytext.Length)
+        if (index < IntroStoryController.Length)
         {
-            StoryManager.instance.StartTyping(firststorytext[index], storybox, textspeed);
+            StoryManager.instance.StartTyping(IntroStoryController[index], storybox, textspeed);
         }
 
         else
         {
-            if (spacebarEndingOneClick)
+            if (isEndingTriggered)
             {
                 StartCoroutine(FirstStoryEnding());
             }
@@ -69,16 +69,15 @@ public class FirstStory : MonoBehaviour
 
     IEnumerator FirstStoryEnding()
     {
-        FadeManager.instance.FadeIn(0.1f);
-        AudioManager.instance.EndingAudio(heartbit, fireBgm, false);
+        FadeManager.Instance.FadeIn(0.1f);
+        AudioManager.Instance.EndingAudio(heartbit, fireBgm, false);
 
-        GameManager.instance.SetState(GameState.Playing);
+        GameManager.Instance.SetState(GameState.Playing);
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3f);
 
-        FadeManager.instance.DestroyFade();
         SceneManager.LoadScene("Village");
-        spacebarEndingOneClick = false;
+        isEndingTriggered = false;
     }
 
     

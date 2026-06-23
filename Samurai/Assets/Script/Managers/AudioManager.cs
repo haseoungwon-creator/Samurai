@@ -4,16 +4,16 @@ using static UnityEditor.MaterialProperty;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instance;
-    AudioSource BgmSource;
-    AudioSource EffectSource;
+    public static AudioManager Instance;
+    AudioSource bgmSource;
+    AudioSource effectSource;
     AudioSource sfxSource;
 
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -23,26 +23,26 @@ public class AudioManager : MonoBehaviour
     }
     public void PlayBgm(AudioSource source)
     {
-        BgmSource = source;
-        BgmSource.loop = true;
-        BgmSource.Play();
+        bgmSource = source;
+        bgmSource.loop = true;
+        bgmSource.Play();
         return;
     }
 
     public void StopBgm()
     {
-        BgmSource.Stop();
+        bgmSource.Stop();
     }
 
     public void PlayEffect(AudioSource source)
     {
-        EffectSource = source;
-        EffectSource.loop = false;
-        EffectSource.Play();
+        effectSource = source;
+        effectSource.loop = false;
+        effectSource.Play();
     }
 
 
-    public void PlaysfxSource(AudioSource source)
+    public void PlaySfx(AudioSource source)
     {
         sfxSource = source;
         sfxSource.loop = false;

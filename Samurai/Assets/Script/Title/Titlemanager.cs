@@ -6,34 +6,34 @@ public class TitleManager : MonoBehaviour
     [SerializeField] string nextSceneName = "";
     [SerializeField] AudioSource audioSource;
     float delay = 1f;
-    bool canInput = false;
-    bool onetouch = true;
+    bool isInputEnabled = false;
+    bool hasPressedStart = true;
 
     void Start()
     {
-        AudioManager.instance.PlayBgm(audioSource);
+        AudioManager.Instance.PlayBgm(audioSource);
         Invoke("EnableInput", delay);
     }
 
     void EnableInput()
     {
-        canInput = true;
+        isInputEnabled = true;
     }
 
     void Update()
     {
-        if (canInput && Input.GetKeyDown(KeyCode.Space)&& onetouch)
+        if (isInputEnabled && Input.GetKeyDown(KeyCode.Space)&& hasPressedStart)
         {
-            FadeManager.instance.FadeIn(2f);
-            Invoke("NextScene", 3f);
-            AudioManager.instance.StopBgm();
-            onetouch = false;
+            FadeManager.Instance.FadeIn(2f);
+            Invoke("LoadNextScene", 3f);
+            AudioManager.Instance.StopBgm();
+            hasPressedStart = false;
            
             
         }
     }
 
-    private void NextScene()
+    private void LoadNextScene()
     {
         SceneManager.LoadScene(nextSceneName);
     }

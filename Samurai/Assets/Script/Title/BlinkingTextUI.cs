@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TextScript : MonoBehaviour
+public class BlinkingTextUI : MonoBehaviour
 {
     
     private Text text;
-    float time;
+    float elapsedTime;
     void Start()
     {
         
@@ -14,8 +14,8 @@ public class TextScript : MonoBehaviour
 
     private void Update()
     {
-        time += Time.deltaTime;
-        float opacity = Mathf.PingPong(time, 1f);
+        elapsedTime += Time.deltaTime;
+        float opacity = Mathf.PingPong(elapsedTime, 1f);
         Color color = Color.white;
 
         text.color = new Color(color.r,color.g,color.b,opacity);

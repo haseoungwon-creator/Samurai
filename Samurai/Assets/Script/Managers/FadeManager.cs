@@ -5,16 +5,16 @@ using static UnityEditor.Experimental.GraphView.Port;
 
 public class FadeManager : MonoBehaviour
 {
-    public static FadeManager instance;
-    static GameObject fadeInstance;
+    public static FadeManager Instance;
+    private GameObject fadeObject;
     Image fadeImage;
-    float fadeDuration = 1f;
+    float duration = 1f;
 
     private void Awake()
     {
-        if(instance == null)
+        if(Instance == null)
         {
-            instance = this;
+            Instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -26,48 +26,48 @@ public class FadeManager : MonoBehaviour
     private void Start()
     {
 
-        fadeInstance = Instantiate(Resources.Load<GameObject>("FadePrefab"));
+        fadeObject = Instantiate(Resources.Load<GameObject>("FadePrefab"));
         
-        fadeImage = fadeInstance.GetComponentInChildren<Image>();
+        fadeImage = fadeObject.GetComponentInChildren<Image>();
 
         Color c = fadeImage.color;
         fadeImage.color = c;
 
-        DontDestroyOnLoad(fadeInstance);
+        DontDestroyOnLoad(fadeObject);
     }
 
     public void Create()
     {
-        fadeInstance = Instantiate(Resources.Load<GameObject>("FadePrefab"));
+        fadeObject = Instantiate(Resources.Load<GameObject>("FadePrefab"));
     }
 
     public void DestroyFade()
     {
-        Destroy(fadeInstance);
+        Destroy(fadeObject);
         StopAllCoroutines();
     }
 
     public void FadeIn(float fadeDurations)
     {
-        fadeDuration = fadeDurations;
-        StartCoroutine(Fade(0, 1, fadeDuration));
+        duration = fadeDurations;
+        StartCoroutine(FadeRoutine(0, 1, duration));
     }
 
     public void FadeOut(float fadeDurations)
     {
-        fadeDuration = fadeDurations;
-        StartCoroutine(Fade(1, 0, fadeDuration));
+        duration = fadeDurations;
+        StartCoroutine(FadeRoutine(1, 0, duration));
     }
 
-    private IEnumerator Fade(float start,float end, float duration)
+    private IEnumerator FadeRoutine(float start,float end, float duration)
     {
-        float t = 0;
+        float time = 0;
         Color c = fadeImage.color;
 
-        while (t < duration)
+        while (time < duration)
         {
-            t += Time.deltaTime; 
-            c.a = Mathf.Lerp(start, end, t/duration);
+            time += Time.deltaTime; 
+            c.a = Mathf.Lerp(start, end, time/duration);
             fadeImage.color = c;
             yield return null;
         }

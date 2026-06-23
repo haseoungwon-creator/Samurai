@@ -57,7 +57,7 @@ public class StoryManager : MonoBehaviour
 
     }
 
-    public void skip()
+    public void SkipTyping()
     {
         if (typingcoroutine != null)
         {
