@@ -36,6 +36,17 @@ public class FadeManager : MonoBehaviour
         DontDestroyOnLoad(fadeInstance);
     }
 
+    public void Create()
+    {
+        fadeInstance = Instantiate(Resources.Load<GameObject>("FadePrefab"));
+    }
+
+    public void DestroyFade()
+    {
+        Destroy(fadeInstance);
+        StopAllCoroutines();
+    }
+
     public void FadeIn(float fadeDurations)
     {
         fadeDuration = fadeDurations;

@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class FirstStory : MonoBehaviour
@@ -60,15 +62,26 @@ public class FirstStory : MonoBehaviour
         {
             if (spacebarEndingOneClick)
             {
-                FadeManager.instance.FadeIn(0.1f);
-                AudioManager.instance.EndingAudio(heartbit, fireBgm, false);
-
-                GameManager.instance.SetState(GameState.Playing);
-
-                spacebarEndingOneClick = false;
+                StartCoroutine(FirstStoryEnding());
             }
         }
     }
+
+    IEnumerator FirstStoryEnding()
+    {
+        FadeManager.instance.FadeIn(0.1f);
+        AudioManager.instance.EndingAudio(heartbit, fireBgm, false);
+
+        GameManager.instance.SetState(GameState.Playing);
+
+        yield return new WaitForSeconds(4f);
+
+        FadeManager.instance.DestroyFade();
+        SceneManager.LoadScene("Village");
+        spacebarEndingOneClick = false;
+    }
+
+    
    
    
 }

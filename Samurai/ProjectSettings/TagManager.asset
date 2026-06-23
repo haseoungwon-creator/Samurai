@@ -43,8 +43,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Bkackground
+    uniqueID: 2353792555
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Foreground
+    uniqueID: 2086088281
     locked: 0
   m_RenderingLayers:
   - Default
