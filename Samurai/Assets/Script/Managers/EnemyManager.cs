@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -10,16 +11,22 @@ public class EnemyManager : Singleton<EnemyManager>
 
     public void Register(Enemy enemy)
     {
-        enemies.Add(enemy);
+        if(!enemies.Contains(enemy))
+            enemies.Add(enemy);
     }
 
     public void Unregister(Enemy enemy)
     {
-        enemis.Remove(enemy);
+        enemies.Remove(enemy);
     }
 
     public bool HasAliveEnemy()
     {
         return enemies.Count > 0;
+    }
+
+    public List<Enemy> GetEnemies()
+    {
+        return enemies;
     }
 }

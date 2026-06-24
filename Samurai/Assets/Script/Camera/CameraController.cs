@@ -49,9 +49,8 @@ public class CameraController : MonoBehaviour
 
     bool IsEnemyInView()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-        foreach(GameObject enemy in enemies)
+        foreach(Enemy enemy in EnemyManager.Instance.GetEnemies())
         {
             Vector3 viewPos = cam.WorldToViewportPoint(enemy.transform.position);
 

@@ -4,60 +4,70 @@ using static UnityEditor.MaterialProperty;
 
 public class AudioManager : Singleton<AudioManager>
 {
-    AudioSource bgmSource;
-    AudioSource effectSource;
-    AudioSource sfxSource;
+    private AudioSource bgmSource;
+    private AudioSource effectSource;
+    private AudioSource sfxSource;
 
-    
+    protected override void Awake()
+    {
+        base.Awake();
+
+        bgmSource = gameObject.AddComponent<AudioSource>();
+        effectSource = gameObject.AddComponent<AudioSource>();
+        sfxSource = gameObject.AddComponent<AudioSource>();
+
+        bgmSource.loop = true;
+        effectSource.loop = false;
+        sfxSource.loop = false;
+    }
+
+    private void PlayAudio(AudioSource target, AudioSource source, bool loop)
+    {
+        if (source == null || target == null || source.clip == null) return;
+
+        target.clip = source.clip;
+        target.loop = loop;
+        target.Play();
+    }
+
     public void PlayBgm(AudioSource source)
     {
-        bgmSource = source;
-        bgmSource.loop = true;
-        bgmSource.Play();
-        return;
+        PlayAudio(bgmSource, source, true);
     }
 
     public void StopBgm()
     {
+        if(bgmSource == null) return;
         bgmSource.Stop();
     }
 
+
     public void PlayEffect(AudioSource source)
     {
-        effectSource = source;
-        effectSource.loop = false;
-        effectSource.Play();
+        PlayAudio(effectSource, source, false);
+    }
+
+    public void StopEffect()
+    {
+        if (effectSource == null) return;
+        effectSource.Stop();
     }
 
 
     public void PlaySfx(AudioSource source)
     {
-        sfxSource = source;
-        sfxSource.loop = false;
-        sfxSource.Play();
+        PlayAudio(sfxSource, source, false);
     }
 
-    public IEnumerator EndingAuido(AudioSource sourcestart,AudioSource sourceending,float stoptime,bool looptype)
+    public void StopSfx()
     {
-        sourceending.Stop();
-        yield return new WaitForSeconds(stoptime);
-        sourcestart.loop = looptype;
-        sourcestart.Play();
+        if (sfxSource == null) return;
+        sfxSource.Stop();
     }
 
-    public void EndingAudio(AudioSource sourcestart, AudioSource sourceending, bool looptype)
-    {
-        sourceending.Stop();
-        sourcestart.loop = looptype;
-        sourcestart.Play();
-    }
 
-    public IEnumerator EndingAuido(AudioSource sourcestart, float stoptime, bool looptype)
-    {
-        sourcestart.Stop();
-        yield return new WaitForSeconds(stoptime);
-        sourcestart.loop = looptype;
-        sourcestart.Play();
-    }
+
+
+
 
 }

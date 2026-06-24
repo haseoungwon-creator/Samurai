@@ -33,15 +33,15 @@ public class FirstStory : MonoBehaviour
         storybox = GetComponent<Text>();
         index = 0;
 
-        StoryManager.instance.StartTyping(IntroStoryController[0], storybox, textspeed);
+        StoryManager.Instance.StartTyping(IntroStoryController[0], storybox, textspeed);
     }
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            if (StoryManager.instance.isTyping)
+            if (StoryManager.Instance.isTyping)
             {
-                StoryManager.instance.SkipTyping();
+                StoryManager.Instance.skip(storybox, IntroStoryController[index]);
             }
             else
             {
@@ -55,7 +55,7 @@ public class FirstStory : MonoBehaviour
         index++;
         if (index < IntroStoryController.Length)
         {
-            StoryManager.instance.StartTyping(IntroStoryController[index], storybox, textspeed);
+            StoryManager.Instance.StartTyping(IntroStoryController[index], storybox, textspeed);
         }
 
         else
@@ -69,15 +69,23 @@ public class FirstStory : MonoBehaviour
 
     IEnumerator FirstStoryEnding()
     {
+        isEndingTriggered = false;
+
         FadeManager.Instance.FadeIn(0.1f);
-        AudioManager.Instance.EndingAudio(heartbit, fireBgm, false);
+
+        AudioManager.Instance.StopBgm();
+
+        AudioManager.Instance.PlayEffect(heartbit);
 
         GameManager.Instance.SetState(GameState.Playing);
 
         yield return new WaitForSeconds(3f);
 
+        Destroy(gameObject);
+
         SceneManager.LoadScene("Village");
-        isEndingTriggered = false;
+        
+        
     }
 
     

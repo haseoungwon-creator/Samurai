@@ -15,7 +15,7 @@ public class StoryManager : Singleton<StoryManager>
         if(typingCoroutine != null)
             StopCoroutine(typingCoroutine);
 
-        typingCoroutine = StartCoroutine(TypeRoutine(text, uiText uiText, speed));
+        typingCoroutine = StartCoroutine(TypeRoutine(text,uiText, speed));
     }
 
     IEnumerator TypeRoutine(string text, Text uiText, float speed)
