@@ -4,67 +4,42 @@ using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StoryManager : MonoBehaviour
+public class StoryManager : Singleton<StoryManager>
 {
-
-    public static StoryManager instance;
-
-    private string storytext;
-
     public bool isTyping { get; private set; }
-    Coroutine typingcoroutine;
-    Text textbox;
-    float speed;
-    string storyline;
 
-    private void Awake()
+    private Coroutine typingCoroutine;
+
+    public void StartTyping(string text, Text uiText, float speed)
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        if(typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
+
+        typingCoroutine = StartCoroutine(TypeRoutine(text, uiText uiText, speed));
     }
-    private IEnumerator TypeText()
+
+    IEnumerator TypeRoutine(string text, Text uiText, float speed)
     {
         isTyping = true;
-        storytext = "";
-        foreach (char c in storyline)
+        uiText.text = "";
+
+        foreach(char c in text)
         {
-            storytext += c;
-            textbox.text = storytext;
+            uiText.text += c;
             yield return new WaitForSeconds(speed);
         }
+
         isTyping=false;
     }
 
-    public void StartTyping(string typingstorytext, Text textbox_, float speed_)
+    public void skip(Text uiText,string fullText)
     {
-        storyline = typingstorytext;
-        textbox = textbox_;
-        speed = speed_;
+        if(typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
 
-        StopAllCoroutines();
-        if (typingcoroutine != null) 
-        { 
-            StopCoroutine(typingcoroutine);
-        }
-        typingcoroutine = StartCoroutine(TypeText());
-
-    }
-
-    public void SkipTyping()
-    {
-        if (typingcoroutine != null)
-        {
-            StopCoroutine(typingcoroutine);
-        }
-        textbox.text = storyline;
+        uiText.text = fullText;
         isTyping = false;
+
     }
 
 }

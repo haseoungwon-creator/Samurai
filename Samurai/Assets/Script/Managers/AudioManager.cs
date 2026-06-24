@@ -2,25 +2,13 @@ using System.Collections;
 using UnityEngine;
 using static UnityEditor.MaterialProperty;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : Singleton<AudioManager>
 {
-    public static AudioManager Instance;
     AudioSource bgmSource;
     AudioSource effectSource;
     AudioSource sfxSource;
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    
     public void PlayBgm(AudioSource source)
     {
         bgmSource = source;

@@ -1,53 +1,92 @@
 using System.Collections;
 using UnityEngine;
 
-public class CameraManager : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
+    public GameObject Player;
+    public float moveDistance;
+    public Transform playerTransform;
+    public Transform cameraTransform;
 
-    public static CameraManager Instance;
     private Camera cam;
-    private float defaultSize;
-    private float zoomSize = 3f;
 
-    private void Awake()
+    bool isMoving = false;
+
+
+    private void Start()
     {
-        if(Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Player = GameObject.FindGameObjectWithTag("Player");
         cam = Camera.main;
-        defaultSize = cam.orthographicSize; 
-        
+        playerTransform = Player.transform;
+        cameraTransform = transform;
+        float height = cam.orthographicSize * 2f;
+        moveDistance = height * cam.aspect -2f;
     }
 
-    public void Zoomin()
+   
+    private void LateUpdate()
     {
-        StartCoroutine(ZoomRoutine(cam.orthographicSize, zoomSize));
+        if (isMoving) return;
+
+        CheckOutOfBounds();
     }
 
-    public void Zoomout()
+    
+    void CheckOutOfBounds()
     {
-        StartCoroutine(ZoomRoutine(cam.orthographicSize, defaultSize));
+
+        if(IsEnemyInView()) return;
+        Vector3 viewPos = cam.WorldToViewportPoint(playerTransform.position);
+        if(viewPos.x > 1f)
+        {
+            FollowPlayer(Vector3.right);
+        }
+        else if(viewPos.x < 0f)
+        {
+            FollowPlayer(Vector3.left);
+        }
     }
 
-
-    private IEnumerator ZoomRoutine(float start, float end)
+    bool IsEnemyInView()
     {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach(GameObject enemy in enemies)
+        {
+            Vector3 viewPos = cam.WorldToViewportPoint(enemy.transform.position);
+
+            if(viewPos.x > 0f && viewPos.x < 1f && viewPos.y > 0f && viewPos.y < 1f)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void FollowPlayer(Vector3 dir)
+    {
+        StartCoroutine(SmoothMoving(dir));
+    }
+
+    IEnumerator SmoothMoving(Vector3 dir)
+    {
+        isMoving = true; 
+
+        Vector3 startPos = transform.position;
+        Vector3 endPos = startPos + dir *moveDistance;
+
         float time = 0f;
-        float duration = 1f;
+        float duration = 0.3f;
 
         while (time < duration)
         {
             time += Time.deltaTime;
-            cam.orthographicSize = Mathf.Lerp(start, end, time / duration);
+            transform.position = Vector3.Lerp(startPos,endPos, time/duration);
             yield return null;
         }
 
-        cam.orthographicSize = end;
+        transform.position = endPos;
+        isMoving = false;
     }
 }

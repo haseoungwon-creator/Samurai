@@ -9,6 +9,7 @@ TagManager:
   - fade
   - Road
   - soil
+  - Enemy
   layers:
   - Default
   - TransparentFX
