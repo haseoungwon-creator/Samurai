@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.VectorGraphics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -81,11 +82,12 @@ public class FirstStory : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
 
-        
 
-        SceneManager.LoadScene("Village");
-        
-        
+       SceneManager.LoadSceneAsync("Village");
+
+
+
+
     }
 
     

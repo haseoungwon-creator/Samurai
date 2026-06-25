@@ -2843,7 +2843,7 @@ GameObject:
   - component: {fileID: 1402634682}
   m_Layer: 0
   m_Name: Teacher
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3003,6 +3003,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StoryTirgger
   storyPanel: {fileID: 1884766742}
+  storyKey: 
+  storyKeyPrefix: village_master_
+  maxCount: 10
 --- !u!1 &1442092687
 GameObject:
   m_ObjectHideFlags: 0
@@ -3360,6 +3363,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StoryTirgger
   storyPanel: {fileID: 1884766742}
+  storyKey: 
+  storyKeyPrefix: village_friend_
+  maxCount: 10
 --- !u!1 &1629650207
 GameObject:
   m_ObjectHideFlags: 0
@@ -10738,7 +10744,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StoryController
   nameText: {fileID: 894276750}
   dialogueText: {fileID: 1033795609}
-  textSpeed: 0.3
+  textSpeed: 0.1
 --- !u!1 &1895303909
 GameObject:
   m_ObjectHideFlags: 0

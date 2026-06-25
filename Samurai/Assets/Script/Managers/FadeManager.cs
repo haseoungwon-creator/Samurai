@@ -25,13 +25,13 @@ public class FadeManager : Singleton<FadeManager>
         DontDestroyOnLoad(fadeObject);
     }
 
-    public void DestroyFade()
+    public void SetActiveFade(bool tf)
     {
-        if(fadeObject != null)
+        Debug.Log("dd");
+        if (fadeObject != null)
         {
-            Destroy(fadeObject);
-            fadeObject = null;
-            fadeImage = null;
+            Debug.Log("dd");
+            fadeObject.SetActive(tf);
         }
     }
 

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,24 +7,29 @@ public class StoryController : MonoBehaviour
 {
     [SerializeField] Text nameText;
     [SerializeField] Text dialogueText;
-    [SerializeField] float textSpeed = 0.3f;
+    [SerializeField] float textSpeed = 0.1f;
 
 
     private List<Dialogue> currentStory;
     private int index = 0;
 
-    private void Start()
+    public void StartStory(string key)
     {
-        FadeManager.Instance.FadeOut(0.1f);
-        GameManager.Instance.SetState(GameState.Story);
+        currentStory = StoryDatabase.Get(key);
 
-        currentStory = StoryDatabase.Story1;
+        if(currentStory == null || currentStory.Count == 0)
+        {
+            EndStory();
+            return;
+        }
 
+        index = 0;
         ShowDialogue();
     }
 
     private void Update()
     {
+        if (currentStory == null) return;
         if (Input.GetKeyDown(KeyCode.Space))
         {
             NextDialogue();
@@ -57,6 +63,7 @@ public class StoryController : MonoBehaviour
 
     void EndStory()
     {
+        currentStory = null;
         GameManager.Instance.SetState(GameState.Playing);
         gameObject.SetActive(false);
     }
