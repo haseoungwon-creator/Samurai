@@ -8,11 +8,13 @@ public class StoryController : MonoBehaviour
     [SerializeField] Text dialogueText;
     [SerializeField] float textSpeed = 0.3f;
 
+
     private List<Dialogue> currentStory;
     private int index = 0;
 
     private void Start()
     {
+        FadeManager.Instance.FadeOut(0.1f);
         GameManager.Instance.SetState(GameState.Story);
 
         currentStory = StoryDatabase.Story1;
@@ -58,4 +60,6 @@ public class StoryController : MonoBehaviour
         GameManager.Instance.SetState(GameState.Playing);
         gameObject.SetActive(false);
     }
+
+    
 }

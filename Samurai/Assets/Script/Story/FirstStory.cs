@@ -81,7 +81,7 @@ public class FirstStory : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
 
-        Destroy(gameObject);
+        
 
         SceneManager.LoadScene("Village");
         

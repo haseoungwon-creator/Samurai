@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
     public Transform playerTransform;
     public Transform cameraTransform;
 
-    private Camera cam;
+     private Camera cam;
 
     bool isMoving = false;
 

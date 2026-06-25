@@ -9,10 +9,6 @@ public class FadeManager : Singleton<FadeManager>
     private GameObject fadeObject;
     private Image fadeImage;
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
 
     private void Start()
     {
@@ -33,7 +29,7 @@ public class FadeManager : Singleton<FadeManager>
     {
         if(fadeObject != null)
         {
-            Destroy(fadeImage);
+            Destroy(fadeObject);
             fadeObject = null;
             fadeImage = null;
         }

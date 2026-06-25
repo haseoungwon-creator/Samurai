@@ -4,42 +4,43 @@ public class StoryTirgger : MonoBehaviour
 {
     
     [SerializeField] GameObject storyPanel;
-
-    private Transform player;
     private bool isTriggered = false;
-    private float triggerDistance = 2f;
+    Camera cameraMain;
+
+    
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        cameraMain = Camera.main;
     }
 
-    private void Update()
-    {
-        if (!isTriggered) return;
-
-        float distance = Vector2.Distance(transform.position,player.position);
-
-        if (distance < triggerDistance)
-        {
-            TriggerStory();
-        }
-    }
+   
 
     void TriggerStory()
     {
         isTriggered = true;
         storyPanel.SetActive(true);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (isTriggered) return;
 
-        if (collision.CompareTag("Player"))
-        {
+        if (!collision.CompareTag("Player")) return;
+
+        Vector3 viewPos = cameraMain.WorldToViewportPoint(transform.position);
+
+        bool isVisible =
+            viewPos.x > 0f && viewPos.x < 1f && viewPos.y > 0f && viewPos.y < 1f;
+
+        if(!isVisible) return;
+
+        GameManager.Instance.SetState(GameState.Story);
+        
             isTriggered = true;
 
             GameManager.Instance.SetState(GameState.Story);
-        }
+
+        storyPanel.SetActive(true);
+        
     }
 }
