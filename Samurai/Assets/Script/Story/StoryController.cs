@@ -8,21 +8,21 @@ public class StoryController : MonoBehaviour
     [SerializeField] Text nameText;
     [SerializeField] Text dialogueText;
     [SerializeField] float textSpeed = 0.1f;
+    private StoryTirgger ownerTrigger;
 
 
     private List<Dialogue> currentStory;
     private int index = 0;
 
-    public void StartStory(string key)
+    public void StartStory(string key, StoryTirgger trigger = null)
     {
+        ownerTrigger = trigger;
         currentStory = StoryDatabase.Get(key);
-
-        if(currentStory == null || currentStory.Count == 0)
+        if (currentStory == null || currentStory.Count == 0)
         {
             EndStory();
             return;
         }
-
         index = 0;
         ShowDialogue();
     }
@@ -53,7 +53,7 @@ public class StoryController : MonoBehaviour
         }
 
         index++;
-        if(index >= currentStory.Count)
+        if (index >= currentStory.Count)
         {
             EndStory();
             return;
@@ -61,12 +61,16 @@ public class StoryController : MonoBehaviour
         ShowDialogue();
     }
 
+
     void EndStory()
     {
         currentStory = null;
         GameManager.Instance.SetState(GameState.Playing);
-        gameObject.SetActive(false);
-    }
+        if (ownerTrigger != null)
+        {
+            gameObject.SetActive(false);
+        }
 
-    
+
+    }
 }

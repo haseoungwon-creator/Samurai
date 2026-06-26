@@ -27,10 +27,8 @@ public class FadeManager : Singleton<FadeManager>
 
     public void SetActiveFade(bool tf)
     {
-        Debug.Log("dd");
         if (fadeObject != null)
         {
-            Debug.Log("dd");
             fadeObject.SetActive(tf);
         }
     }

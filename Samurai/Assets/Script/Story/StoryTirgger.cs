@@ -9,6 +9,7 @@ public class StoryTirgger : MonoBehaviour
     [SerializeField] int maxCount = 10;
 
     private bool isTriggered = false;
+
     private int meetCount = 0;
     Camera cameraMain;
 
@@ -43,15 +44,12 @@ public class StoryTirgger : MonoBehaviour
     void TriggerStory()
     {
         string key = GetCurrentKey();
-
         if (!StoryDatabase.Exists(key)) return;
-
         isTriggered = true;
         GameManager.Instance.SetState(GameState.Story);
-
-        var controller = storyPanel.GetComponent<StoryController>();
         storyPanel.SetActive(true);
-        controller.StartStory(key);
+        var controller = storyPanel.GetComponent<StoryController>();
+        controller.StartStory(key, this);
     }
 
     string GetCurrentKey()
