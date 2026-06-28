@@ -1,5 +1,3 @@
-using System.ComponentModel;
-using System.ComponentModel.Design.Serialization;
 using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour

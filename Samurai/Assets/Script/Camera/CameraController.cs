@@ -36,6 +36,7 @@ public class CameraController : MonoBehaviour
     {
 
         if(IsEnemyInView()) return;
+       
         Vector3 viewPos = cam.WorldToViewportPoint(playerTransform.position);
         if(viewPos.x > 1f)
         {
@@ -56,16 +57,22 @@ public class CameraController : MonoBehaviour
 
             if(viewPos.x > 0f && viewPos.x < 1f && viewPos.y > 0f && viewPos.y < 1f)
             {
+                RoomWallManager.Instance.OnRoomWall();
+                RoomWallManager.Instance.MoveWall();
                 return true;
             }
         }
+
+        RoomWallManager.Instance.OffRoomWall();
 
         return false;
     }
 
     private void FollowPlayer(Vector3 dir)
     {
+        RoomWallManager.Instance.OffRoomWall();
         StartCoroutine(SmoothMoving(dir));
+        
     }
 
     IEnumerator SmoothMoving(Vector3 dir)
@@ -87,5 +94,7 @@ public class CameraController : MonoBehaviour
 
         transform.position = endPos;
         isMoving = false;
+
+        RoomWallManager.Instance.OnRoomWall();
     }
 }

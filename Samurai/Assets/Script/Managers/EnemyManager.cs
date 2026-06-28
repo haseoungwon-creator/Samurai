@@ -6,8 +6,8 @@ public class EnemyManager : Singleton<EnemyManager>
 {
 
     private List<Enemy> enemies = new List<Enemy>();
+  
 
-   
 
     public void Register(Enemy enemy)
     {

@@ -1,16 +1,18 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
 
-    
-    private void OnEnable()
+
+    private void Start()
     {
         EnemyManager.Instance.Register(this);
     }
 
     private void OnDisable()
     {
+        if(EnemyManager.Instance != null)
         EnemyManager.Instance.Unregister(this);
     }
 
