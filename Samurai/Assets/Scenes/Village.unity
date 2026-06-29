@@ -274,6 +274,7 @@ GameObject:
   - component: {fileID: 119771114}
   - component: {fileID: 119771116}
   - component: {fileID: 119771115}
+  - component: {fileID: 119771117}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -500,7 +501,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
   moveSpeed: 5
-  jumpForce: 10
 --- !u!114 &119771115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,6 +513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 781c11743ca796f40b44941935502234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackStateMachine
+  <CurrentState>k__BackingField: 0
   comboTime: 0
   chargeTime: 0
   chargeThreshold: 0.5
@@ -536,6 +537,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2f30c924fd547074ea8055b69b2694d8, type: 2}
   chargeData: {fileID: 11400000, guid: 4bf4cbfbc4dc1b44499183cbdfd69949, type: 2}
   hitboxPrefab: {fileID: 314332146139138849, guid: 3e001649c8bb11649a01e04c6217acca, type: 3}
+--- !u!114 &119771117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119771107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 007130dd3ec4c1b4fb2a637bf41d01f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
+  moveSpeed: 0
 --- !u!1 &121538227
 GameObject:
   m_ObjectHideFlags: 0
