@@ -3,8 +3,12 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     Rigidbody2D rigidbody2;
+
     Animator animator;
-    [SerializeField] float moveSpeed;
+
+    [SerializeField] float moveSpeed = 4f;
+
+
     float x;
 
     private void Awake()
