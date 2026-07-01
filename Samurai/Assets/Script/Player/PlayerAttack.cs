@@ -2,15 +2,22 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    [SerializeField] AttackData[] attackData;
+
+    [SerializeField] float comboWindowTime;
+
+    AttackData thisAttackData;
+
     Animator animator;
 
     int comboStep;
 
-    [SerializeField] float comboWindowTime;
     float comboTimer;
+    
 
     bool isAttacking;
     bool nextAttackQueued;
+
 
     private void Awake()
     {
@@ -19,6 +26,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.Currentstate == GameState.Story) return;
         comboTimer -= Time.deltaTime;
         if(comboTimer <= 0 && !isAttacking)
         {
@@ -54,5 +62,15 @@ public class PlayerAttack : MonoBehaviour
             nextAttackQueued = false;
             Attack();
         }
+    }
+
+    public void PerformAttack()
+    {
+        thisAttackData = attackData[comboStep-1];
+        float direction = transform.localScale.x > 0 ? 1f: -1f;
+        GameObject hitobject = Instantiate(thisAttackData.hitboxPrefab, transform.position, Quaternion.identity);
+        Debug.Log("hitbox make");
+        hitobject.transform.SetParent(transform);
+        hitobject.GetComponent<Hitbox>().Init(thisAttackData, direction);
     }
 }

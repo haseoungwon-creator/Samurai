@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    Rigidbody2D rigidbody2;
+    Rigidbody2D rigidbody;
 
     Animator animator;
 
@@ -13,12 +13,18 @@ public class PlayerMove : MonoBehaviour
 
     private void Awake()
     {
-        rigidbody2 = GetComponent<Rigidbody2D>();
+        rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
+        if (GameManager.Instance.Currentstate == GameState.Story)
+        {
+            rigidbody.linearVelocity = Vector2.zero;
+            animator.SetFloat("speed", 0);
+            return;
+        }
         x = Input.GetAxisRaw("Horizontal");
         if (x > 0) transform.localScale = new Vector3(1, 1, 1);
         else if (x < 0) transform.localScale = new Vector3(-1, 1, 1);
@@ -28,6 +34,8 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rigidbody2.linearVelocity = new Vector2(x * moveSpeed, rigidbody2.linearVelocity.y);
+        if (GameManager.Instance.Currentstate == GameState.Story) { return;
+            rigidbody.linearVelocity = Vector2.zero; }
+            rigidbody.linearVelocity = new Vector2(x * moveSpeed, rigidbody.linearVelocity.y);
     }
 }
