@@ -6,10 +6,9 @@ public class Hitbox : MonoBehaviour
 
     public void Init(AttackData data,float direction)
     {
-        Debug.Log("hitbox reset");
         attackData = data;
 
-        transform.localPosition = new Vector2(data.offset.x * direction, 0);
+        transform.position = (Vector2)transform.position + new Vector2(data.offset.x * direction, 0);
 
         GetComponent<BoxCollider2D>().size = data.size;
 
@@ -18,7 +17,6 @@ public class Hitbox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("hitbox collision");
         Enemy enemy =  collision.GetComponent<Enemy>();
         if (enemy == null) return;
 

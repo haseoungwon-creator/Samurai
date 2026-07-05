@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public GameObject Player;
-    public float moveDistance;
-    public Transform playerTransform;
-    public Transform cameraTransform;
+    [SerializeField] GameObject Player;
+    [SerializeField] float moveDistance;
+    private Transform playerTransform;
+    private Transform cameraTransform;
 
      private Camera cam;
 

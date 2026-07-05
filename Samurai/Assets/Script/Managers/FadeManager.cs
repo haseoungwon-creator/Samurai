@@ -1,8 +1,6 @@
 using System.Collections;
-using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Experimental.GraphView.Port;
 
 public class FadeManager : Singleton<FadeManager>
 {

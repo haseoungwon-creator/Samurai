@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class RoomWallManager : Singleton<RoomWallManager>
 {
@@ -20,11 +19,17 @@ public class RoomWallManager : Singleton<RoomWallManager>
 
     public void OnRoomWall()
     {
-        gameObject.SetActive(true);
+        foreach(Transform child in transform)
+        {
+            child.gameObject.SetActive(true);
+        }
     }
 
     public void OffRoomWall()
     {
-        gameObject.SetActive(false);
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(false);
+        }
     }
 }

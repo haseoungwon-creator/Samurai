@@ -2,9 +2,15 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    Rigidbody2D rigidbody;
+    Rigidbody2D rb;
 
     Animator animator;
+
+    PlayerHealth playerHealth;
+
+    PlayerDash playerDash;
+
+    PlayerCharge playerCharge;
 
     [SerializeField] float moveSpeed = 4f;
 
@@ -13,29 +19,44 @@ public class PlayerMove : MonoBehaviour
 
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-    }
+        playerHealth = GetComponent<PlayerHealth>();
+        playerDash = GetComponent<PlayerDash>();
+        playerCharge = GetComponent<PlayerCharge>();
+        GameManager.Instance.SetState(GameState.Playing);
 
+    }
     private void Update()
     {
-        if (GameManager.Instance.Currentstate == GameState.Story)
+        Debug.Log(GameManager.Instance.Currentstate);
+
+        if (GameManager.Instance.Currentstate == GameState.Story || playerHealth.isDead || playerCharge.isCharged)
         {
-            rigidbody.linearVelocity = Vector2.zero;
+            rb.linearVelocity = Vector2.zero;
             animator.SetFloat("speed", 0);
             return;
         }
+
+        if (playerDash.isDashing) return;
+
         x = Input.GetAxisRaw("Horizontal");
         if (x > 0) transform.localScale = new Vector3(1, 1, 1);
         else if (x < 0) transform.localScale = new Vector3(-1, 1, 1);
 
-        animator.SetFloat("speed",Mathf.Abs(x));
+        animator.SetFloat("speed", Mathf.Abs(x));
     }
 
     private void FixedUpdate()
     {
-        if (GameManager.Instance.Currentstate == GameState.Story) { return;
-            rigidbody.linearVelocity = Vector2.zero; }
-            rigidbody.linearVelocity = new Vector2(x * moveSpeed, rigidbody.linearVelocity.y);
+        if (GameManager.Instance.Currentstate == GameState.Story || playerHealth.isDead || playerCharge.isCharging)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
+        if (playerDash.isDashing) return;
+
+        rb.linearVelocity = new Vector2(x * moveSpeed, rb.linearVelocity.y);
     }
 }

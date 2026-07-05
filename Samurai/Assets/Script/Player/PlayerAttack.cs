@@ -10,12 +10,14 @@ public class PlayerAttack : MonoBehaviour
 
     Animator animator;
 
+
+
     int comboStep;
 
     float comboTimer;
     
 
-    bool isAttacking;
+    public bool isAttacking {  get; private set; }
     bool nextAttackQueued;
 
 
@@ -26,18 +28,28 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.Currentstate == GameState.Story) return;
         comboTimer -= Time.deltaTime;
         if(comboTimer <= 0 && !isAttacking)
         {
             comboStep = 0;
             animator.SetInteger("attackState", comboStep);
         }
+    }
 
-        if(Input.GetMouseButtonDown(0))
+    public void OnAttackInput()
+    {
+        Debug.Log("Attack Input");
+        if (!isAttacking)
         {
-            if(!isAttacking) Attack();
-            else nextAttackQueued = true;
+            if(comboTimer <= 0)
+            {
+                comboStep = 0;
+            }
+            Attack();
+        }
+        else
+        {
+            nextAttackQueued = true;
         }
     }
 
@@ -69,8 +81,8 @@ public class PlayerAttack : MonoBehaviour
         thisAttackData = attackData[comboStep-1];
         float direction = transform.localScale.x > 0 ? 1f: -1f;
         GameObject hitobject = Instantiate(thisAttackData.hitboxPrefab, transform.position, Quaternion.identity);
-        Debug.Log("hitbox make");
-        hitobject.transform.SetParent(transform);
         hitobject.GetComponent<Hitbox>().Init(thisAttackData, direction);
     }
+
+
 }
