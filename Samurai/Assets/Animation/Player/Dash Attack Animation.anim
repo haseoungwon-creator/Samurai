@@ -36,8 +36,6 @@ AnimationClip:
       value: {fileID: 6854818468338811795, guid: d691cce321b547b46b24f6716eda5946, type: 3}
     - time: 0.36666667
       value: {fileID: 3294683174483630275, guid: d691cce321b547b46b24f6716eda5946, type: 3}
-    - time: 0.41666666
-      value: {fileID: 1994902198317951820, guid: d691cce321b547b46b24f6716eda5946, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -68,13 +66,12 @@ AnimationClip:
     - {fileID: -3055397265071886228, guid: d691cce321b547b46b24f6716eda5946, type: 3}
     - {fileID: 6854818468338811795, guid: d691cce321b547b46b24f6716eda5946, type: 3}
     - {fileID: 3294683174483630275, guid: d691cce321b547b46b24f6716eda5946, type: 3}
-    - {fileID: 1994902198317951820, guid: d691cce321b547b46b24f6716eda5946, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.43333334
+    m_StopTime: 0.38333336
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -94,7 +91,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.41666666
+  - time: 0.36666667
     functionName: EndDashAttack
     data: 
     objectReferenceParameter: {fileID: 0}

@@ -28,23 +28,22 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        comboTimer -= Time.deltaTime;
-        if(comboTimer <= 0 && !isAttacking)
+        if (!isAttacking && comboTimer > 0)
         {
-            comboStep = 0;
-            animator.SetInteger("attackState", comboStep);
+            comboTimer -= Time.deltaTime;
+            if (comboTimer <= 0)
+            {
+                comboTimer = 0;
+                comboStep = 0;
+                animator.SetInteger("attackState", comboStep);
+            }
         }
     }
 
     public void OnAttackInput()
     {
-        Debug.Log("Attack Input");
         if (!isAttacking)
         {
-            if(comboTimer <= 0)
-            {
-                comboStep = 0;
-            }
             Attack();
         }
         else
@@ -55,20 +54,31 @@ public class PlayerAttack : MonoBehaviour
 
     private void Attack()
     {
+        if(comboTimer <= 0)
+        {
+            comboStep = 0;
+        }
+
         comboStep++;
 
-        if(comboStep > 3)
+        if(comboStep > attackData.Length)
         {
             comboStep = 1;
         }
-        animator.SetInteger("attackState",comboStep);
+
         comboTimer = comboWindowTime;
+
+        nextAttackQueued = false;
+
         isAttacking = true;
+
+        animator.SetInteger("attackState", comboStep);
     }
 
     public void EndAttack()
     {
         isAttacking = false;
+
         if(nextAttackQueued)
         {
             nextAttackQueued = false;
@@ -79,10 +89,12 @@ public class PlayerAttack : MonoBehaviour
     public void PerformAttack()
     {
         thisAttackData = attackData[comboStep-1];
+
         float direction = transform.localScale.x > 0 ? 1f: -1f;
+
         GameObject hitobject = Instantiate(thisAttackData.hitboxPrefab, transform.position, Quaternion.identity);
+        
         hitobject.GetComponent<Hitbox>().Init(thisAttackData, direction);
     }
-
 
 }

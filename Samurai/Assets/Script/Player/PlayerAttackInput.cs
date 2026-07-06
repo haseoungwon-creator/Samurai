@@ -17,51 +17,59 @@ public class PlayerAttackInput : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.Currentstate == GameState.Story) return;
-        if(playerHealth.isDead) return;
+        if(GameManager.Instance.Currentstate == GameState.Story || playerHealth.isDead) return;
 
-        if (Input.GetMouseButtonDown(1)&& !playerCharge.isCharging)
+        HandleDashInput();
+        HandleAttackInput();
+    }
+
+    void HandleDashInput()
+    {
+        if(Input.GetMouseButtonDown(1))
         {
-            
-            playerDash.Dash();
+            if(!playerCharge.isCharged)
+                playerDash.Dash();
         }
 
-        if (playerDash.isDashing)
+        if(playerDash.isDashing && Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0))
+            playerDash.QueueDashAttack();
+        }
+
+    }
+
+    void HandleAttackInput()
+    {
+        if (playerDash.isDashing) return;
+
+        if (playerCharge.isCharging || playerCharge.isCharged)
+        {
+            if (Input.GetMouseButton(0))
             {
-                playerDash.QueueDashAttack();
+                playerCharge.Charging();
             }
 
-            return;
+            if (Input.GetMouseButtonUp(0))
+            {
+                if (playerCharge.isCharged)
+                    playerCharge.ReleaseCharge();
+                else
+                    playerCharge.CancelCharge();
+            }   
         }
 
-        if (Input.GetMouseButtonDown(0)&&!playerCharge.isCharging)
+        if(Input.GetMouseButtonDown(0))
         {
             playerCharge.StartCharge();
         }
 
-        if (Input.GetMouseButton(0))
-        {
-            playerCharge.Charging();
-            return;
-        }
-
         if (Input.GetMouseButtonUp(0))
         {
-            if (playerDash.dashAttackQueued) return;
-            Debug.Log("Mouse Up");
-            if (playerCharge.isCharged)
-            {
-                playerCharge.EndCharge();
-                return;
-            }
-            else if(!playerDash.isDashing)
-            {
-                playerCharge.CancelCharge();
-                playerAttack.OnAttackInput();
-                return;
-            }
+            Debug.Log("Attack Input Detected");
+            playerAttack.OnAttackInput();
         }
     }
+
+
+
 }

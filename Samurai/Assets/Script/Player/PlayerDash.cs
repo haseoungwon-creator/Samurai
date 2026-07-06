@@ -84,8 +84,7 @@ public class PlayerDash : MonoBehaviour
         playerHealth.SetIncincible(false);
         animator.SetBool("isdashing", false);
         isDashing = false;
-        yield return new WaitForSeconds(dashCooldown);
-        canDash = true;
+        StartCoroutine(DashCooldown());
 
     }
 
@@ -93,24 +92,29 @@ public class PlayerDash : MonoBehaviour
     {
         dashAttackQueued = false;
 
-        
+        rb.linearVelocity = Vector2.zero;
+        playerHealth.SetIncincible(false);
 
         animator.SetTrigger("dashattack");
+        animator.SetBool("isdashing", false);
+
         foreach(Enemy enemy in hitEnemies)
         {
             if(enemy == null) continue;
             enemy.TakeDamage(dashAttackData.damage);
         }
         hitEnemies.Clear();
-        rb.linearVelocity = Vector2.zero;
-        playerHealth.SetIncincible(false);
-        animator.SetBool("isdashing", false);
-
+        
     }
 
-    private void EndDashAttack()
+    public void EndDashAttack()
     {
+        dashAttackQueued = false;
+
+        animator.ResetTrigger("dashattack");
+
         isDashing = false;
+        
         StartCoroutine(DashCooldown());
     }
 

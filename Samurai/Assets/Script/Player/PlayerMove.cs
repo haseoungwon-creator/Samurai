@@ -49,7 +49,7 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (GameManager.Instance.Currentstate == GameState.Story || playerHealth.isDead || playerCharge.isCharging)
+        if (GameManager.Instance.Currentstate == GameState.Story || playerHealth.isDead || playerCharge.isCharged)
         {
             rb.linearVelocity = Vector2.zero;
             return;
