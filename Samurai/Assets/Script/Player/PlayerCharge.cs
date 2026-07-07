@@ -34,7 +34,7 @@ public class PlayerCharge : MonoBehaviour
         if(chargeTimer >= chargeTime)
         {
             isCharged = true;
-            animator.SetTrigger("charge");
+            animator.SetBool("charge",true);
         }
     }
 
@@ -45,7 +45,7 @@ public class PlayerCharge : MonoBehaviour
         isCharging = false;
         isCharged= false;
 
-        animator.SetTrigger("chargeattack");
+        animator.SetBool("chargeattack",true);
     }
 
     public void PerformChargeAttack()
@@ -68,9 +68,10 @@ public class PlayerCharge : MonoBehaviour
     }
 
     void ResetCharge()
-    {
+    { 
         isCharged = false;
         isCharging = false;
         chargeTimer = 0;
+        animator.SetBool("chargeattack", false);
     }
 }

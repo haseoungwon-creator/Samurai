@@ -65,7 +65,7 @@ public class PlayerAttackInput : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            Debug.Log("Attack Input Detected");
+            if(!playerCharge.isCharged && !playerCharge.isCharging) 
             playerAttack.OnAttackInput();
         }
     }

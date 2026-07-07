@@ -96,7 +96,6 @@ public class PlayerDash : MonoBehaviour
         playerHealth.SetIncincible(false);
 
         animator.SetTrigger("dashattack");
-        animator.SetBool("isdashing", false);
 
         foreach(Enemy enemy in hitEnemies)
         {
@@ -104,7 +103,9 @@ public class PlayerDash : MonoBehaviour
             enemy.TakeDamage(dashAttackData.damage);
         }
         hitEnemies.Clear();
-        
+
+        animator.SetBool("isdashing", false);
+
     }
 
     public void EndDashAttack()
