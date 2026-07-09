@@ -7,5 +7,6 @@ public class AttackData : ScriptableObject
     public Vector2 size;
     public Vector2 offset;
     public float duration;
+    public float comboWindow;
     public GameObject hitboxPrefab;
 }

@@ -15,5 +15,6 @@ MonoBehaviour:
   damage: 5
   size: {x: 1, y: 1}
   offset: {x: 0.5, y: 0}
-  duration: 0.4
+  duration: 0.5
+  comboWindow: 0.5
   hitboxPrefab: {fileID: 6519367993085803004, guid: 5f232e6947439204e82e6675ec0ecd32, type: 3}

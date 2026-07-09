@@ -1,100 +1,102 @@
+using System.Collections;
 using UnityEngine;
-
 public class PlayerAttack : MonoBehaviour
 {
-    [SerializeField] AttackData[] attackData;
+    [SerializeField] AttackData[] attackDatas;
 
-    [SerializeField] float comboWindowTime;
-
-    AttackData thisAttackData;
-
-    Animator animator;
-
-
+    PlayerStateMachine stateMachine;
+    PlayerAnimator playerAnimator;
 
     int comboStep;
 
-    float comboTimer;
-    
+    bool canQueueNextAttack;
+    bool attackQueued;
 
-    public bool isAttacking {  get; private set; }
-    bool nextAttackQueued;
-
-
+    Coroutine comboResetCoroutine;
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        stateMachine = GetComponent<PlayerStateMachine>();
+        playerAnimator = GetComponent<PlayerAnimator>();
     }
 
-    private void Update()
+    private void Start()
     {
-        if (!isAttacking && comboTimer > 0)
-        {
-            comboTimer -= Time.deltaTime;
-            if (comboTimer <= 0)
-            {
-                comboTimer = 0;
-                comboStep = 0;
-                animator.SetInteger("attackState", comboStep);
-            }
-        }
+        comboStep = 0;
     }
-
-    public void OnAttackInput()
+  
+    public void TryAttack()
     {
-        if (!isAttacking)
-        {
-            Attack();
-        }
-        else
-        {
-            nextAttackQueued = true;
-        }
-    }
-
-    private void Attack()
-    {
-        if(comboTimer <= 0)
-        {
-            comboStep = 0;
-        }
-
-        comboStep++;
-
-        if(comboStep > attackData.Length)
+        if (stateMachine.CanAttack())
         {
             comboStep = 1;
+
+            stateMachine.ChangeState(PlayerState.Attack);
+
+            StartCoroutine(AttackRoutine());
         }
-
-        comboTimer = comboWindowTime;
-
-        nextAttackQueued = false;
-
-        isAttacking = true;
-
-        animator.SetInteger("attackState", comboStep);
-    }
-
-    public void EndAttack()
-    {
-        isAttacking = false;
-
-        if(nextAttackQueued)
+        else if(stateMachine.CurrentState == PlayerState.Attack && canQueueNextAttack)
         {
-            nextAttackQueued = false;
-            Attack();
+            attackQueued = true;
         }
     }
 
-    public void PerformAttack()
+
+    IEnumerator AttackRoutine()
     {
-        thisAttackData = attackData[comboStep-1];
+        Debug.Log($"comboStep : {comboStep}");
+        Debug.Log($"Length : {attackDatas.Length}");
+        Debug.Log($"Data : {attackDatas[comboStep - 1]}");
+        AttackData data = attackDatas[comboStep-1];
 
-        float direction = transform.localScale.x > 0 ? 1f: -1f;
+        attackQueued = false;
+        canQueueNextAttack = false;
 
-        GameObject hitobject = Instantiate(thisAttackData.hitboxPrefab, transform.position, Quaternion.identity);
-        
-        hitobject.GetComponent<Hitbox>().Init(thisAttackData, direction);
+        playerAnimator.SetAttackStep(comboStep);
+
+        yield return new WaitForSeconds(data.duration * 0.3f);
+
+        PerformAttack();
+
+        yield return new WaitForSeconds(data.duration * 0.4f);
+
+        canQueueNextAttack = true;
+
+        yield return new WaitForSeconds(data.duration * 0.3f);
+
+        canQueueNextAttack = false;
+
+        if (attackQueued)
+        {
+            comboStep++;
+
+            if(comboStep > attackDatas.Length)
+                comboStep = 1;
+
+            StartCoroutine(AttackRoutine());
+            yield break;
+        }
+
+        stateMachine.ChangeState(PlayerState.Idle);
+
+        playerAnimator.ResetAttack();
+
+        if (comboResetCoroutine != null)
+            StopCoroutine(comboResetCoroutine);
+
+        comboResetCoroutine = StartCoroutine(ComboReset(data.comboWindow));
     }
 
+
+    IEnumerator ComboReset(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        comboStep = 0;
+    }
+    void PerformAttack()
+    {
+        float direction = transform.localScale.x > 0 ? 1 : -1;
+        GameObject hitobject = Instantiate(attackDatas[comboStep - 1].hitboxPrefab, transform.position, Quaternion.identity);
+        hitobject.GetComponent<Hitbox>().Init(attackDatas[comboStep - 1], direction);
+    }
 }

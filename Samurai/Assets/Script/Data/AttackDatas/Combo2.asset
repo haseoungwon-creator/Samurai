@@ -16,4 +16,5 @@ MonoBehaviour:
   size: {x: 1.7, y: 1}
   offset: {x: 0.1, y: 0}
   duration: 0.5
+  comboWindow: 0.5
   hitboxPrefab: {fileID: 6460222504487057972, guid: 2152118abb2766d4d84edf94c406d315, type: 3}

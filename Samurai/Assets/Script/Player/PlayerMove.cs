@@ -15,7 +15,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] float moveSpeed = 4f;
 
 
-    float x;
+    public float x;
 
     private void Awake()
     {
@@ -40,7 +40,7 @@ public class PlayerMove : MonoBehaviour
 
         if (playerDash.isDashing) return;
 
-        x = Input.GetAxisRaw("Horizontal");
+        
         if (x > 0) transform.localScale = new Vector3(1, 1, 1);
         else if (x < 0) transform.localScale = new Vector3(-1, 1, 1);
 

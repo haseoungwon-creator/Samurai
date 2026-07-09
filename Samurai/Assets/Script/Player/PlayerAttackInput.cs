@@ -1,75 +1,54 @@
 using UnityEngine;
-
 public class PlayerAttackInput : MonoBehaviour
 {
+    PlayerStateMachine stateMachine;
     PlayerAttack playerAttack;
-    PlayerCharge playerCharge;
     PlayerDash playerDash;
+    PlayerCharge playerCharge;
     PlayerHealth playerHealth;
-
     private void Awake()
     {
+        stateMachine = GetComponent<PlayerStateMachine>();
         playerAttack = GetComponent<PlayerAttack>();
-        playerCharge = GetComponent<PlayerCharge>();
         playerDash = GetComponent<PlayerDash>();
+        playerCharge = GetComponent<PlayerCharge>();
         playerHealth = GetComponent<PlayerHealth>();
     }
-
     private void Update()
     {
-        if(GameManager.Instance.Currentstate == GameState.Story || playerHealth.isDead) return;
-
+        if (GameManager.Instance.Currentstate == GameState.Story || playerHealth.isDead) return;
         HandleDashInput();
         HandleAttackInput();
     }
-
-    void HandleDashInput()
+    private void HandleDashInput()
     {
-        if(Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1))
         {
-            if(!playerCharge.isCharged)
-                playerDash.Dash();
+            //playerDash.TryDash();
         }
-
-        if(playerDash.isDashing && Input.GetMouseButtonDown(0))
-        {
-            playerDash.QueueDashAttack();
-        }
-
     }
-
-    void HandleAttackInput()
+    private void HandleAttackInput()
     {
-        if (playerDash.isDashing) return;
-
-        if (playerCharge.isCharging || playerCharge.isCharged)
-        {
-            if (Input.GetMouseButton(0))
-            {
-                playerCharge.Charging();
-            }
-
-            if (Input.GetMouseButtonUp(0))
-            {
-                if (playerCharge.isCharged)
-                    playerCharge.ReleaseCharge();
-                else
-                    playerCharge.CancelCharge();
-            }   
-        }
-
-        if(Input.GetMouseButtonDown(0))
+        if (stateMachine.CurrentState == PlayerState.Dash) return;
+        if (Input.GetMouseButtonDown(0))
         {
             playerCharge.StartCharge();
         }
-
+        if (Input.GetMouseButton(0))
+        {
+            playerCharge.Charging();
+        }
         if (Input.GetMouseButtonUp(0))
         {
-            if(!playerCharge.isCharged && !playerCharge.isCharging) 
-            playerAttack.OnAttackInput();
+            if (stateMachine.CurrentState == PlayerState.ChargeFull)
+            {
+                playerCharge.ReleaseCharge();
+            }
+            else
+            {
+                playerCharge.CancelCharge();
+                playerAttack.TryAttack();
+            }
         }
     }
-
-
-
 }
