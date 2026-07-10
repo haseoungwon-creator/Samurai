@@ -8,11 +8,11 @@ public class PlayerAnimator : MonoBehaviour
     }
     public void SetAttackStep(int step)
     {
-        animator.SetInteger("attackState", step);
+        animator.SetInteger("attackstate", step);
     }
     public void SetDashing(bool isDashing)
     {
-        animator.SetBool("isDashing", isDashing);
+        animator.SetBool("isdashing", isDashing);
     }
     public void TriggerCharge()
     {
@@ -20,11 +20,11 @@ public class PlayerAnimator : MonoBehaviour
     }
     public void TriggerChargeAttack()
     {
-        animator.SetTrigger("chargeAttack");
+        animator.SetTrigger("chargeattack");
     }
     public void TriggerDashAttack()
     {
-        animator.SetTrigger("dashAttack");
+        animator.SetTrigger("dashattack");
     }
     public void TriggerHurt()
     {
@@ -40,6 +40,6 @@ public class PlayerAnimator : MonoBehaviour
     }
     public void ResetAttack()
     {
-        animator.SetInteger("attackState", 0);
+        animator.SetInteger("attackstate", 0);
     }
 }

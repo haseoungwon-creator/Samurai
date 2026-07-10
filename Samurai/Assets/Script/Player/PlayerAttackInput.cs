@@ -6,6 +6,7 @@ public class PlayerAttackInput : MonoBehaviour
     PlayerDash playerDash;
     PlayerCharge playerCharge;
     PlayerHealth playerHealth;
+    PlayerMove playerMove;
     private void Awake()
     {
         stateMachine = GetComponent<PlayerStateMachine>();
@@ -13,18 +14,30 @@ public class PlayerAttackInput : MonoBehaviour
         playerDash = GetComponent<PlayerDash>();
         playerCharge = GetComponent<PlayerCharge>();
         playerHealth = GetComponent<PlayerHealth>();
+        playerMove = GetComponent<PlayerMove>();
     }
     private void Update()
     {
         if (GameManager.Instance.Currentstate == GameState.Story || playerHealth.isDead) return;
         HandleDashInput();
         HandleAttackInput();
+        HandleMouveInput();
     }
     private void HandleDashInput()
     {
         if (Input.GetMouseButtonDown(1))
         {
-            //playerDash.TryDash();
+            playerDash.TryDash();
+        }
+
+        if(stateMachine.CurrentState== PlayerState.Dash)
+        {
+            if(Input.GetMouseButtonDown(0))
+            {
+                playerDash.QueueDashAttack();
+            }
+
+            return;
         }
     }
     private void HandleAttackInput()
@@ -50,5 +63,9 @@ public class PlayerAttackInput : MonoBehaviour
                 playerAttack.TryAttack();
             }
         }
+    }
+    private void HandleMouveInput()
+    {
+       playerMove.SetMoveInput(Input.GetAxisRaw("Horizontal"));
     }
 }

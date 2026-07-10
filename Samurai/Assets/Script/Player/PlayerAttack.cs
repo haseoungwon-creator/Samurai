@@ -18,11 +18,6 @@ public class PlayerAttack : MonoBehaviour
         stateMachine = GetComponent<PlayerStateMachine>();
         playerAnimator = GetComponent<PlayerAnimator>();
     }
-
-    private void Start()
-    {
-        comboStep = 0;
-    }
   
     public void TryAttack()
     {
@@ -32,7 +27,7 @@ public class PlayerAttack : MonoBehaviour
 
             stateMachine.ChangeState(PlayerState.Attack);
 
-            StartCoroutine(AttackRoutine());
+            playerAnimator.SetAttackStep(comboStep);
         }
         else if(stateMachine.CurrentState == PlayerState.Attack && canQueueNextAttack)
         {
@@ -40,63 +35,56 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-
-    IEnumerator AttackRoutine()
-    {
-        Debug.Log($"comboStep : {comboStep}");
-        Debug.Log($"Length : {attackDatas.Length}");
-        Debug.Log($"Data : {attackDatas[comboStep - 1]}");
-        AttackData data = attackDatas[comboStep-1];
-
-        attackQueued = false;
-        canQueueNextAttack = false;
-
-        playerAnimator.SetAttackStep(comboStep);
-
-        yield return new WaitForSeconds(data.duration * 0.3f);
-
-        PerformAttack();
-
-        yield return new WaitForSeconds(data.duration * 0.4f);
-
-        canQueueNextAttack = true;
-
-        yield return new WaitForSeconds(data.duration * 0.3f);
-
-        canQueueNextAttack = false;
-
-        if (attackQueued)
-        {
-            comboStep++;
-
-            if(comboStep > attackDatas.Length)
-                comboStep = 1;
-
-            StartCoroutine(AttackRoutine());
-            yield break;
-        }
-
-        stateMachine.ChangeState(PlayerState.Idle);
-
-        playerAnimator.ResetAttack();
-
-        if (comboResetCoroutine != null)
-            StopCoroutine(comboResetCoroutine);
-
-        comboResetCoroutine = StartCoroutine(ComboReset(data.comboWindow));
-    }
-
-
-    IEnumerator ComboReset(float time)
-    {
-        yield return new WaitForSeconds(time);
-
-        comboStep = 0;
-    }
-    void PerformAttack()
+    public void PerformAttack()
     {
         float direction = transform.localScale.x > 0 ? 1 : -1;
-        GameObject hitobject = Instantiate(attackDatas[comboStep - 1].hitboxPrefab, transform.position, Quaternion.identity);
-        hitobject.GetComponent<Hitbox>().Init(attackDatas[comboStep - 1], direction);
+
+        GameObject hit = Instantiate(attackDatas[comboStep - 1].hitboxPrefab, transform.position,Quaternion.identity);
+
+        hit.GetComponent<Hitbox>().Init(attackDatas[comboStep-1],direction);
+    }
+
+    public void OpenComboWindow() 
+        {
+            canQueueNextAttack = true;
+        } 
+
+    public void ClosecomboWindow()
+    {
+        canQueueNextAttack = false;
+    }
+
+    public void FinishAttack()
+    {
+        if(attackQueued)
+        {
+            attackQueued = false;
+            comboStep++;
+            if(comboStep > attackDatas.Length)
+            {
+                comboStep = 1;
+            }
+
+            playerAnimator.SetAttackStep(comboStep);
+        }
+        else
+        {
+            stateMachine.ChangeState(PlayerState.Idle);
+
+            playerAnimator.ResetAttack();
+
+            if(comboResetCoroutine != null)
+            {
+                StopCoroutine(comboResetCoroutine);
+            }
+
+            comboResetCoroutine = StartCoroutine(ResetCombo());
+        }
+    }
+
+    IEnumerator ResetCombo()
+    {
+        yield return new WaitForSeconds(attackDatas[comboStep - 1].comboWindow);
+        comboStep = 1;
     }
 }

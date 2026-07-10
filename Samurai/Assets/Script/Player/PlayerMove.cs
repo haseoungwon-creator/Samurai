@@ -15,7 +15,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] float moveSpeed = 4f;
 
 
-    public float x;
+    float x;
 
     private void Awake()
     {
@@ -38,7 +38,7 @@ public class PlayerMove : MonoBehaviour
             return;
         }
 
-        if (playerDash.isDashing) return;
+        if (playerDash.dashAttackQueued) return;
 
         
         if (x > 0) transform.localScale = new Vector3(1, 1, 1);
@@ -47,6 +47,10 @@ public class PlayerMove : MonoBehaviour
         animator.SetFloat("speed", Mathf.Abs(x));
     }
 
+    public void SetMoveInput(float input)
+    {
+        x = input;
+    }
     private void FixedUpdate()
     {
         if (GameManager.Instance.Currentstate == GameState.Story || playerHealth.isDead || playerCharge.isCharged)
@@ -55,7 +59,7 @@ public class PlayerMove : MonoBehaviour
             return;
         }
 
-        if (playerDash.isDashing) return;
+        if (playerDash.dashAttackQueued) return;
 
         rb.linearVelocity = new Vector2(x * moveSpeed, rb.linearVelocity.y);
     }
