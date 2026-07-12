@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerDash : MonoBehaviour
@@ -12,6 +11,7 @@ public class PlayerDash : MonoBehaviour
 
     bool canDash = true;
     public bool dashAttackQueued {  get; private set; }
+    public bool isDashing => stateMachine.CurrentState == PlayerState.Dash;
 
     Rigidbody2D rb;
     PlayerHealth playerHealth;
@@ -64,12 +64,13 @@ public class PlayerDash : MonoBehaviour
         if (dashAttackQueued)
         {
             yield return StartCoroutine(DashAttackRoutine());
+            yield break;
         }
 
         playerAnimator.SetDashing(false);
         stateMachine.ChangeState(PlayerState.Idle);
-        yield return new WaitForSeconds(dashCooldown);
-        canDash = true;
+
+        StartCoroutine(DashCooldown());
     }
 
     public void PerformDashAttack()
@@ -88,6 +89,8 @@ public class PlayerDash : MonoBehaviour
 
         playerAnimator.TriggerDashAttack();
 
+        bool hitEnemy = hitEnemies.Count > 0;
+
         foreach (Enemy enemy in hitEnemies)
         {
             if(enemy == null) continue;
@@ -97,8 +100,23 @@ public class PlayerDash : MonoBehaviour
         hitEnemies.Clear();
 
         yield return new WaitForSeconds(dashAttackData.duration);
-
+        playerAnimator.SetDashing(false);
         stateMachine.ChangeState(PlayerState.Idle);
+
+        if (hitEnemy)
+        {
+            canDash = true;
+        }
+        else
+        {
+            StartCoroutine(DashCooldown());
+        }
+    }
+
+    IEnumerator DashCooldown()
+    {
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -111,5 +129,7 @@ public class PlayerDash : MonoBehaviour
             hitEnemies.Add(enemy);
         }
     }
+
+
 }
 

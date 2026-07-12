@@ -21,6 +21,8 @@ public class PlayerAttack : MonoBehaviour
   
     public void TryAttack()
     {
+        if (stateMachine.CurrentState == PlayerState.DashAttack) return;
+        if (stateMachine.CurrentState == PlayerState.ChargeAttack) return;
         if (stateMachine.CanAttack())
         {
             comboStep = 1;
@@ -56,6 +58,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void FinishAttack()
     {
+        canQueueNextAttack = false;
         if(attackQueued)
         {
             attackQueued = false;

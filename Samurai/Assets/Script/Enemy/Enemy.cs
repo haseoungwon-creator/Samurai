@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     }
 
 
-    private void OnDisable()
+    private void OnDestory()
     {
         if(EnemyManager.Instance != null)
         EnemyManager.Instance.Unregister(this);

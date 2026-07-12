@@ -9,16 +9,20 @@ public class PlayerCharge : MonoBehaviour
 
     float chargeTimer;
 
-    Animator animator;
+    PlayerAnimator playerAnimator;
+    PlayerStateMachine stateMachine;
     
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        playerAnimator = GetComponent<PlayerAnimator>();
+        stateMachine = GetComponent<PlayerStateMachine>();
     }
 
     public void StartCharge()
     {
+
+        if (!stateMachine.CanCharge()) return;
         if(isCharging) return;
         chargeTimer = 0;
         isCharging = true;
@@ -27,14 +31,16 @@ public class PlayerCharge : MonoBehaviour
 
     public void Charging()
     {
-        if(!isCharging) return;
-        if (isCharged) return;
+        if (stateMachine.CurrentState != PlayerState.Idle && stateMachine.CurrentState != PlayerState.Charge) return;
 
+        if(!isCharging || isCharged) return;
+        stateMachine.ChangeState(PlayerState.Charge);
         chargeTimer += Time.deltaTime;
         if(chargeTimer >= chargeTime)
         {
             isCharged = true;
-            animator.SetBool("charge",true);
+            stateMachine.ChangeState(PlayerState.ChargeFull);
+            playerAnimator.TriggerChargeAttack();
         }
     }
 
@@ -45,25 +51,26 @@ public class PlayerCharge : MonoBehaviour
         isCharging = false;
         isCharged= false;
 
-        animator.SetBool("chargeattack",true);
+        stateMachine.ChangeState(PlayerState.ChargeAttack);
+        playerAnimator.TriggerChargeAttack();
     }
 
     public void PerformChargeAttack()
     {
-        if(isCharging) return;
-        float direction = transform.localScale.x > 0 ? 1f : -1f;
-
-        GameObject hitbox = Instantiate(chargeAttackData.hitboxPrefab, transform.position, Quaternion.identity);
-
+        float direction = transform.localScale.x > 0 ? 1 : -1;
+        GameObject hitbox = Instantiate(chargeAttackData.hitboxPrefab,transform.position, Quaternion.identity);
         hitbox.GetComponent<Hitbox>().Init(chargeAttackData, direction);
     }
 
+
     public void EndChargeAttack()
     {
+        stateMachine.ChangeState(PlayerState.Idle);
         ResetCharge();
     }
     public void CancelCharge()
     {
+        if(!isCharging) return;
         ResetCharge();
     }
 
@@ -72,6 +79,7 @@ public class PlayerCharge : MonoBehaviour
         isCharged = false;
         isCharging = false;
         chargeTimer = 0;
-        animator.SetBool("chargeattack", false);
+        playerAnimator.ResetTriggerCharge();
+        stateMachine.ChangeState(PlayerState.Idle);
     }
 }

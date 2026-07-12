@@ -11,15 +11,22 @@ public class PlayerHealth : MonoBehaviour
 
     Animator animator;
     PlayerCharge playerCharge;
+    PlayerDefend playerDefend;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         playerCharge = GetComponent<PlayerCharge>();
+        playerDefend = GetComponent<PlayerDefend>();
         isDead = false;
     }
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Enemy attacker = null)
     {
+        if (playerDefend.isDefending)
+        {
+            playerDefend.TryGuard(attacker);
+            return;
+        }
         if(isDead||isInvincible) { return; }
         playerCharge.CancelCharge();
         hp -= damage;

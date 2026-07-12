@@ -27,4 +27,10 @@ public class PlayerStateMachine : MonoBehaviour
         if (CurrentState == PlayerState.Idle) return true;
         return false;
     }
+
+    public bool CanDefend()
+    {
+        if (CurrentState == PlayerState.Idle || CurrentState == PlayerState.Attack) return true;
+        return false;
+    }
 }

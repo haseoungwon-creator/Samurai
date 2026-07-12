@@ -7,5 +7,7 @@ public enum PlayerState
     ChargeFull,
     ChargeAttack,
     DashAttack,
-    Dead
+    Dead,
+    Defend,
+    GuardBreak
 }

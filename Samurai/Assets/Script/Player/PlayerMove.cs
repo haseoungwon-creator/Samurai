@@ -12,6 +12,8 @@ public class PlayerMove : MonoBehaviour
 
     PlayerCharge playerCharge;
 
+    PlayerDefend playerDefen;
+
     [SerializeField] float moveSpeed = 4f;
 
 
@@ -24,21 +26,21 @@ public class PlayerMove : MonoBehaviour
         playerHealth = GetComponent<PlayerHealth>();
         playerDash = GetComponent<PlayerDash>();
         playerCharge = GetComponent<PlayerCharge>();
+        playerDefen = GetComponent<PlayerDefend>();
         GameManager.Instance.SetState(GameState.Playing);
 
     }
     private void Update()
     {
-        Debug.Log(GameManager.Instance.Currentstate);
 
-        if (GameManager.Instance.Currentstate == GameState.Story || playerHealth.isDead || playerCharge.isCharged)
+        if (GameManager.Instance.Currentstate == GameState.Story || playerHealth.isDead || playerCharge.isCharged || playerDefen.isDefending)
         {
             rb.linearVelocity = Vector2.zero;
             animator.SetFloat("speed", 0);
             return;
         }
 
-        if (playerDash.dashAttackQueued) return;
+        if (playerDash.isDashing) return;
 
         
         if (x > 0) transform.localScale = new Vector3(1, 1, 1);
@@ -53,13 +55,13 @@ public class PlayerMove : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (GameManager.Instance.Currentstate == GameState.Story || playerHealth.isDead || playerCharge.isCharged)
+        if (GameManager.Instance.Currentstate == GameState.Story || playerHealth.isDead || playerCharge.isCharged || playerDefen.isDefending)
         {
             rb.linearVelocity = Vector2.zero;
             return;
         }
 
-        if (playerDash.dashAttackQueued) return;
+        if (playerDash.isDashing) return;
 
         rb.linearVelocity = new Vector2(x * moveSpeed, rb.linearVelocity.y);
     }

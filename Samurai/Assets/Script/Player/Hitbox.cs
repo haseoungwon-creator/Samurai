@@ -3,7 +3,7 @@ using UnityEngine;
 public class Hitbox : MonoBehaviour
 {
     AttackData attackData;
-
+    public bool attackEnemy {  get; private set; }
     public void Init(AttackData data,float direction)
     {
         attackData = data;
@@ -20,6 +20,7 @@ public class Hitbox : MonoBehaviour
         Enemy enemy =  collision.GetComponent<Enemy>();
         if (enemy == null) return;
 
+        attackEnemy = true;
         enemy.TakeDamage(attackData.damage);
         Destroy(gameObject);
     }

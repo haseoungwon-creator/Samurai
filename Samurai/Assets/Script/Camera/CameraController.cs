@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class CameraController : Singleton<CameraController>
 {
     [SerializeField] GameObject Player;
     [SerializeField] float moveDistance;
@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour
      private Camera cam;
 
     bool isMoving = false;
+
 
 
     private void Start()
@@ -23,7 +24,6 @@ public class CameraController : MonoBehaviour
         moveDistance = height * cam.aspect -2f;
     }
 
-   
     private void LateUpdate()
     {
         if (isMoving) return;
@@ -41,7 +41,7 @@ public class CameraController : MonoBehaviour
         if(viewPos.x > 1f)
         {
             FollowPlayer(Vector3.right);
-        }
+        }   
         else if(viewPos.x < 0f)
         {
             FollowPlayer(Vector3.left);

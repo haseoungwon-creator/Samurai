@@ -28,7 +28,7 @@ AnimationClip:
       value: {fileID: 4970056502602508726, guid: 336c7cca050d2e1419f6f5c9b80bec10, type: 3}
     - time: 0.33333334
       value: {fileID: 1935231433567745852, guid: 336c7cca050d2e1419f6f5c9b80bec10, type: 3}
-    - time: 0.5
+    - time: 0.5833333
       value: {fileID: 8810267081325647525, guid: 336c7cca050d2e1419f6f5c9b80bec10, type: 3}
     attribute: m_Sprite
     path: 
@@ -62,7 +62,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.5833333
+    m_StopTime: 0.6666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -96,15 +96,15 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.5
-    functionName: ClosecomboWindow
+  - time: 0.6666667
+    functionName: FinishAttack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.5
-    functionName: FinishAttack
+  - time: 0.6666667
+    functionName: ClosecomboWindow
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -4,10 +4,15 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static T instance;
 
+    private static bool applicationIsQuitting = false;
     public static T Instance{
         get
         {
-            if(instance == null)
+            if (applicationIsQuitting)
+            {
+                return null;
+            }
+            if (instance == null)
             {
                 instance = FindAnyObjectByType<T>();
 
@@ -35,4 +40,16 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
+    protected virtual void OnApplicationQuit()
+    {
+        applicationIsQuitting = true;
+    }
+
+    protected virtual void OnDestroy()
+    {
+        if(instance == this)
+        {
+            applicationIsQuitting = true;
+        }
+    }
 }

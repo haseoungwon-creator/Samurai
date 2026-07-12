@@ -42,4 +42,25 @@ public class PlayerAnimator : MonoBehaviour
     {
         animator.SetInteger("attackstate", 0);
     }
+    public void ResetTriggerCharge()
+    {
+        animator.ResetTrigger("charge");
+        animator.ResetTrigger("chargeattack");
+    }
+
+    public void SetDefending(bool isDefending)
+    {
+        animator.SetBool("isdefending",isDefending);
+    }
+
+    public void TriggerGuardReact()
+    {
+        animator.SetTrigger("guardreact");
+    }
+
+    public void TriggerGuardBreak()
+    {
+        animator.SetTrigger("guardbreak");
+
+    }
 }
