@@ -52,6 +52,9 @@ public class PlayerCharge : MonoBehaviour
         isCharged= false;
 
         stateMachine.ChangeState(PlayerState.ChargeAttack);
+
+        Debug.Log("stateMachine 상태: " + stateMachine.CurrentState);
+        Debug.Log("Instance 상태: " + PlayerStateMachine.Instance.CurrentState);
         playerAnimator.TriggerChargeAttack();
     }
 

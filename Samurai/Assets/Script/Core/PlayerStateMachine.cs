@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerStateMachine : MonoBehaviour
+public class PlayerStateMachine : Singleton<PlayerStateMachine>
 {
     public PlayerState CurrentState { get; private set; }
 

@@ -9,5 +9,8 @@ public enum PlayerState
     DashAttack,
     Dead,
     Defend,
-    GuardBreak
+    GuardBreak,
+    TakeDamage,
+    LowHp,
+    none
 }

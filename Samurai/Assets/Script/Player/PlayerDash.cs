@@ -11,12 +11,11 @@ public class PlayerDash : MonoBehaviour
 
     bool canDash = true;
     public bool dashAttackQueued {  get; private set; }
-    public bool isDashing => stateMachine.CurrentState == PlayerState.Dash;
+    public bool isDashing => PlayerStateMachine.Instance.CurrentState == PlayerState.Dash;
 
     Rigidbody2D rb;
     PlayerHealth playerHealth;
     PlayerAnimator playerAnimator;
-    PlayerStateMachine stateMachine;
 
     List<Enemy> hitEnemies;
 
@@ -25,19 +24,18 @@ public class PlayerDash : MonoBehaviour
         playerAnimator = GetComponent<PlayerAnimator>();
         playerHealth = GetComponent<PlayerHealth>();
         rb = GetComponent<Rigidbody2D>();
-        stateMachine = GetComponent<PlayerStateMachine>();
     }
 
    public void TryDash()
     {
-        if (!canDash || !stateMachine.CanDash()) return;
+        if (!canDash || !PlayerStateMachine.Instance.CanDash()) return;
 
         StartCoroutine(DashRoutine());
     }
 
     public void QueueDashAttack()
     {
-        if(stateMachine.CurrentState != PlayerState.Dash) return;
+        if(PlayerStateMachine.Instance.CurrentState != PlayerState.Dash) return;
         dashAttackQueued = true;
     }
 
@@ -47,7 +45,7 @@ public class PlayerDash : MonoBehaviour
         dashAttackQueued = false;
         hitEnemies = new List<Enemy>();
 
-        stateMachine.ChangeState(PlayerState.Dash);
+        PlayerStateMachine.Instance.ChangeState(PlayerState.Dash);
         playerAnimator.SetDashing(true);
 
         float dir = transform.localScale.x > 0 ? 1 : -1;
@@ -68,7 +66,7 @@ public class PlayerDash : MonoBehaviour
         }
 
         playerAnimator.SetDashing(false);
-        stateMachine.ChangeState(PlayerState.Idle);
+        PlayerStateMachine.Instance.ChangeState(PlayerState.Idle);
 
         StartCoroutine(DashCooldown());
     }
@@ -85,23 +83,29 @@ public class PlayerDash : MonoBehaviour
    IEnumerator DashAttackRoutine()
     {
         dashAttackQueued = false;
-        stateMachine.ChangeState(PlayerState.DashAttack);
+        PlayerStateMachine.Instance.ChangeState(PlayerState.DashAttack);
 
         playerAnimator.TriggerDashAttack();
-
+        StateDataExchange.Instance.StateDataExchanged();
         bool hitEnemy = hitEnemies.Count > 0;
 
         foreach (Enemy enemy in hitEnemies)
         {
-            if(enemy == null) continue;
+            if (enemy == null) continue;
+
             enemy.TakeDamage(dashAttackData.damage);
         }
+        if(hitEnemy)
+        {
+            CameraManager.Instance.CameraMoving(CameraStateMachine.Instance.CurrentState);
+        }
+
 
         hitEnemies.Clear();
 
         yield return new WaitForSeconds(dashAttackData.duration);
         playerAnimator.SetDashing(false);
-        stateMachine.ChangeState(PlayerState.Idle);
+        PlayerStateMachine.Instance .ChangeState(PlayerState.Idle);
 
         if (hitEnemy)
         {
@@ -121,7 +125,7 @@ public class PlayerDash : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(stateMachine.CurrentState != PlayerState.Dash) return;
+        if(PlayerStateMachine.Instance.CurrentState != PlayerState.Dash) return;
         Enemy enemy = collision.GetComponent<Enemy>();
         if (enemy == null) return;
         if (!hitEnemies.Contains(enemy))

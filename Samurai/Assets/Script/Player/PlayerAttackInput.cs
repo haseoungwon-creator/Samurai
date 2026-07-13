@@ -1,7 +1,6 @@
 using UnityEngine;
 public class PlayerAttackInput : MonoBehaviour
 {
-    PlayerStateMachine stateMachine;
     PlayerAttack playerAttack;
     PlayerDash playerDash;
     PlayerCharge playerCharge;
@@ -10,7 +9,6 @@ public class PlayerAttackInput : MonoBehaviour
     PlayerDefend playerDefend;
     private void Awake()
     {
-        stateMachine = GetComponent<PlayerStateMachine>();
         playerAttack = GetComponent<PlayerAttack>();
         playerDash = GetComponent<PlayerDash>();
         playerCharge = GetComponent<PlayerCharge>();
@@ -22,10 +20,10 @@ public class PlayerAttackInput : MonoBehaviour
     {
         if (GameManager.Instance.Currentstate == GameState.Story || playerHealth.isDead) return;
         HandleDashInput();
-        if (stateMachine.CurrentState == PlayerState.Dash) return;
+        if (PlayerStateMachine.Instance.CurrentState == PlayerState.Dash) return;
         HandleDefendInput();
 
-        if(stateMachine.CurrentState == PlayerState.Defend) return;
+        if(PlayerStateMachine.Instance.CurrentState == PlayerState.Defend) return;
         HandleAttackInput();
         HandleMouveInput();
     }
@@ -36,7 +34,7 @@ public class PlayerAttackInput : MonoBehaviour
             playerDash.TryDash();
         }
 
-        if (stateMachine.CurrentState == PlayerState.Dash)
+        if (PlayerStateMachine.Instance.CurrentState == PlayerState.Dash)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -60,15 +58,15 @@ public class PlayerAttackInput : MonoBehaviour
     }
     private void HandleAttackInput()
     {
-        if (stateMachine.CurrentState == PlayerState.Dash) return;
+        if (PlayerStateMachine.Instance.CurrentState == PlayerState.Dash) return;
         if (Input.GetMouseButtonDown(0))
         {
-            if (stateMachine.CanCharge())
+            if (PlayerStateMachine.Instance.CanCharge())
             {
                 playerCharge.StartCharge();
             }
 
-            else if (stateMachine.CurrentState == PlayerState.Attack)
+            else if (PlayerStateMachine.Instance.CurrentState == PlayerState.Attack)
             {
                 playerAttack.TryAttack();
             }
@@ -79,14 +77,14 @@ public class PlayerAttackInput : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
-            if (stateMachine.CurrentState == PlayerState.Charge)
+            if (PlayerStateMachine.Instance.CurrentState == PlayerState.Charge)
             {
                 playerCharge.CancelCharge();
                 playerAttack.TryAttack();
                 return;
             }
 
-            //else if (stateMachine.CurrentState == PlayerState.ChargeFull)
+            //else if (PlayerStateMachine.Instance.CurrentState == PlayerState.ChargeFull)
             //{
             //    playerCharge.ReleaseCharge();
             //    return;

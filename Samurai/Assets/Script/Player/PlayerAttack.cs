@@ -4,7 +4,6 @@ public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] AttackData[] attackDatas;
 
-    PlayerStateMachine stateMachine;
     PlayerAnimator playerAnimator;
 
     int comboStep;
@@ -15,23 +14,22 @@ public class PlayerAttack : MonoBehaviour
     Coroutine comboResetCoroutine;
     private void Awake()
     {
-        stateMachine = GetComponent<PlayerStateMachine>();
         playerAnimator = GetComponent<PlayerAnimator>();
     }
   
     public void TryAttack()
     {
-        if (stateMachine.CurrentState == PlayerState.DashAttack) return;
-        if (stateMachine.CurrentState == PlayerState.ChargeAttack) return;
-        if (stateMachine.CanAttack())
+        if (PlayerStateMachine.Instance.CurrentState == PlayerState.DashAttack) return;
+        if (PlayerStateMachine.Instance.CurrentState == PlayerState.ChargeAttack) return;
+        if (PlayerStateMachine.Instance.CanAttack())
         {
             comboStep = 1;
 
-            stateMachine.ChangeState(PlayerState.Attack);
+            PlayerStateMachine.Instance.ChangeState(PlayerState.Attack);
 
             playerAnimator.SetAttackStep(comboStep);
         }
-        else if(stateMachine.CurrentState == PlayerState.Attack && canQueueNextAttack)
+        else if(PlayerStateMachine.Instance.CurrentState == PlayerState.Attack && canQueueNextAttack)
         {
             attackQueued = true;
         }
@@ -72,7 +70,7 @@ public class PlayerAttack : MonoBehaviour
         }
         else
         {
-            stateMachine.ChangeState(PlayerState.Idle);
+            PlayerStateMachine.Instance.ChangeState(PlayerState.Idle);
 
             playerAnimator.ResetAttack();
 
