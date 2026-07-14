@@ -18,12 +18,19 @@ public class PlayerAttackInput : MonoBehaviour
     }
     private void Update()
     {
-        if (GameManager.Instance.Currentstate == GameState.Story || playerHealth.isDead) return;
+        if (GameManager.Instance.Currentstate != GameState.Playing || playerHealth.isDead)
+            return;
+
         HandleDashInput();
-        if (PlayerStateMachine.Instance.CurrentState == PlayerState.Dash) return;
+
+        if (PlayerStateMachine.Instance.CurrentState == PlayerState.Dash)
+            return;
+
         HandleDefendInput();
 
-        if(PlayerStateMachine.Instance.CurrentState == PlayerState.Defend) return;
+        if (PlayerStateMachine.Instance.CurrentState == PlayerState.Defend)
+            return;
+
         HandleAttackInput();
         HandleMouveInput();
     }

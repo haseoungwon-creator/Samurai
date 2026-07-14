@@ -32,7 +32,7 @@ public class PlayerCharge : MonoBehaviour
     public void Charging()
     {
         if (stateMachine.CurrentState != PlayerState.Idle && stateMachine.CurrentState != PlayerState.Charge) return;
-
+        
         if(!isCharging || isCharged) return;
         stateMachine.ChangeState(PlayerState.Charge);
         chargeTimer += Time.deltaTime;

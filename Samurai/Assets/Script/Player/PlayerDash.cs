@@ -86,7 +86,7 @@ public class PlayerDash : MonoBehaviour
         PlayerStateMachine.Instance.ChangeState(PlayerState.DashAttack);
 
         playerAnimator.TriggerDashAttack();
-        StateDataExchange.Instance.StateDataExchanged();
+        
         bool hitEnemy = hitEnemies.Count > 0;
 
         foreach (Enemy enemy in hitEnemies)
@@ -94,10 +94,11 @@ public class PlayerDash : MonoBehaviour
             if (enemy == null) continue;
 
             enemy.TakeDamage(dashAttackData.damage);
+               
         }
-        if(hitEnemy)
+        if (hitEnemy)
         {
-            CameraManager.Instance.CameraMoving(CameraStateMachine.Instance.CurrentState);
+            StateDataExchange.Instance.StateDataExchanged();
         }
 
 
