@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
@@ -23,13 +24,17 @@ public class PauseManager : MonoBehaviour
 
     public void Pause()
     {
-        Time.timeScale = 0f;
+        Time.timeScale = 0;
         GameManager.Instance.SetState(GameState.Pause);
+
         pausePanel.SetActive(true);
+
+        Debug.Log(pausePanel.activeInHierarchy);
     }
 
     public void Continue()
     {
+        Debug.Log("Continue");
         Time.timeScale = 1f;
         GameManager.Instance.SetState(GameState.Playing);
         pausePanel.SetActive(false);
@@ -37,17 +42,15 @@ public class PauseManager : MonoBehaviour
 
     public void GoMenu()
     {
+        Debug.Log("GoMenu");
         Time.timeScale = 1f;
         SceneManager.LoadScene("StartTitle");
     }
 
     public void Quit()
     {
+        Debug.Log("Quit");
         Application.Quit();
     }
 
-    public void TestClick()
-    {
-        Debug.Log("¹öÆ° Å¬¸¯µÊ");
-    }
 }
