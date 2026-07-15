@@ -18,7 +18,7 @@ public class StoryTirgger : MonoBehaviour
     private void Start()
     {
         cameraMain = Camera.main;
-        FadeManager.Instance.SetActiveFade(false);
+        //FadeManager.Instance.SetActiveFade(false);
     }
 
    
