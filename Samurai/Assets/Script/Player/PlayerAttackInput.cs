@@ -18,6 +18,8 @@ public class PlayerAttackInput : MonoBehaviour
     }
     private void Update()
     {
+
+        Pause();
         if (GameManager.Instance.Currentstate != GameState.Playing || playerHealth.isDead)
             return;
 
@@ -33,6 +35,14 @@ public class PlayerAttackInput : MonoBehaviour
 
         HandleAttackInput();
         HandleMouveInput();
+    }
+
+    private void Pause()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            PanelManaager.Instance.Open(panel.Pause);
+        }
     }
     private void HandleDashInput()
     {

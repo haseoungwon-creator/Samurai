@@ -24,17 +24,9 @@ public class TitleManager : MonoBehaviour
     {
         if (isInputEnabled && Input.GetKeyDown(KeyCode.Space)&& hasPressedStart)
         {
-            FadeManager.Instance.FadeIn(2f);
-            Invoke("LoadNextScene", 3f);
+            SceneryManager.Instance.LoadScene(nextSceneName);
             AudioManager.Instance.StopBgm();
             hasPressedStart = false;
-           
-            
         }
-    }
-
-    private void LoadNextScene()
-    {
-        SceneManager.LoadScene(nextSceneName);
     }
 }

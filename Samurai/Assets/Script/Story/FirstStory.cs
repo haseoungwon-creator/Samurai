@@ -25,7 +25,6 @@ public class FirstStory : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.SetState(GameState.Story);
-        FadeManager.Instance.FadeOut(0.1f);
         AudioManager.Instance.PlayBgm(fireBgm);
         storybox = GetComponent<Text>();
         index = 0;
@@ -59,12 +58,12 @@ public class FirstStory : MonoBehaviour
         {
             if (isEndingTriggered)
             {
-                StartCoroutine(FirstStoryEnding());
+                FirstStoryEnding();
             }
         }
     }
 
-    IEnumerator FirstStoryEnding()
+    private void FirstStoryEnding()
     {
         isEndingTriggered = false;
 
@@ -76,10 +75,7 @@ public class FirstStory : MonoBehaviour
 
         GameManager.Instance.SetState(GameState.Playing);
 
-        yield return new WaitForSeconds(3f);
-
-
-       SceneManager.LoadSceneAsync("Village");
+        SceneryManager.Instance.LoadScene("Village");
 
 
 

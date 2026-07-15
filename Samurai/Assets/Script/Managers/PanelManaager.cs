@@ -8,7 +8,7 @@ public class PanelManaager : Singleton<PanelManaager>
 
     Dictionary<panel,GameObject> dictionary = new Dictionary<panel,GameObject>();
 
-    public void Open(panel panel,string message)
+    public void Open(panel panel)
     {
         if (dictionary.TryGetValue(panel, out clone) == false)
         {

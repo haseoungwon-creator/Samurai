@@ -6,26 +6,10 @@ public class PauseManager : MonoBehaviour
 {
     [SerializeField] GameObject pausePanel;
 
-    private void Awake()
-    {
-        pausePanel.SetActive(false);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape)) { 
-            if(GameManager.Instance.Currentstate == GameState.Playing)
-                Pause();
-                
-            else if (GameManager.Instance.Currentstate == GameState.Pause)
-                Continue();
-        }
-    }
-
     public void Pause()
     {
         Time.timeScale = 0;
-        GameManager.Instance.SetState(GameState.Pause);
+        PanelManaager.Instance.Open(panel.Pause);
 
         pausePanel.SetActive(true);
 
@@ -40,9 +24,9 @@ public class PauseManager : MonoBehaviour
         pausePanel.SetActive(false);
     }
 
-    public void GoMenu()
+    public void GoToMenu()
     {
-        Debug.Log("GoMenu");
+        Debug.Log("GoToMenu");
         Time.timeScale = 1f;
         SceneManager.LoadScene("StartTitle");
     }
@@ -50,7 +34,6 @@ public class PauseManager : MonoBehaviour
     public void Quit()
     {
         Debug.Log("Quit");
-        Application.Quit();
     }
 
 }
