@@ -10,12 +10,12 @@ public class StoryController : MonoBehaviour
     [SerializeField] float textSpeed = 0.1f;
     private StoryTirgger ownerTrigger;
 
-
     private List<Dialogue> currentStory;
     private int index = 0;
 
     public void StartStory(string key, StoryTirgger trigger = null)
     {
+        UIOrderManager.Instance.StoryMode(true);
         ownerTrigger = trigger;
         currentStory = StoryDatabase.Get(key);
         if (currentStory == null || currentStory.Count == 0)
@@ -64,11 +64,13 @@ public class StoryController : MonoBehaviour
 
     void EndStory()
     {
+
         currentStory = null;
         GameManager.Instance.SetState(GameState.Playing);
         if (ownerTrigger != null)
         {
             gameObject.SetActive(false);
+            UIOrderManager.Instance.StoryMode(false);
         }
 
 

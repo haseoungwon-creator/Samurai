@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour
     {
         if (isDead) return;
         animator.SetTrigger("hurt");
+        damage += PlayerStat.Instance.Power;
         hp -= damage;
         Debug.Log(hp);
         if (hp <= 0) Die();

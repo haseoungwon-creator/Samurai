@@ -71,15 +71,6 @@ public class PlayerDash : MonoBehaviour
         StartCoroutine(DashCooldown());
     }
 
-    public void PerformDashAttack()
-    {
-        foreach (Enemy enemy in hitEnemies)
-        {
-            if(enemy == null) continue;
-            enemy.TakeDamage(dashAttackData.damage);
-        }
-        hitEnemies.Clear();
-    }
    IEnumerator DashAttackRoutine()
     {
         dashAttackQueued = false;

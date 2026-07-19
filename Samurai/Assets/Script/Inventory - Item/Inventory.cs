@@ -1,67 +1,93 @@
+using System.Data;
 using UnityEngine;
 
 public class Inventory : Singleton<Inventory>
 {
-    [SerializeField] int maxSlot = 12;
-    ItemSlot[] slots;
-    ItemSlot[] quickSlots;
-    ItemSlot weaponSlot;
-    ItemSlot armorSlot;
+    [SerializeField] int inventorySize = 12;
+
+    public ItemSlot[] inventorySlots;
+
+    public ItemSlot[] quickSlots = new ItemSlot[4];
+
+    public ItemSlot weaponSlot = new ItemSlot();
+    public ItemSlot armorSlot = new ItemSlot();
 
     protected override void Awake()
     {
         base.Awake();
-        slots = new ItemSlot[maxSlot];
-        quickSlots = new ItemSlot[4];
-        weaponSlot = new ItemSlot();
-        armorSlot = new ItemSlot();
 
-        for (int i = 0; i < maxSlot; i++)
-        {
-            slots[i] = new ItemSlot();
-        }
-        for (int i = 0; i < 4; i++)
-        {
+        inventorySlots = new ItemSlot[inventorySize];
+
+        for (int i = 0; i < inventorySize; i++)
+            inventorySlots[i] = new ItemSlot();
+
+        for(int i = 0;i < quickSlots . Length; i++)
             quickSlots[i] = new ItemSlot();
-        }
     }
 
-    public bool AddItem(ItemData data,int qty = 1)
+    public bool AddItem(ItemData data, int amount = 1)
     {
         if (data.isStackable)
         {
-            foreach (ItemSlot slot in slots)
+            foreach(ItemSlot slot in inventorySlots)
             {
-                if(slot.itemData == data)
+                if (slot.CanStack(data))
                 {
-                    slot.AddQuantity(qty);
+                    slot.Add(amount);
+
+
                     return true;
                 }
             }
         }
 
-        foreach(ItemSlot slot in slots)
+        foreach (ItemSlot slot in inventorySlots)
         {
             if (slot.IsEmpty)
             {
-                slot.SetItem(data,qty);
+                slot.SetItem(data,amount);
+
+
                 return true;
             }
         }
-
         return false;
     }
 
-    public void RemoveItem(int slotIndex)
+    public void RemoveItem(ItemSlot slot,int amount = 1)
     {
-        slots[slotIndex].Clear();
+        slot.Remove(amount);
+
     }
 
-    public void SwapSlot(ItemSlot a, ItemSlot b)
+    public void Swap(ItemSlot a , ItemSlot b)
     {
-        ItemData tempData = a.itemData;
-        int tempQty = a.quantity;
+        if(!a.IsEmpty && !b.IsEmpty && a.itemData == b.itemData && a.itemData.isStackable)
+        {
+            int total = a.quantity + b.quantity;
+
+            if(total <= a.itemData.maxStack)
+            {
+                b.quantity = total;
+                a.Clear();
+            }
+            else
+            {
+                b.quantity = a.itemData.maxStack;
+                a.quantity = total - a.itemData.maxStack;
+            }
+            return;
+        }
+        ItemData data = a.itemData;
+        int amount = a.quantity;
+
         a.SetItem(b.itemData, b.quantity);
-        b.SetItem(tempData, tempQty);
+
+        if(data == null)
+            b.Clear();
+        else
+            b.SetItem(data, amount);
+
     }
+
 }

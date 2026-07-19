@@ -14,9 +14,6 @@ public class PlayerMove : MonoBehaviour
 
     PlayerDefend playerDefen;
 
-    [SerializeField] float moveSpeed = 4f;
-
-
     float x;
 
     private void Awake()
@@ -63,6 +60,6 @@ public class PlayerMove : MonoBehaviour
 
         if (playerDash.isDashing) return;
 
-        rb.linearVelocity = new Vector2(x * moveSpeed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(x * PlayerStat.Instance.MoveSpeed, rb.linearVelocity.y);
     }
 }

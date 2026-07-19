@@ -1,23 +1,41 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DropHandler : MonoBehaviour,IDropHandler
+public class DropHandler : MonoBehaviour, IDropHandler
 {
-   SlotUI slotUI;
+    SlotUI mySlot;
 
+    [SerializeField] ItemType allowType = ItemType.None;
     private void Awake()
     {
-        slotUI = GetComponent<SlotUI>();
+        if (mySlot == null)
+            mySlot = GetComponent<SlotUI>();
     }
 
     public void OnDrop(PointerEventData eventData)
     {
-        SlotUI draggedSlot = eventData.pointerDrag.GetComponent<SlotUI>();
-        if (slotUI == draggedSlot) return;
+        if (DragHandler.DragSlot == null) return;
 
-        Inventory.Instance.SwapSlot(slotUI.slot,draggedSlot.slot);
+       SlotUI dragSlot = DragHandler.DragSlot;
 
-        slotUI.UpdateUI();
-        draggedSlot.UpdateUI();
+        if (dragSlot == mySlot) return;
+
+        if(allowType != ItemType.None)
+        {
+            if (dragSlot.Slot.IsEmpty) return;
+            if (dragSlot.Slot.itemData.itemType != allowType)
+                return;
+        }
+        if (dragSlot.Slot.IsEmpty) return;
+
+        if (mySlot.Slot == null) return;
+
+        if(allowType == ItemType.Weapon ||  allowType == ItemType.Armor)
+        {
+            EquipManager.Instance.Equip(dragSlot.Slot);
+            return;
+        }
+        Inventory.Instance.Swap(dragSlot.Slot, mySlot.Slot);
     }
 }
+

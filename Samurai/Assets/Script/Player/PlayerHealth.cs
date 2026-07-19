@@ -19,6 +19,7 @@ public class PlayerHealth : MonoBehaviour
         playerCharge = GetComponent<PlayerCharge>();
         playerDefend = GetComponent<PlayerDefend>();
         isDead = false;
+        hp = PlayerStat.Instance.MaxHp;
     }
     public void TakeDamage(int damage, Enemy attacker = null)
     {
@@ -29,7 +30,8 @@ public class PlayerHealth : MonoBehaviour
         }
         if(isDead||isInvincible) { return; }
         playerCharge.CancelCharge();
-        hp -= damage;
+        int finalDamage = Mathf.Max(0, damage - PlayerStat.Instance.Defense);
+        hp -= finalDamage;
         animator.SetTrigger("hurt");
 
         if(hp <= 0)
@@ -62,5 +64,17 @@ public class PlayerHealth : MonoBehaviour
     public void SetIncincible (bool value)
     {
         isInvincible = value;
+    }
+
+    public void Heal(int amount)
+    {
+        if (isDead) return;
+
+        hp += amount;
+
+        if (hp > PlayerStat.Instance.MaxHp)
+        {
+            hp = PlayerStat.Instance.MaxHp;
+        }
     }
 }

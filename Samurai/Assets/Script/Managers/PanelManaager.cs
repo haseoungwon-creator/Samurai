@@ -19,12 +19,22 @@ public class PanelManaager : Singleton<PanelManaager>
             dictionary.Add(panel, clone);
 
             DontDestroyOnLoad(clone);
+
+            clone.SetActive(true);
         }
         else
         {
             clone = dictionary[panel];
 
             clone.SetActive(true);
+        }
+    }
+
+    public void Close(panel panel)
+    {
+        if(dictionary.TryGetValue(panel, out clone))
+        {
+            clone.SetActive(false);
         }
     }
 }

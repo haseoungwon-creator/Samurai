@@ -1,20 +1,38 @@
-[System.Serializable]
+using System;
+
+[Serializable]
 public class ItemSlot
 {
     public ItemData itemData;
     public int quantity;
 
-    public bool IsEmpty => itemData == null ? true : false;
+    public bool IsEmpty => itemData == null;
 
-    public void SetItem(ItemData data, int qty)
+    public bool CanStack(ItemData data)
     {
-        itemData = data;
-        quantity = qty;
+        return itemData == data && itemData.isStackable && quantity < itemData.maxStack;
     }
 
-    public void AddQuantity(int amoumt)
+    public void SetItem(ItemData data, int amount)
     {
-        quantity += amoumt;
+        itemData = data;
+        quantity = amount;
+    }
+
+    public void Add(int amount)
+    {
+        quantity += amount;
+
+        if (quantity > itemData.maxStack)
+            quantity = itemData.maxStack;
+    }
+
+    public void Remove(int amount)
+    {
+        quantity -= amount;
+
+        if (quantity <= 0)
+            Clear();
     }
 
     public void Clear()

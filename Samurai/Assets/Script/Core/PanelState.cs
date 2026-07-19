@@ -1,4 +1,7 @@
 public enum panel
 {
-    Pause
+    Pause,
+    Inventory,
+    Shop,
+    Dialogue
 }

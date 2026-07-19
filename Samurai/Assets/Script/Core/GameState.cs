@@ -2,5 +2,6 @@ public enum GameState
 {
     Story,
     Playing,
-    Pause
+    Pause,
+    Shop
 }

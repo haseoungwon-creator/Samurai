@@ -2,54 +2,66 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler,IEndDragHandler
 {
     SlotUI slotUI;
-    static GameObject dragIcon;
-    [SerializeField] Canvas rootCanvas;
+
+    Canvas canvas;
+
+    GameObject dragIcon;
+
+    RectTransform dragRect;
+
+    Image dragImage;
+
+    public static SlotUI DragSlot;
 
     private void Awake()
     {
         slotUI = GetComponent<SlotUI>();
+
+        canvas = GetComponentInParent<Canvas>();
+
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (slotUI.slot.IsEmpty)
-        {
-            return;
-        }
+        Debug.Log("드래그 시작");
+        if (slotUI.Slot == null) return;
+
+        if (slotUI.Slot.IsEmpty) return;
+
+        DragSlot = slotUI;
 
         dragIcon = new GameObject("DragIcon");
 
-        dragIcon.transform.SetParent(rootCanvas.transform);
+        dragIcon.transform.SetParent(canvas.transform);
 
-        Image image = dragIcon.AddComponent<Image>();
-        image.sprite = slotUI.slot.itemData.icon;
-        image.raycastTarget = false;
+        dragIcon.transform.SetAsLastSibling();
 
-        dragIcon.GetComponent<RectTransform>().sizeDelta = new Vector2(50, 50);
+        dragRect = dragIcon.AddComponent<RectTransform>();
 
+        dragRect.sizeDelta = new Vector2(100,100);
+
+        dragImage = dragIcon.AddComponent<Image>();
+
+        dragImage.sprite = slotUI.Slot.itemData.icon;
+
+        dragImage.raycastTarget = false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         if (dragIcon == null) return;
 
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            rootCanvas.transform as RectTransform,
-            eventData.position,
-            rootCanvas.worldCamera,
-            out Vector2 localPos);
-
-        dragIcon.transform.localPosition = localPos;
+        dragRect.position = eventData.position;
     }
 
-    public void OnEndDrag(PointerEventData eventData) 
+    public void OnEndDrag(PointerEventData eventData)
     {
-        Destroy(dragIcon);
+        if(dragIcon != null)
+            Destroy(dragIcon);
+
+        DragSlot = null;
     }
-
-
 }
-    
