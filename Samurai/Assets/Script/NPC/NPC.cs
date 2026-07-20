@@ -18,11 +18,18 @@ public class NPC : MonoBehaviour
 
     private void Update()
     {
-        if (!canInteract) return;
+
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            Interact();
+            if (GameManager.Instance.Currentstate == GameState.Shop)
+                CloseShop();
+
+            else
+            {
+                if (!canInteract) return;
+                Interact();
+            }
         }
     }
 
@@ -30,9 +37,13 @@ public class NPC : MonoBehaviour
     {
         if (isShopNPC)
         {
+            MouseManager.Instance.ShowCursor();
+
             GameManager.Instance.SetState(GameState.Shop);
 
             PanelManaager.Instance.Open(panel.Shop);
+
+            interactionUI.SetActive(false);
         }
         else
         {
@@ -45,9 +56,13 @@ public class NPC : MonoBehaviour
 
     private void CloseShop()
     {
+        MouseManager.Instance.HideCursor();
+
         PanelManaager.Instance.Close(panel.Shop);
 
         GameManager.Instance.SetState(GameState.Playing);
+
+        interactionUI.SetActive(true);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -66,6 +81,5 @@ public class NPC : MonoBehaviour
         
         interactionUI.SetActive(false);
 
-        CloseShop();
     }
 }

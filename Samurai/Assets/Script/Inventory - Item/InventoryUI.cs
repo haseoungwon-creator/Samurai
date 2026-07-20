@@ -25,7 +25,6 @@ public class InventoryUI : MonoBehaviour
         Refresh();
         if(Input.GetKeyDown(KeyCode.Tab))
         {
-            Debug.Log("Tab");
             Toggle();
         }
     }
@@ -63,10 +62,17 @@ public class InventoryUI : MonoBehaviour
     {
         isOpen = !isOpen;
 
-        Debug.Log("isOpen");
-
         if (isOpen) Refresh();
 
         inventoryPanel.SetActive(isOpen);
+
+        if (isOpen)
+        {
+            MouseManager.Instance.ShowCursor();
+        }
+        else
+        {
+            MouseManager.Instance.HideCursor();
+        }
     }
 }

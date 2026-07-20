@@ -16,7 +16,7 @@ public class ShopSlot : MonoBehaviour
 
         iconImage.sprite = data.itemData.icon;
         nameText.text = data.itemData.name;
-        priceText.text = data.price.ToString();
+        priceText.text = data.price.ToString() + "G";
 
         buyButton.onClick.RemoveAllListeners();
         buyButton.onClick.AddListener(Buy);

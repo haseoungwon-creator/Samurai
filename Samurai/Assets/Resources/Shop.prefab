@@ -37,7 +37,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -17, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &4734785783128338004
 CanvasRenderer:
@@ -124,10 +124,10 @@ RectTransform:
   - {fileID: 2237857637894304940}
   m_Father: {fileID: 3133330420718466200}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 825, y: 650}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &190539440934020404
 CanvasRenderer:
@@ -180,11 +180,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ScrollRect
   m_Content: {fileID: 5242215277746779897}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
-  m_Inertia: 1
+  m_Inertia: 0
   m_DecelerationRate: 0.135
   m_ScrollSensitivity: 1
   m_Viewport: {fileID: 2237857637894304940}
@@ -462,6 +462,7 @@ GameObject:
   - component: {fileID: 5242215277746779897}
   - component: {fileID: 4195810343846917083}
   - component: {fileID: 486222616826199972}
+  - component: {fileID: 9215931791048558984}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -483,11 +484,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2237857637894304940}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 824, y: 0}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &4195810343846917083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -527,13 +528,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopManager
   shopData:
+  - {fileID: 11400000, guid: 316fd8ed7c8a23642a591156e0cef170, type: 2}
+  - {fileID: 11400000, guid: d76bbb32fc0fbf94f9756af2543f2c04, type: 2}
+  - {fileID: 11400000, guid: 6ce47eb4c4b66a742ae8c88bb8d16717, type: 2}
+  - {fileID: 11400000, guid: 1da63296e322bf14f9e8070d08c0f09e, type: 2}
+  - {fileID: 11400000, guid: 52ed7a0c13711bb4ea79167c1a8dedf0, type: 2}
+  - {fileID: 11400000, guid: 989be8b449c50604da740b5515b95b3a, type: 2}
+  - {fileID: 11400000, guid: 54d4bf2898343de46a0485265079c3d3, type: 2}
+  - {fileID: 11400000, guid: c31dfc69243d29f479e983dd56bf6ec8, type: 2}
   - {fileID: 11400000, guid: 67ac48e77c7d5a44abb45100c30690a0, type: 2}
-  - {fileID: 11400000, guid: 191b8b35499084f47ad7162776e93100, type: 2}
-  - {fileID: 11400000, guid: 40b13005cb32ca043a845e1608eefc33, type: 2}
-  - {fileID: 11400000, guid: ea0c84463196c844499b3b9be66de6a3, type: 2}
-  - {fileID: 11400000, guid: f0386e6e33fdaf74e9d6535c97ad77f2, type: 2}
-  - {fileID: 11400000, guid: ae8cae9e6505b8b47b14f520f13f2822, type: 2}
-  - {fileID: 11400000, guid: 67908fac170f1e14f91c29590c5c8159, type: 2}
-  - {fileID: 11400000, guid: a74c77e9692673f4ea1a650bc6dcc724, type: 2}
+  - {fileID: 11400000, guid: c8b6b09603a56584d895763ec7449f0e, type: 2}
+  - {fileID: 11400000, guid: 5619e4dcd63f7d644a1ed5f231fb3895, type: 2}
+  - {fileID: 11400000, guid: cbde29879b0520a4fa3767f896bb59a4, type: 2}
   content: {fileID: 5242215277746779897}
   ShopSlotPrefab: {fileID: 7397367068709943114, guid: a83a11011f53f9a4fa91d90daf20cefa, type: 3}
+--- !u!114 &9215931791048558984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8422486787694213694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
+  m_HorizontalFit: 0
+  m_VerticalFit: 2

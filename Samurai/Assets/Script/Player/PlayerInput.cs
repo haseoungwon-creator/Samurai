@@ -39,6 +39,7 @@ public class PlayerInput : MonoBehaviour
 
         HandleMouveInput();
 
+        if(MouseManager.Instance.ismMouse) return;
         if (inventoryUI.isOpen) return;
         if (GameManager.Instance.Currentstate != GameState.Playing || playerHealth.isDead)
             return;

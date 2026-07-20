@@ -10,7 +10,7 @@ public class PauseManager : MonoBehaviour
     {
         Time.timeScale = 0;
         PanelManaager.Instance.Open(panel.Pause);
-
+        MouseManager.Instance.ShowCursor();
         pausePanel.SetActive(true);
 
         Debug.Log(pausePanel.activeInHierarchy);
@@ -22,6 +22,7 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 1f;
         GameManager.Instance.SetState(GameState.Playing);
         pausePanel.SetActive(false);
+        MouseManager.Instance.HideCursor();
     }
 
     public void GoToMenu()
@@ -29,10 +30,12 @@ public class PauseManager : MonoBehaviour
         Debug.Log("GoToMenu");
         Time.timeScale = 1f;
         SceneManager.LoadScene("StartTitle");
+        MouseManager.Instance.HideCursor();
     }
 
     public void Quit()
     {
+
         Debug.Log("Quit");
     }
 
