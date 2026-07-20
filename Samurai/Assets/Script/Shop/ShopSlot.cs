@@ -10,6 +10,10 @@ public class ShopSlot : MonoBehaviour
 
     ShopData shopData;
 
+    private void Update()
+    {
+        CheckBuyButton();
+    }
     public void SetData(ShopData data)
     {
         shopData = data;
@@ -39,5 +43,10 @@ public class ShopSlot : MonoBehaviour
         }
 
         Debug.Log(shopData.itemData.name + "Buy");
+    }
+
+    private void CheckBuyButton()
+    {
+        buyButton.interactable = GoldManager.Instance.Gold >= shopData.price;
     }
 }

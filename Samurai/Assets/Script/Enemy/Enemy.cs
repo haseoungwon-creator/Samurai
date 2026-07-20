@@ -3,12 +3,14 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] int hp;
+    [SerializeField] FleshEffect fleshEffect;
     Animator animator;
     bool isDead = false;
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();    
+        animator = GetComponent<Animator>();  
+        fleshEffect = GetComponent<FleshEffect>();
     }
     private void Start()
     {
@@ -28,6 +30,7 @@ public class Enemy : MonoBehaviour
         if (isDead) return;
         animator.SetTrigger("hurt");
         damage += PlayerStat.Instance.Power;
+        fleshEffect.Flash();
         hp -= damage;
         Debug.Log(hp);
         if (hp <= 0) Die();

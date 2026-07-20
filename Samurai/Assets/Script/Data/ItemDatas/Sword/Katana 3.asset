@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Katana 3
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Hyakuren Katana
-  icon: {fileID: 21300000, guid: 38f67412065b241468c51007dd159e26, type: 3}
+  icon: {fileID: 21300000, guid: 4ee39aada7ec2174ba16f05b82497212, type: 3}
   description: Power + 6
   itemType: 0
   isStackable: 0
