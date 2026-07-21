@@ -19,4 +19,4 @@ MonoBehaviour:
   isStackable: 0
   maxStack: 1
   ability: 1
-  Stat: 6
+  Stat: 8

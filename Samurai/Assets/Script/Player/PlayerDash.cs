@@ -52,7 +52,7 @@ public class PlayerDash : MonoBehaviour
         rb.linearVelocity = new Vector2(dashSpeed * dir, 0);
         playerHealth.SetIncincible(true);
 
-        yield return new WaitForSeconds(dashDuration);
+        yield return CoroutineManager.Wait(dashDuration);
 
         rb.linearVelocity = Vector2.zero;
 
@@ -95,7 +95,7 @@ public class PlayerDash : MonoBehaviour
 
         hitEnemies.Clear();
 
-        yield return new WaitForSeconds(dashAttackData.duration);
+        yield return CoroutineManager.Wait(dashAttackData.duration);
         playerAnimator.SetDashing(false);
         PlayerStateMachine.Instance .ChangeState(PlayerState.Idle);
 
@@ -111,7 +111,7 @@ public class PlayerDash : MonoBehaviour
 
     IEnumerator DashCooldown()
     {
-        yield return new WaitForSeconds(dashCooldown);
+        yield return CoroutineManager.Wait(dashCooldown);
         canDash = true;
     }
 

@@ -65,7 +65,7 @@ public class PlayerStat : Singleton<PlayerStat>
     {
         powerMultiplier = 2f;
 
-        yield return new WaitForSeconds(duration);
+        yield return CoroutineManager.Wait(duration);
 
         powerMultiplier = 1f;
         powerRoutine = null;
@@ -83,7 +83,7 @@ public class PlayerStat : Singleton<PlayerStat>
     {
         speedMultiplier = 2f;
 
-        yield return new WaitForSeconds(duration);
+        yield return CoroutineManager.Wait(duration);
 
         speedMultiplier = 1f;
         speedRoutine = null;

@@ -57,7 +57,7 @@ public class PlayerHealth : MonoBehaviour
     public IEnumerator InvincibleRoutine()
     {
         isInvincible = true;
-        yield return new WaitForSeconds(invincibleTime);
+        yield return CoroutineManager.Wait(invincibleTime);
         isInvincible = false;
     }
 

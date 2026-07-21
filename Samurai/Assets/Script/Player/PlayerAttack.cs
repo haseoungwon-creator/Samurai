@@ -85,7 +85,7 @@ public class PlayerAttack : MonoBehaviour
 
     IEnumerator ResetCombo()
     {
-        yield return new WaitForSeconds(attackDatas[comboStep - 1].comboWindow);
+        yield return CoroutineManager.Wait(attackDatas[comboStep - 1].comboWindow);
         comboStep = 1;
     }
 }

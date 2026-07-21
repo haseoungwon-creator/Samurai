@@ -27,7 +27,7 @@ public class FleshEffect : MonoBehaviour
     {
         spriteRenderer.material = flashMaterial;
 
-        yield return new WaitForSeconds(duraion);
+        yield return CoroutineManager.Wait(duraion);
 
         spriteRenderer.material = originarMaterial;
         coroutine = null;

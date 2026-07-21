@@ -25,7 +25,7 @@ public class StoryManager : Singleton<StoryManager>
         foreach(char c in text)
         {
             uiText.text += c;
-            yield return new WaitForSeconds(speed);
+            yield return CoroutineManager.Wait(speed);
         }
 
         isTyping=false;
