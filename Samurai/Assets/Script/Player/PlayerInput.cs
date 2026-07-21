@@ -9,6 +9,7 @@ public class PlayerInput : MonoBehaviour
     PlayerDefend playerDefend;
     [SerializeField]ItemData testItem;
     [SerializeField] InventoryUI inventoryUI;
+    [SerializeField] PauseManager pauseManager;
     private void Awake()
     {
         playerAttack = GetComponent<PlayerAttack>();
@@ -17,6 +18,7 @@ public class PlayerInput : MonoBehaviour
         playerHealth = GetComponent<PlayerHealth>();
         playerMove = GetComponent<PlayerMove>();
         playerDefend = GetComponent<PlayerDefend>();
+        
     }
     private void Update()
     {
@@ -26,7 +28,7 @@ public class PlayerInput : MonoBehaviour
 
         }
 
-        if(Input.GetKeyDown(KeyCode.G))
+        if(Input.GetKey(KeyCode.G))
         {
             GoldManager.Instance.AddGold(100);
         }
@@ -62,7 +64,11 @@ public class PlayerInput : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Escape))
         {
+
             PanelManaager.Instance.Open(panel.Pause);
+            pauseManager = FindAnyObjectByType<PauseManager>();
+            pauseManager.Pause();
+
         }
     }
     private void HandleDashInput()
