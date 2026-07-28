@@ -1,7 +1,20 @@
 public enum GameState
 {
-    Story,
+    None,
+
     Playing,
+
+    Story,
+
     Pause,
-    Shop
+
+    Shop,
+
+    Dialogue,
+
+    CutScene,
+
+    Loading,
+
+    Dead
 }

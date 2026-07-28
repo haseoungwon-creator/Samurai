@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88edfecbd165cec469525385549dad5d, type: 3}
+  m_Name: villageQuest
+  m_EditorClassIdentifier: Assembly-CSharp::QuestData
+  questId: 
+  questName: 0-1
+  description: kill the dummy
+  chapter: 0
+  stage: 1
+  questType: 0
+  targetID: dummy
+  targetCount: 3
+  rewardGold: 100
+  rewardItem: {fileID: 11400000, guid: cfeb48a750648704eb9eeb868113f79c, type: 2}
+  startStoryKey: village_teacher_1
+  progressStoryKey: ...
+  completeStoryKey: good
+  nextQuest: {fileID: 11400000, guid: c96bec41c22170440ac6e428377aa4ac, type: 2}
+  autoStartNextQuest: 0

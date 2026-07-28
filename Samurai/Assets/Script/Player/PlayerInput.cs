@@ -10,6 +10,9 @@ public class PlayerInput : MonoBehaviour
     [SerializeField]ItemData testItem;
     [SerializeField] InventoryUI inventoryUI;
     [SerializeField] PauseManager pauseManager;
+    [SerializeField] QuestData quest;
+
+    MouseManager mouseManager;
     private void Awake()
     {
         playerAttack = GetComponent<PlayerAttack>();
@@ -18,10 +21,17 @@ public class PlayerInput : MonoBehaviour
         playerHealth = GetComponent<PlayerHealth>();
         playerMove = GetComponent<PlayerMove>();
         playerDefend = GetComponent<PlayerDefend>();
+        mouseManager = FindAnyObjectByType<MouseManager>();
         
     }
     private void Update()
     {
+        if(inventoryUI == null)
+        {
+            inventoryUI = FindAnyObjectByType<InventoryUI>();
+        }
+
+        if (inventoryUI != null && inventoryUI.isOpen) return; 
         if(Input.GetKeyDown(KeyCode.Q))
         {
             Inventory.Instance.AddItem(testItem);
@@ -37,13 +47,25 @@ public class PlayerInput : MonoBehaviour
         {
             GoldManager.Instance.UseGold(300);
         }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            QuestManager.Instance.StartQuest(quest);
+        }
+
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            QuestManager.Instance.AddProgress("enemies");
+        }
+
+
         Pause();
 
         HandleMouveInput();
 
-        if(MouseManager.Instance.ismMouse) return;
-        if (inventoryUI.isOpen) return;
-        if (GameManager.Instance.Currentstate != GameState.Playing || playerHealth.isDead)
+        if(mouseManager.ismMouse) return;
+        if (inventoryUI != null && inventoryUI.isOpen) return;
+        if (GameManager.Instance.CurrentState != GameState.Playing || playerHealth.isDead)
             return;
 
         HandleDashInput();

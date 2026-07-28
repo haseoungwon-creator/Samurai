@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;
 public class PauseManager :MonoBehaviour
 {
     [SerializeField] GameObject pausePanel;
+    MouseManager mouseManager;
+
+    private void Awake()
+    {
+        mouseManager = FindAnyObjectByType<MouseManager>();
+    }
 
     bool isOpen = false;
     public void Pause()
@@ -12,30 +18,26 @@ public class PauseManager :MonoBehaviour
         if (isOpen) return;
         isOpen = true;
         Time.timeScale = 0;
-        MouseManager.Instance.ShowCursor();
+        mouseManager.ShowCursor();
         pausePanel.SetActive(true);
-
-        Debug.Log(pausePanel.activeInHierarchy);
     }
 
     public void Continue()
     {
         isOpen = false;
-        Debug.Log("Continue");
         Time.timeScale = 1f;
-        GameManager.Instance.SetState(GameState.Playing);
         pausePanel.SetActive(false);
-        MouseManager.Instance.HideCursor();
+        mouseManager.HideCursor();
+        GameManager.Instance.SetState(GameState.Playing);
     }
 
     public void GoToMenu()
     {
         isOpen = false;
-        Debug.Log("GoToMenu");
         Time.timeScale = 1f;
+        pausePanel.SetActive(false);
+        mouseManager.HideCursor();
         SceneManager.LoadScene("StartTitle");
-        pausePanel.SetActive(false );
-        MouseManager.Instance.HideCursor();
     }
 
     public void Quit()

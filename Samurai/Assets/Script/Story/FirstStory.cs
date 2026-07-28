@@ -7,15 +7,17 @@ public class FirstStory : MonoBehaviour
 {
     [SerializeField] AudioSource fireBgm;
     [SerializeField] AudioSource heartbit;
-    bool isEndingTriggered = true;
 
-    private Text storybox;
+    [SerializeField] Text storyText;
 
-    float textspeed = 0.2f;
-    public int index;
+    [SerializeField] float textSpeed = 0.05f;
+    [SerializeField] string nextScene = "Village";
+
+    private bool isEnding;
+    private int index;
     
 
-    string[] IntroStoryController =
+    private  readonly string[] introStory =
         {
             "난세의 불꽃이 온 세상을 집어삼키던 날",
             "사원의 검은 꺾였고, 스승의 서약은 잿더미가 되었다.",
@@ -26,63 +28,68 @@ public class FirstStory : MonoBehaviour
     {
         GameManager.Instance.SetState(GameState.Story);
         AudioManager.Instance.PlayBgm(fireBgm);
-        storybox = GetComponent<Text>();
+        StoryManager.Instance.StartTyping(introStory[index],storyText,textSpeed);
         index = 0;
 
-        StoryManager.Instance.StartTyping(IntroStoryController[0], storybox, textspeed);
     }
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            if (StoryManager.Instance.isTyping)
-            {
-                StoryManager.Instance.skip(storybox, IntroStoryController[index]);
-            }
-            else
-            {
-                ShowNextLine();
-            }
-        }
-    }
+        if (!Input.GetKeyDown(KeyCode.Space))
+            return;
 
-    void ShowNextLine()
-    {
-        index++;
-        if (index < IntroStoryController.Length)
-        {
-            StoryManager.Instance.StartTyping(IntroStoryController[index], storybox, textspeed);
-        }
+        if (isEnding)
+            return;
 
+        if (StoryManager.Instance.isTyping)
+        {
+            StoryManager.Instance.Skip(storyText, introStory[index]);
+        }
         else
         {
-            if (isEndingTriggered)
-            {
-                FirstStoryEnding();
-            }
+            NextLine();
         }
     }
 
-    private void FirstStoryEnding()
+    private void NextLine()
     {
-        isEndingTriggered = false;
+        index++;
 
-        FadeManager.Instance.FadeIn(0.1f);
+        if (index >= introStory.Length)
+        {
+            StartCoroutine(EndingRoutine());
+            return;
+        }
+
+        StoryManager.Instance.StartTyping(introStory[index], storyText, textSpeed);
+    }
+
+    private IEnumerator EndingRoutine()
+    {
+        isEnding = true;
+
+        StoryManager.Instance.StopTyping();
+
+        FadeManager.Instance.FadeIn(0.5f);
+
+        yield return new WaitForSeconds(0.5f);
 
         AudioManager.Instance.StopBgm();
 
-        AudioManager.Instance.PlayEffect(heartbit);
+        if (heartbit != null)
+            AudioManager.Instance.PlayEffect(heartbit);
 
         GameManager.Instance.SetState(GameState.Playing);
 
-        SceneryManager.Instance.LoadScene("Village");
-
-
-
-
+        SceneryManager.Instance.LoadScene(nextScene);
     }
 
-    
-   
-   
+    private void OnDestroy()
+    {
+        if (StoryManager.Instance != null)
+            StoryManager.Instance.StopTyping();
+    }
+
+
+
+
 }

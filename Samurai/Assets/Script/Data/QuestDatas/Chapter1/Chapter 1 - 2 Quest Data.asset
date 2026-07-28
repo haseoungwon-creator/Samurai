@@ -12,13 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88edfecbd165cec469525385549dad5d, type: 3}
   m_Name: Chapter 1 - 2 Quest Data
   m_EditorClassIdentifier: Assembly-CSharp::QuestData
+  questId: 
+  questName: 1-2
+  description: "\uC232\uC5D0\uC11C \uC801 5\uBA85\uC744 \uCC98\uCE58\uD558\uB77C"
   chapter: 1
   stage: 2
-  questID: 1-2
-  questName: "\uC801 \uCC98\uCE58"
-  description: "\uC232\uC5D0\uC11C \uC801 5\uBA85\uC744 \uCC98\uCE58\uD558\uB77C"
   questType: 0
   targetID: enemies
   targetCount: 0
-  RewardGold: 0
-  rewaedItem: {fileID: 11400000, guid: cfeb48a750648704eb9eeb868113f79c, type: 2}
+  rewardGold: 0
+  rewardItem: {fileID: 0}
+  startStoryKey: 
+  progressStoryKey: 
+  completeStoryKey: 
+  nextQuest: {fileID: 0}
+  autoStartNextQuest: 0

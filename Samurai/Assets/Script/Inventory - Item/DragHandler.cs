@@ -26,7 +26,6 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler,IEndDr
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("드래그 시작");
         if (slotUI.Slot == null) return;
 
         if (slotUI.Slot.IsEmpty) return;

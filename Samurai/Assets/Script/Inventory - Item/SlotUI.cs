@@ -44,7 +44,7 @@ public class SlotUI : MonoBehaviour,IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(Slot.itemData != null)
+        if(Slot != null && Slot.itemData != null && ToolTipManger.Instance != null)
         {
             ToolTipManger.Instance.Show(Slot.itemData);
         }
@@ -52,6 +52,7 @@ public class SlotUI : MonoBehaviour,IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if(ToolTipManger.Instance != null)
         ToolTipManger.Instance.Hide();
     }
 }

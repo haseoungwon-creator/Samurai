@@ -719,7 +719,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FirstStory
   fireBgm: {fileID: 1088331936}
   heartbit: {fileID: 1088331935}
-  index: 0
+  storyText: {fileID: 1088331932}
+  textSpeed: 0.05
+  nextScene: Village
 --- !u!82 &1088331935
 AudioSource:
   m_ObjectHideFlags: 0

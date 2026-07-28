@@ -3,12 +3,12 @@ using UnityEngine.UI;
 
 public class BlinkingTextUI : MonoBehaviour
 {
-    
+    private Color baseColor;
     private Text text;
     float elapsedTime;
     void Start()
     {
-        
+        baseColor = Color.white;
         text = GetComponent<Text>();
     }
 
@@ -16,9 +16,8 @@ public class BlinkingTextUI : MonoBehaviour
     {
         elapsedTime += Time.deltaTime;
         float opacity = Mathf.PingPong(elapsedTime, 1f);
-        Color color = Color.white;
 
-        text.color = new Color(color.r,color.g,color.b,opacity);
+        text.color = new Color(baseColor.r, baseColor.g, baseColor.b,opacity);
     }
 
 

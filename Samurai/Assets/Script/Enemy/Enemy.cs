@@ -4,6 +4,8 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] int hp;
     [SerializeField] FleshEffect fleshEffect;
+    [SerializeField] string enemyId;
+    EnemyManager enemyManager;
     Animator animator;
     bool isDead = false;
 
@@ -11,18 +13,19 @@ public class Enemy : MonoBehaviour
     {
         animator = GetComponent<Animator>();  
         fleshEffect = GetComponent<FleshEffect>();
+        enemyManager = FindAnyObjectByType<EnemyManager>();
     }
     private void Start()
     {
-        EnemyManager.Instance.Register(this);
+        enemyManager.Register(this);
         
     }
 
 
-    private void OnDestory()
+    private void OnDestroy()
     {
-        if(EnemyManager.Instance != null)
-        EnemyManager.Instance.Unregister(this);
+        if(enemyManager != null)
+        enemyManager.Unregister(this);
     }
 
     public void TakeDamage(int damage)
@@ -41,8 +44,9 @@ public class Enemy : MonoBehaviour
         isDead = true;
         animator.ResetTrigger("hurt");
         animator.SetTrigger("die");
-        EnemyManager.Instance.Unregister(this);
+        enemyManager.Unregister(this);
         GetComponent<Collider2D>().enabled = false;
+        QuestManager.Instance.AddProgress(enemyId);
     }
 
     public void DestoryEnemy()

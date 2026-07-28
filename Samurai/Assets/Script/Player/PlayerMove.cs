@@ -30,7 +30,7 @@ public class PlayerMove : MonoBehaviour
     private void Update()
     {
 
-        if (GameManager.Instance.Currentstate == GameState.Story || playerHealth.isDead || playerCharge.isCharged || playerDefen.isDefending)
+        if (GameManager.Instance.CurrentState == GameState.Story || playerHealth.isDead || playerCharge.isCharged || playerDefen.isDefending)
         {
             rb.linearVelocity = Vector2.zero;
             animator.SetFloat("speed", 0);
@@ -52,7 +52,7 @@ public class PlayerMove : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (GameManager.Instance.Currentstate == GameState.Story || playerHealth.isDead || playerCharge.isCharged || playerDefen.isDefending)
+        if (GameManager.Instance.CurrentState == GameState.Story || playerHealth.isDead || playerCharge.isCharged || playerDefen.isDefending)
         {
             rb.linearVelocity = Vector2.zero;
             return;

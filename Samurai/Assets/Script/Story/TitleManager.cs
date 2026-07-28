@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,7 +13,7 @@ public class TitleManager : MonoBehaviour
     void Start()
     {
         AudioManager.Instance.PlayBgm(audioSource);
-        Invoke("EnableInput", delay);
+        StartCoroutine(StartDelay());
     }
 
     void EnableInput()
@@ -28,5 +29,11 @@ public class TitleManager : MonoBehaviour
             AudioManager.Instance.StopBgm();
             hasPressedStart = false;
         }
+    }
+
+    IEnumerator StartDelay()
+    {
+        yield return CoroutineManager.Wait(delay);
+        isInputEnabled = true;
     }
 }

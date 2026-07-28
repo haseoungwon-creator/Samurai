@@ -10,11 +10,13 @@ public class InventoryUI : MonoBehaviour
 
     [SerializeField] SlotUI weaponSlot;
     [SerializeField] SlotUI armorSlot;
+    MouseManager mouseManager;
     
     public bool isOpen {  get; private set; }
 
     private void Awake()
     {
+        mouseManager = FindAnyObjectByType<MouseManager>();
         inventoryPanel.SetActive(false);
 
         InitSlots();
@@ -68,11 +70,11 @@ public class InventoryUI : MonoBehaviour
 
         if (isOpen)
         {
-            MouseManager.Instance.ShowCursor();
+            mouseManager.ShowCursor();
         }
         else
         {
-            MouseManager.Instance.HideCursor();
+            mouseManager.HideCursor();
         }
     }
 }
