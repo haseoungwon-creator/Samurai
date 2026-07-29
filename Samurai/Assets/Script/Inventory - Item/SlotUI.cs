@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SlotUI : MonoBehaviour,IPointerEnterHandler, IPointerExitHandler
+public class SlotUI : MonoBehaviour,IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [SerializeField] Image iconImage;
     [SerializeField] TextMeshProUGUI quantityText;
@@ -54,5 +54,15 @@ public class SlotUI : MonoBehaviour,IPointerEnterHandler, IPointerExitHandler
     {
         if(ToolTipManger.Instance != null)
         ToolTipManger.Instance.Hide();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if(Slot == null || Slot.IsEmpty) return;
+
+        if(eventData.button == PointerEventData.InputButton.Right)
+        {
+            ItemDeleteManager.Instance.RequesDelete(this);
+        }
     }
 }

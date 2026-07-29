@@ -11,6 +11,8 @@ public class QuestUI : MonoBehaviour
 
     [SerializeField] Text progressText;
 
+    [SerializeField] Text reward;
+
     private void Update()
     {
         UpdateQuestUI();
@@ -33,5 +35,9 @@ public class QuestUI : MonoBehaviour
         descriptionText.text = quest.description;
 
         progressText.text = $"{QuestManager.Instance.CurrentCount} / {quest.targetCount}";
+
+
+        if (quest.rewardGold <= 0) return;
+        reward.text = $"{ quest.rewardGold.ToString()} G" ;
     }
 }

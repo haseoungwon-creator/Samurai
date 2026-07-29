@@ -4,5 +4,6 @@ public enum panel
     Inventory,
     Shop,
     Dialogue,
-    Quest
+    Quest,
+    DeleteConfirm
 }

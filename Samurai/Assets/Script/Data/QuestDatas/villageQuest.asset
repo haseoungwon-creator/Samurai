@@ -26,4 +26,4 @@ MonoBehaviour:
   progressStoryKey: ...
   completeStoryKey: good
   nextQuest: {fileID: 11400000, guid: c96bec41c22170440ac6e428377aa4ac, type: 2}
-  autoStartNextQuest: 0
+  autoStartNextQuest: 1
