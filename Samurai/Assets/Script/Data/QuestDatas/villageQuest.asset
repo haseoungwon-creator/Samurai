@@ -27,3 +27,7 @@ MonoBehaviour:
   completeStoryKey: good
   nextQuest: {fileID: 11400000, guid: c96bec41c22170440ac6e428377aa4ac, type: 2}
   autoStartNextQuest: 1
+  targetScene: 
+  spawnPointID: 
+  returnVillage: 0
+  nextStory: 0

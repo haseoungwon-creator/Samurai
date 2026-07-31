@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Wood Sword
   icon: {fileID: 21300000, guid: 2e9ebe4a46354434ebb2a64350758055, type: 3}
-  description: 'Power + 0 '
+  description: Power + 2
   itemType: 0
   isStackable: 0
   maxStack: 1

@@ -8,9 +8,9 @@ public class FriendNPC : NPCBase
     {
         if(!canTalk) return;
 
-        if (talked) return;
+        if(!StoryManager.Instance.CanFriendTalk) return;
 
-        talked = true;
+        StoryManager.Instance.FriendTalkComplete();
 
         string storyKey = GetStoryKey();
 
@@ -19,8 +19,7 @@ public class FriendNPC : NPCBase
 
     private string GetStoryKey()
     {
-        int stage = WorldManager.Instance.CurrentStage;
-        return $"{storyPrefix}_{stage}";
+        return $"{storyPrefix}_{StoryManager.Instance.FriendStoryIndex}";
     }
 
     protected override void EndDialogue()

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Tamahagane Katana
   icon: {fileID: 21300000, guid: 38f67412065b241468c51007dd159e26, type: 3}
-  description: Power + 2
+  description: Power + 4
   itemType: 0
   isStackable: 0
   maxStack: 1

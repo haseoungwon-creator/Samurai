@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88edfecbd165cec469525385549dad5d, type: 3}
+  m_Name: Chapter 1 - 4 Quest Data
+  m_EditorClassIdentifier: Assembly-CSharp::QuestData
+  questId: 
+  questName: 1-4
+  description: "\uC232\uC5D0\uC11C \uC801 10\uBA85\uC744 \uCC98\uCE58\uD558\uB77C"
+  chapter: 1
+  stage: 4
+  questType: 0
+  targetID: Forest Enemy
+  targetCount: 10
+  rewardGold: 250
+  rewardItem: {fileID: 0}
+  startStoryKey: village_teacher_5
+  progressStoryKey: 
+  completeStoryKey: 
+  nextQuest: {fileID: 11400000, guid: c62e3c3505544e0478450f8d32f5ac21, type: 2}
+  autoStartNextQuest: 1
+  targetScene: Chapter 1
+  spawnPointID: 
+  returnVillage: 1
+  nextStory: 0

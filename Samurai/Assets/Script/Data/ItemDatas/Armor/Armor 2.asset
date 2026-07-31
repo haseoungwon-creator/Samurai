@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Shogun Armor
   icon: {fileID: 21300000, guid: 5fea9eef91fcf4344a13c3dbbe19333d, type: 3}
-  description: defense + 4
+  description: defense + 6
   itemType: 1
   isStackable: 0
   maxStack: 1

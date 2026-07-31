@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerStat : Singleton<PlayerStat>
 {
     [SerializeField] int baseHP = 100;
-    [SerializeField] int basePower = 10;
     [SerializeField] int baseDefense = 0;
     [SerializeField] int baseSpeed = 4;
 
@@ -21,8 +20,8 @@ public class PlayerStat : Singleton<PlayerStat>
     Coroutine speedRoutine;
 
     public int MaxHp => baseHP + bonusHp;
-    public int Power => bonusPower;
     public int Defense => baseDefense + bonusDefense;
+    public int Power => bonusPower * (int)powerMultiplier;
     public float MoveSpeed => (baseSpeed + bonusSpeed) * speedMultiplier;
 
     public void AddStat(Ability ability, int value)

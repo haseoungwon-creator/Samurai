@@ -20,8 +20,10 @@ public class Hitbox : MonoBehaviour
         Enemy enemy =  collision.GetComponent<Enemy>();
         if (enemy == null) return;
         StateDataExchange.Instance.StateDataExchanged();
+
+        int finalDamage = attackData.damage + PlayerStat.Instance.Power;
         attackEnemy = true;
-        enemy.TakeDamage(attackData.damage);
+        enemy.TakeDamage(finalDamage);
         Destroy(gameObject);
     }
 }

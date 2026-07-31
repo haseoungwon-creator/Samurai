@@ -104,5 +104,29 @@ public class StoryController : Singleton<StoryController>
         finishCallback = null;
 
     }
-    
+
+    public void FindUI()
+    {
+        Debug.Log("FindUI");
+        if (storyCanvas == null)
+        {
+            storyCanvas = GameObject.Find("StoryCanvas").GetComponent<Canvas>();
+        }
+
+        if (storyPanel == null)
+        {
+            storyPanel = storyCanvas.transform.Find("StoryPanel").gameObject;
+        }
+
+        if (speakerText == null)
+        {
+            speakerText = storyPanel.transform.Find("TalkCharacter").GetComponent<Text>();
+        }
+
+        if (dialogueText == null)
+        {
+            dialogueText = storyPanel.transform.Find("StoryText").GetComponent<Text>();
+        }
+    }
+
 }

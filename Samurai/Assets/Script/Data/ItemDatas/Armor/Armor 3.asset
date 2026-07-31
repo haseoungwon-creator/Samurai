@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Black Iron Armor
   icon: {fileID: 21300000, guid: 7b19bda9ee561184492e0a0cd9a0a9d0, type: 3}
-  description: defense + 6
+  description: defense + 8
   itemType: 1
   isStackable: 0
   maxStack: 1

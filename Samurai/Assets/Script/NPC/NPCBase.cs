@@ -40,6 +40,8 @@ public class NPCBase : MonoBehaviour
 
         if (talked) return;
 
+        if (StoryController.Instance.IsPlaying) return;
+
         talked = true;
 
         StoryController.Instance.Play(storyKey, EndDialogue);

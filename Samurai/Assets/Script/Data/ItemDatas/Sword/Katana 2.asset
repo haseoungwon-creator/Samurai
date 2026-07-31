@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Satetsu Katana
   icon: {fileID: 21300000, guid: 4c688947b512ddc4fb01688d6d4263e4, type: 3}
-  description: Power + 4
+  description: Power + 6
   itemType: 0
   isStackable: 0
   maxStack: 1

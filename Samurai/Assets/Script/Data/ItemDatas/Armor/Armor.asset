@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Shinobi Garb
   icon: {fileID: 21300000, guid: 8d3b793d8de615d4c8e0734fda3d5373, type: 3}
-  description: defense + 0
+  description: defense + 2
   itemType: 1
   isStackable: 0
   maxStack: 1

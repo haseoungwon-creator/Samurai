@@ -13,6 +13,8 @@ public class PlayerMove : MonoBehaviour
     PlayerCharge playerCharge;
 
     PlayerDefend playerDefen;
+    
+    InventoryUI inventoryUI;
 
     float x;
 
@@ -25,12 +27,13 @@ public class PlayerMove : MonoBehaviour
         playerCharge = GetComponent<PlayerCharge>();
         playerDefen = GetComponent<PlayerDefend>();
         GameManager.Instance.SetState(GameState.Playing);
+        inventoryUI = FindAnyObjectByType<InventoryUI>();
 
     }
     private void Update()
     {
 
-        if (GameManager.Instance.CurrentState == GameState.Story || playerHealth.isDead || playerCharge.isCharged || playerDefen.isDefending)
+        if (GameManager.Instance.CurrentState == GameState.Story || playerHealth.isDead || playerCharge.isCharged || playerDefen.isDefending || inventoryUI.isOpen)
         {
             rb.linearVelocity = Vector2.zero;
             animator.SetFloat("speed", 0);
@@ -52,7 +55,7 @@ public class PlayerMove : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (GameManager.Instance.CurrentState == GameState.Story || playerHealth.isDead || playerCharge.isCharged || playerDefen.isDefending)
+        if (GameManager.Instance.CurrentState == GameState.Story || playerHealth.isDead || playerCharge.isCharged || playerDefen.isDefending || inventoryUI.isOpen)
         {
             rb.linearVelocity = Vector2.zero;
             return;

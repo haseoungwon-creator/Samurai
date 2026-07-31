@@ -48,11 +48,6 @@ public class PlayerInput : MonoBehaviour
             GoldManager.Instance.UseGold(300);
         }
 
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            QuestManager.Instance.StartQuest(quest);
-        }
-
         if (Input.GetKeyDown(KeyCode.N))
         {
             QuestManager.Instance.AddProgress("enemies");

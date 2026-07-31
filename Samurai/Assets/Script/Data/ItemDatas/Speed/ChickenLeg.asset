@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: chickenleg
   icon: {fileID: 21300000, guid: 2b27310466105804b962ab430f884e55, type: 3}
-  description: SPEED  X 1.5
+  description: SPEED  X 2
   itemType: 2
   isStackable: 1
   maxStack: 10

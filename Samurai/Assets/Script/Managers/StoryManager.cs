@@ -9,6 +9,11 @@ public class StoryManager : Singleton<StoryManager>
 
     private Coroutine typingCoroutine;
 
+    public int FriendStoryIndex { get; private set; } = 1;
+    public bool CanFriendTalk { get; private set; } = true;
+
+    public bool CanTeachTalk { get; private set;} = true;
+
     public void StartTyping(string text, Text uiText, float speed)
     {
         StopTyping();
@@ -69,6 +74,27 @@ public class StoryManager : Singleton<StoryManager>
     private void OnDisable()
     {
         StopTyping();
+    }
+
+    public void FriendTalkComplete()
+    {
+        CanFriendTalk = false;
+    }
+
+    public void UnlockNextFriendStory()
+    {
+        FriendStoryIndex++;
+        CanFriendTalk = true;
+    }
+
+    public void TeacherTalkComplete()
+    {
+        CanTeachTalk = false;
+    }
+
+    public void UnlockNextTeacherStory()
+    {
+        CanTeachTalk= true;
     }
 }
 

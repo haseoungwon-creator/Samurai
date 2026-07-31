@@ -1,28 +1,64 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class QuestNPC : NPCBase
 {
     [SerializeField] QuestData[] quests;
 
+    Transform player;
+
+    
+
+    private void Update()
+    {
+        LookAtPlayer();
+    }
+
     protected override void TryTalk()
     {
         if (!canTalk) return;
 
-        QuestManager questManager = QuestManager.Instance;
+        if (!StoryManager.Instance.CanTeachTalk) return;
 
-        if(questManager.CurrentQuest == null)
+        StoryManager.Instance.TeacherTalkComplete();
+
+        if(QuestManager.Instance.CurrentQuest == null)
         {
             StartNewQuest();
-            return;
         }
-
-        if (!questManager.IsCompleted)
+        if (QuestManager.Instance.IsCompleted)
         {
-            ShowProgressStory();
+            CompleteQuest();
+        }
+
+    }
+
+    private void CompleteQuest()
+    {
+        QuestData currentQuest = QuestManager.Instance.CurrentQuest;
+
+        QuestData nextQuest = currentQuest.nextQuest;
+
+        if(nextQuest == null)
+        {
+            QuestManager.Instance.SubmitQuest();
+            EndDialogue();
             return;
         }
 
-        ShowCompleteStory();
+        StoryController.Instance.Play(
+            nextQuest.startStoryKey,
+            () =>
+            {
+                QuestManager.Instance.SubmitQuest();
+
+                if (currentQuest.autoStartNextQuest)
+                {
+                    QuestManager.Instance.StartNextQuest();
+                }
+
+                EndDialogue();
+            });
     }
 
     private void StartNewQuest()
@@ -39,28 +75,6 @@ public class QuestNPC : NPCBase
             {
                 QuestManager.Instance.StartQuest(quest);
 
-                EndDialogue();
-            });
-    }
-
-    private void ShowProgressStory()
-    {
-        QuestData quest = QuestManager.Instance.CurrentQuest;
-
-        StoryController.Instance.Play(quest.progressStoryKey, EndDialogue);
-    }
-
-    private void ShowCompleteStory()
-    {
-        QuestData quest = QuestManager.Instance.CurrentQuest;
-
-        StoryController.Instance.Play(
-            quest.completeStoryKey,
-            () =>
-            {
-                Debug.Log("스토리 나올거임");
-                QuestManager.Instance.SubmitQuest();
-                Debug.Log("다음 퀘스트");
                 EndDialogue();
             });
     }
@@ -85,5 +99,22 @@ public class QuestNPC : NPCBase
     protected override void EndDialogue()
     {
             
+    }
+
+    private void LookAtPlayer()
+    {
+        if (player == null)
+        {
+           GameObject obj = GameObject.FindGameObjectWithTag("Player");
+
+            if (obj != null)
+                player = obj.transform;
+        }
+
+            Vector3 scale = transform.localScale;
+
+        scale.x = player.position.x > transform.position.x ? -1 : 1;
+
+        transform.localScale = scale;
     }
 }

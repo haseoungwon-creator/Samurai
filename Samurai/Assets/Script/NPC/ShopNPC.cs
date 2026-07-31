@@ -35,6 +35,7 @@ public class ShopNPC : NPCBase
         {
             PanelManaager.Instance.Close(panel.Shop);
             mouseManager.HideCursor();
+            isOpen = false;
         }
     }
 

@@ -10,6 +10,9 @@ public class QuestManager : Singleton<QuestManager>
     public HashSet<string> CompletedQuest {  get; private set; } = new();
     public int CurrentCount { get; private set; }
     public bool IsCompleted {  get; private set; }
+
+    
+    public bool CanTeacherTalk { get; private set; } = true;
     public void StartQuest(QuestData quest)
     {
         CurrentQuest = quest;
@@ -38,8 +41,23 @@ public class QuestManager : Singleton<QuestManager>
     private void CompleteQuest()
     {
         IsCompleted = true;
+
+        bool returnVillage = CurrentQuest.returnVillage;
+
+        if (CurrentQuest.nextStory)
+        {
+            StoryManager.Instance.UnlockNextFriendStory();
+        }
+
+        StoryManager.Instance.UnlockNextTeacherStory();
+
+        if (returnVillage)
+        {
+            SceneryManager.Instance.LoadScene("Village");
+        }
     }
 
+    
     public void SubmitQuest()
     {
         Debug.Log("submitQuest start");
@@ -64,17 +82,22 @@ public class QuestManager : Singleton<QuestManager>
 
         bool autoStart = CurrentQuest.autoStartNextQuest;
 
+
         ClearQuest();
 
         if (autoStart)
         {
             StartNextQuest();
         }
+
     }
 
     public void StartNextQuest()
     {
-        if(NextQuest == null) return;
+        if (NextQuest == null) {
+            Debug.Log("NextQuest Null");
+            return;
+        } 
 
         StartQuest(NextQuest);
 

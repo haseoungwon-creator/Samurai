@@ -21,10 +21,14 @@ public class QuestData : ScriptableObject
     public ItemData rewardItem;
 
     public string startStoryKey;
-    public string progressStoryKey;
-    public string completeStoryKey;
 
 
     public QuestData nextQuest;
     public bool autoStartNextQuest;
+
+    public string targetScene;
+    public string spawnPointID;
+    public bool returnVillage;
+
+    public bool nextStory;
 }

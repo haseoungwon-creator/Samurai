@@ -37,7 +37,9 @@ public class QuestUI : MonoBehaviour
         progressText.text = $"{QuestManager.Instance.CurrentCount} / {quest.targetCount}";
 
 
-        if (quest.rewardGold <= 0) return;
-        reward.text = $"{ quest.rewardGold.ToString()} G" ;
+        if (quest.rewardGold > 0)
+            reward.text = $"{quest.rewardGold.ToString()} G";
+        else
+            reward.text = "-";
     }
 }

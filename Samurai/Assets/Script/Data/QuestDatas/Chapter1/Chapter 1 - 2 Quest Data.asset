@@ -14,16 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::QuestData
   questId: 
   questName: 1-2
-  description: "\uC232\uC5D0\uC11C \uC801 5\uBA85\uC744 \uCC98\uCE58\uD558\uB77C"
+  description: "\uC232\uC5D0\uC11C \uC801 7\uBA85\uC744 \uCC98\uCE58\uD558\uB77C"
   chapter: 1
   stage: 2
   questType: 0
-  targetID: enemies
-  targetCount: 0
-  rewardGold: 0
+  targetID: Forest Enemy
+  targetCount: 7
+  rewardGold: 150
   rewardItem: {fileID: 0}
-  startStoryKey: 
+  startStoryKey: village_teacher_3
   progressStoryKey: 
   completeStoryKey: 
-  nextQuest: {fileID: 0}
-  autoStartNextQuest: 0
+  nextQuest: {fileID: 11400000, guid: 0eb4cca8d8aa0d542b7b98e558f1b4b8, type: 2}
+  autoStartNextQuest: 1
+  targetScene: Chapter 1
+  spawnPointID: 
+  returnVillage: 1
+  nextStory: 1
