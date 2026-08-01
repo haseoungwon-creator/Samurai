@@ -1,0 +1,403 @@
+fileFormatVersion: 2
+guid: a3c8600dac1fc1d46b55a6249ad16888
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7999359638368072154
+    second: GreenNinja - Death_0
+  - first:
+      213: 5589326092883721377
+    second: GreenNinja - Death_1
+  - first:
+      213: -2045404249873311979
+    second: GreenNinja - Death_2
+  - first:
+      213: 2224219338037733098
+    second: GreenNinja - Death_3
+  - first:
+      213: -6325860733689159304
+    second: GreenNinja - Death_4
+  - first:
+      213: 4778209898698508821
+    second: GreenNinja - Death_5
+  - first:
+      213: 6297053486835507958
+    second: GreenNinja - Death_6
+  - first:
+      213: -1473075162757052773
+    second: GreenNinja - Death_7
+  - first:
+      213: 3729952138005884501
+    second: GreenNinja - Death_8
+  - first:
+      213: 8286581341358142646
+    second: GreenNinja - Death_9
+  - first:
+      213: -871136798877697561
+    second: GreenNinja - Death_10
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GreenNinja - Death_0
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 31
+        width: 44
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad1b68b653f630f60800000000000000
+      internalID: 7999359638368072154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenNinja - Death_1
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 31
+        width: 45
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1acf72cc776419d40800000000000000
+      internalID: 5589326092883721377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenNinja - Death_2
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 31
+        width: 49
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5171a38fba34d93e0800000000000000
+      internalID: -2045404249873311979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenNinja - Death_3
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 31
+        width: 51
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae62b4a14b30ede10800000000000000
+      internalID: 2224219338037733098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenNinja - Death_4
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 31
+        width: 55
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 871add5bd270638a0800000000000000
+      internalID: -6325860733689159304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenNinja - Death_5
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 31
+        width: 55
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51a0e2a369c9f4240800000000000000
+      internalID: 4778209898698508821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenNinja - Death_6
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 31
+        width: 63
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f2277678c0a36750800000000000000
+      internalID: 6297053486835507958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenNinja - Death_7
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 31
+        width: 75
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b964a64b1f59e8be0800000000000000
+      internalID: -1473075162757052773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenNinja - Death_8
+      rect:
+        serializedVersion: 2
+        x: 1037
+        y: 31
+        width: 86
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55eac0715b373c330800000000000000
+      internalID: 3729952138005884501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenNinja - Death_9
+      rect:
+        serializedVersion: 2
+        x: 1164
+        y: 31
+        width: 87
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b4380663d9dff270800000000000000
+      internalID: 8286581341358142646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenNinja - Death_10
+      rect:
+        serializedVersion: 2
+        x: 1292
+        y: 31
+        width: 87
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e9bf1862b919e3f0800000000000000
+      internalID: -871136798877697561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      GreenNinja - Death_0: 7999359638368072154
+      GreenNinja - Death_1: 5589326092883721377
+      GreenNinja - Death_10: -871136798877697561
+      GreenNinja - Death_2: -2045404249873311979
+      GreenNinja - Death_3: 2224219338037733098
+      GreenNinja - Death_4: -6325860733689159304
+      GreenNinja - Death_5: 4778209898698508821
+      GreenNinja - Death_6: 6297053486835507958
+      GreenNinja - Death_7: -1473075162757052773
+      GreenNinja - Death_8: 3729952138005884501
+      GreenNinja - Death_9: 8286581341358142646
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

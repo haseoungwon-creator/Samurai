@@ -18,4 +18,10 @@ public class EnemyData : ScriptableObject
 
 
     public int rewardGold;
+
+    public float detectRange;
+
+    public float attackRange;
+
+    public float attackCooldown;
 }

@@ -8,6 +8,8 @@ public class PlayerHealth : MonoBehaviour
 
     public bool isDead { get; private set; }
     bool isInvincible;
+    public int CurrentHP => hp;
+    public float HpPercent => (float)hp / PlayerStat.Instance.MaxHp;
 
     Animator animator;
     PlayerCharge playerCharge;

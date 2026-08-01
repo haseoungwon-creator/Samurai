@@ -1,104 +1,170 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : EnemyBase
 {
-    [SerializeField] int hp;
-    [SerializeField] FleshEffect fleshEffect;
-    [SerializeField] string enemyId;
-    [SerializeField] int rewardGold;
+    private Rigidbody2D rb;
+    private Transform player;
 
-    EnemyManager enemyManager;
-    Animator animator;
+    private EnemyManager enemyManager;
 
-    EnemyData enemyData;
+    private EnemyState currentState;
 
-    bool returnVillage;
-    bool isDead = false;
+    private float detectRange;
+    private float attackRange;
+    private float attackCooldown;
+    private float moveSpeed;
 
-    private void Awake()
+    private float attackTimer;
+
+    protected override void Awake()
     {
-        animator = GetComponent<Animator>();
-        fleshEffect = GetComponent<FleshEffect>();
+       base.Awake();
+
+        rb = GetComponent<Rigidbody2D>();
         enemyManager = FindAnyObjectByType<EnemyManager>();
     }
+
     private void Start()
     {
-        if(enemyManager != null)
-        enemyManager.Register(this);
-        
+        enemyManager?.Register(this);
+        GameObject obj = GameObject.FindGameObjectWithTag("Player");
+
+        if (obj!= null)
+        {
+            player = obj.transform;
+        }
     }
 
-
-    private void OnDestroy()
+    public override void Initialize(EnemyData data)
     {
-        if(enemyManager != null)
-        enemyManager.Unregister(this);
+        base.Initialize(data);
+
+        detectRange = data.detectRange;
+        attackRange = data.attackRange;
+        attackCooldown = data.attackCooldown;
+        moveSpeed = data.moveSpeed;
+
+        currentState = EnemyState.Idle;
     }
 
-    public void Initialize(EnemyData data)
-    {
-        if (data == null) return;
-
-        hp = data.maxHP;
-        enemyId = data.enemyID;
-        rewardGold = data.rewardGold;
-    }
-
-    public void TakeDamage(int damage)
-    {
-        if (isDead) return;
-
-        if (animator != null)
-            animator.SetTrigger("hurt");
-
-        if (fleshEffect != null)
-            fleshEffect.Flash();
-
-        hp -= damage;
-        Debug.Log(hp);
-
-        if (hp <= 0) Die();
-    }
-
-    public void Die()
+    private void Update()
     {
         if(isDead) return;
 
-        isDead = true;
+        if (!CanUpdateAi) return;
 
-        if (animator != null)
+        if(player == null) return;
+
+        if(!IsPlayerVisible()) return;
+
+        attackTimer -= Time.deltaTime;
+
+        switch (currentState)
         {
-            animator.ResetTrigger("hurt");
-            animator.SetTrigger("die");
+            case EnemyState.Idle:
+                UpdateIdle();
+                break;
+            
+            case EnemyState.Chase:
+                UpdateChase();
+                break;
+
+            case EnemyState.Attack:
+                UpdateAttack();
+                break;
         }
-
-        GetComponent<Collider2D>().enabled = false;
-
-        if(enemyManager != null)
-        {
-            enemyManager.Unregister(this);
-        }
-
-        if(rewardGold > 0)
-        {
-            GoldManager.Instance.AddGold(rewardGold);
-        }
-
-        if(QuestManager.Instance!= null)
-        {
-            QuestManager.Instance.AddProgress(enemyId);
-        }
-
-        
-
-        if(EnemySpawnManager.Instance != null)
-        {
-            EnemySpawnManager.Instance.RemoveEnemy(this);
-        }
+        LookAtPlayer();
     }
 
-    public void DestroyEnemy()
+    private bool IsPlayerVisible()
     {
-        Destroy(gameObject);
+        Vector3 viewport = Camera.main.WorldToViewportPoint(player.position);
+
+        return viewport.x > 0 && viewport.x < 1 && viewport.y > 0 && viewport.y < 1;
+    }
+
+    private void UpdateIdle()
+    {
+        float distance = Vector2.Distance(transform.position, player.position);
+
+        if (distance <= detectRange)
+            currentState = EnemyState.Chase;
+    }
+
+    private void UpdateChase()
+    {
+float distance = Vector2.Distance(transform.position,player.position);
+
+        if(distance > detectRange)
+        {
+            currentState = EnemyState.Idle;
+
+            rb.linearVelocity = Vector2.zero;
+
+            animator.SetBool("run",false);
+
+            return;
+        }
+
+        if(distance <= attackRange)
+        {
+            currentState = EnemyState.Attack;
+
+            rb.linearVelocity = Vector2.zero;
+
+            animator.SetBool("run", false);
+
+            return;
+        }
+
+        Vector2 dir = (player.position - transform.position).normalized;
+
+        rb.linearVelocity = dir * moveSpeed;
+
+        animator.SetBool("run",true);
+    }
+
+    private void UpdateAttack()
+    {
+        rb.linearVelocity = Vector2.zero;
+
+        float distance = Vector2.Distance(transform.position, player.position);
+
+        if(distance > attackRange)
+        {
+            currentState = EnemyState.Chase;
+            return;
+        }
+
+        if (attackTimer > 0) return;
+
+        attackTimer = attackCooldown;
+
+        animator.SetTrigger("attack");
+    }
+
+    private void LookAtPlayer()
+    {
+        Vector3 scale = transform.localScale;
+
+        scale.x = player.position.x > transform.position.x ? -Mathf.Abs(scale.x) : Mathf.Abs(scale.x);
+
+        transform.localScale = scale;
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+
+        rb.linearVelocity = Vector2.zero;
+
+        enemyManager?.Unregister(this);
+
+        currentState = EnemyState.Dead;
+    }
+
+    private void OnDestroy()
+    {
+        enemyManager?.Unregister(this);
     }
 }

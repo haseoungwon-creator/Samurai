@@ -1,0 +1,377 @@
+fileFormatVersion: 2
+guid: 36b621272ec1e3246aff62c4af8a5501
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6032897745912074631
+    second: GreenNinja - walk_0
+  - first:
+      213: -5725408910791477308
+    second: GreenNinja - walk_1
+  - first:
+      213: 1780411297071990189
+    second: GreenNinja - walk_2
+  - first:
+      213: -5265386463170313094
+    second: GreenNinja - walk_3
+  - first:
+      213: -5035695817482474596
+    second: GreenNinja - walk_4
+  - first:
+      213: 1617816180641134752
+    second: GreenNinja - walk_5
+  - first:
+      213: 4862442065283759114
+    second: GreenNinja - walk_6
+  - first:
+      213: -6492287780739902837
+    second: GreenNinja - walk_7
+  - first:
+      213: -4752388173658975893
+    second: GreenNinja - walk_8
+  - first:
+      213: 7085581882487855647
+    second: GreenNinja - walk_9
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GreenNinja - walk_0
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 31
+        width: 45
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7811857498829b350800000000000000
+      internalID: 6032897745912074631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenNinja - walk_1
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 31
+        width: 45
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c7fa6e1ee24b80b0800000000000000
+      internalID: -5725408910791477308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenNinja - walk_2
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 31
+        width: 43
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da5811444aa45b810800000000000000
+      internalID: 1780411297071990189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenNinja - walk_3
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 31
+        width: 43
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a744591b8e69de6b0800000000000000
+      internalID: -5265386463170313094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenNinja - walk_4
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 31
+        width: 41
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9b6902955d9d1ab0800000000000000
+      internalID: -5035695817482474596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenNinja - walk_5
+      rect:
+        serializedVersion: 2
+        x: 687
+        y: 31
+        width: 43
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a87ef6ae33a37610800000000000000
+      internalID: 1617816180641134752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenNinja - walk_6
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 31
+        width: 45
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0cb72acb4dda7340800000000000000
+      internalID: 4862442065283759114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenNinja - walk_7
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 31
+        width: 45
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b82936939a2c6e5a0800000000000000
+      internalID: -6492287780739902837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenNinja - walk_8
+      rect:
+        serializedVersion: 2
+        x: 1069
+        y: 31
+        width: 45
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b611a42a2202c0eb0800000000000000
+      internalID: -4752388173658975893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenNinja - walk_9
+      rect:
+        serializedVersion: 2
+        x: 1197
+        y: 31
+        width: 45
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1ad1ac5e2b055260800000000000000
+      internalID: 7085581882487855647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      GreenNinja - walk_0: 6032897745912074631
+      GreenNinja - walk_1: -5725408910791477308
+      GreenNinja - walk_2: 1780411297071990189
+      GreenNinja - walk_3: -5265386463170313094
+      GreenNinja - walk_4: -5035695817482474596
+      GreenNinja - walk_5: 1617816180641134752
+      GreenNinja - walk_6: 4862442065283759114
+      GreenNinja - walk_7: -6492287780739902837
+      GreenNinja - walk_8: -4752388173658975893
+      GreenNinja - walk_9: 7085581882487855647
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -21,7 +21,31 @@ public class PlayerStat : Singleton<PlayerStat>
 
     public int MaxHp => baseHP + bonusHp;
     public int Defense => baseDefense + bonusDefense;
-    public int Power => bonusPower * (int)powerMultiplier;
+    public int Power
+    {
+        get
+        {
+            int power = Mathf.RoundToInt(bonusPower * powerMultiplier);
+
+            PlayerHealth health = FindAnyObjectByType<PlayerHealth>();
+
+            if (health == null)
+                return power;
+
+            float hp = health.HpPercent;
+
+            if (hp <= 0.2f)
+                power = Mathf.RoundToInt(power * 2.0f);      // 20% 이하
+
+            else if (hp <= 0.4f)
+                power = Mathf.RoundToInt(power * 1.5f);      // 40% 이하
+
+            else if (hp <= 0.6f)
+                power = Mathf.RoundToInt(power * 1.2f);      // 60% 이하
+
+            return power;
+        }
+    }
     public float MoveSpeed => (baseSpeed + bonusSpeed) * speedMultiplier;
 
     public void AddStat(Ability ability, int value)

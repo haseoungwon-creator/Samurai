@@ -7,7 +7,7 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
     [SerializeField] StageData[] stageDatas;
 
     Dictionary<string, SpawnPoint> spawnPoints = new();
-    readonly List<Enemy> aliveEnemies = new();
+    readonly List<EnemyBase> aliveEnemies = new();
 
     public bool IsStageClear {  get; private set; }
 
@@ -49,8 +49,8 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
         }
         Debug.Log("true");
         GameObject obj = Instantiate(info.enemyData.prefab, point.transform.position, Quaternion.identity);
-        
-        Enemy enemy = obj.GetComponent<Enemy>();
+
+        EnemyBase enemy = obj.GetComponent<EnemyBase>();
 
         if(enemy != null)
         {
@@ -73,7 +73,7 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
         return null;
     }
 
-    public void RemoveEnemy(Enemy enemy)
+    public void RemoveEnemy(EnemyBase enemy)
     {
         if (!aliveEnemies.Contains(enemy)) return;
 
