@@ -16,9 +16,11 @@ public class Enemy : EnemyBase
 
     private float attackTimer;
 
+    GameObject currentHitbox;
+
     protected override void Awake()
     {
-       base.Awake();
+        base.Awake();
 
         rb = GetComponent<Rigidbody2D>();
         enemyManager = FindAnyObjectByType<EnemyManager>();
@@ -27,11 +29,17 @@ public class Enemy : EnemyBase
     private void Start()
     {
         enemyManager?.Register(this);
+
         GameObject obj = GameObject.FindGameObjectWithTag("Player");
 
-        if (obj!= null)
+        if (obj != null)
         {
             player = obj.transform;
+            Debug.Log($"{name} : 플레이어 찾음");
+        }
+        else
+        {
+            Debug.LogError($"{name} : Player 태그를 찾지 못함");
         }
     }
 
@@ -45,17 +53,28 @@ public class Enemy : EnemyBase
         moveSpeed = data.moveSpeed;
 
         currentState = EnemyState.Idle;
+
+        Debug.Log($"{name} 초기화");
+        Debug.Log($"Detect : {detectRange}");
+        Debug.Log($"Attack : {attackRange}");
     }
 
-    private void Update()
+    protected override void Update()
     {
-        if(isDead) return;
+        base.Update();
 
-        if (!CanUpdateAi) return;
+        if (isDead) return;
 
-        if(player == null) return;
+        if (!CanUpdateAi)
+        {
+            return;
+        }
 
-        if(!IsPlayerVisible()) return;
+        if (player == null)
+        {
+            Debug.Log($"{name} : player null");
+            return;
+        }
 
         attackTimer -= Time.deltaTime;
 
@@ -64,7 +83,7 @@ public class Enemy : EnemyBase
             case EnemyState.Idle:
                 UpdateIdle();
                 break;
-            
+
             case EnemyState.Chase:
                 UpdateChase();
                 break;
@@ -73,40 +92,39 @@ public class Enemy : EnemyBase
                 UpdateAttack();
                 break;
         }
+
         LookAtPlayer();
-    }
-
-    private bool IsPlayerVisible()
-    {
-        Vector3 viewport = Camera.main.WorldToViewportPoint(player.position);
-
-        return viewport.x > 0 && viewport.x < 1 && viewport.y > 0 && viewport.y < 1;
     }
 
     private void UpdateIdle()
     {
         float distance = Vector2.Distance(transform.position, player.position);
 
+        Debug.Log($"{name} 거리 : {distance}");
+
         if (distance <= detectRange)
+        {
+            Debug.Log($"{name} 추적 시작");
             currentState = EnemyState.Chase;
+        }
     }
 
     private void UpdateChase()
     {
-float distance = Vector2.Distance(transform.position,player.position);
+        float distance = Vector2.Distance(transform.position, player.position);
 
-        if(distance > detectRange)
+        if (distance > detectRange)
         {
             currentState = EnemyState.Idle;
 
             rb.linearVelocity = Vector2.zero;
 
-            animator.SetBool("run",false);
+            animator.SetBool("run", false);
 
             return;
         }
 
-        if(distance <= attackRange)
+        if (distance <= attackRange)
         {
             currentState = EnemyState.Attack;
 
@@ -121,7 +139,7 @@ float distance = Vector2.Distance(transform.position,player.position);
 
         rb.linearVelocity = dir * moveSpeed;
 
-        animator.SetBool("run",true);
+        animator.SetBool("run", true);
     }
 
     private void UpdateAttack()
@@ -130,16 +148,20 @@ float distance = Vector2.Distance(transform.position,player.position);
 
         float distance = Vector2.Distance(transform.position, player.position);
 
-        if(distance > attackRange)
+        if (distance > attackRange)
         {
             currentState = EnemyState.Chase;
             return;
         }
 
-        if (attackTimer > 0) return;
+        if (attackTimer > 0)
+            return;
 
         attackTimer = attackCooldown;
 
+        int attackIndex = Random.Range(0, enemyData.attackDatas.Length);
+
+        animator.SetInteger("AttackIndex", attackIndex);
         animator.SetTrigger("attack");
     }
 
@@ -147,9 +169,34 @@ float distance = Vector2.Distance(transform.position,player.position);
     {
         Vector3 scale = transform.localScale;
 
-        scale.x = player.position.x > transform.position.x ? -Mathf.Abs(scale.x) : Mathf.Abs(scale.x);
+        scale.x = player.position.x < transform.position.x
+            ? -Mathf.Abs(scale.x)
+            : Mathf.Abs(scale.x);
 
         transform.localScale = scale;
+    }
+
+    public void SpawnHitbox(int index)
+    {
+        if (currentHitbox != null)
+            Destroy(currentHitbox);
+
+        currentHitbox = Instantiate(enemyData.hitboxPrefab, transform.position, Quaternion.identity);
+
+        EnemyHitbox hitbox = currentHitbox.GetComponent<EnemyHitbox>();
+
+        float dir = transform.localScale.x < 0 ? -1 : 1;
+
+        hitbox.Init(enemyData.attackDatas[index], enemyData, dir);
+    }
+
+    public void DestroyHitbox()
+    {
+        if (currentHitbox != null)
+        {
+            Destroy(currentHitbox);
+            currentHitbox = null;
+        }
     }
 
     protected override void Die()

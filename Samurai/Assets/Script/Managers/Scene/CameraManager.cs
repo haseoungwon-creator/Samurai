@@ -21,8 +21,8 @@ public class CameraManager : MonoBehaviour
     [SerializeField] float chargeAttackMoveDistance = 0.3f;
     [SerializeField]float chargeAttackMoveDuration = 0.05f;
 
-    [SerializeField] float damageZoomSize = 0.2f;
-    [SerializeField] float damageZoomDuration = 0.05f;
+    [SerializeField] float damageZoomSize = 0.3f;
+    [SerializeField] float damageZoomDuration = 0.08f;
 
     EnemyManager enemyManager;
     RoomWallManager roomWallManager;
@@ -194,26 +194,38 @@ public class CameraManager : MonoBehaviour
         cam.transform.position = startpos;
     }
 
-    IEnumerator TakeDamageMove (float zoomsize, float zoomdurationTime)
+    IEnumerator TakeDamageMove(float zoomSize, float zoomDuration)
     {
         float startSize = cam.orthographicSize;
-        float endSize = cam.orthographicSize + zoomsize;
+        float zoomInSize = startSize - zoomSize;  
 
-        float timer = 0;
-        while (timer < zoomdurationTime)
+        float timer = 0f;
+
+        while (timer < zoomDuration)
         {
             timer += Time.deltaTime;
-            cam.orthographicSize = Mathf.Lerp(startSize, endSize, timer / zoomdurationTime);
+
+            cam.orthographicSize = Mathf.Lerp(
+                startSize,
+                zoomInSize,
+                timer / zoomDuration);
+
             yield return null;
         }
 
-        cam.orthographicSize = endSize;
-        timer = 0;
+        cam.orthographicSize = zoomInSize;
 
-        while(timer < zoomdurationTime)
+        timer = 0f;
+
+        while (timer < zoomDuration)
         {
-            timer += Time.captureDeltaTime;
-            cam.orthographicSize = Mathf.Lerp(endSize, startSize, timer /zoomdurationTime);
+            timer += Time.deltaTime;
+
+            cam.orthographicSize = Mathf.Lerp(
+                zoomInSize,
+                startSize,
+                timer / zoomDuration);
+
             yield return null;
         }
 

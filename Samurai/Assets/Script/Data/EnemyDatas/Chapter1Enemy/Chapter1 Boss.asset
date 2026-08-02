@@ -14,10 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyID: Forest Boss
   enemyName: Forest Boss
-  prefab: {fileID: 7757091544001408229, guid: 045de2e0e708c344eaf815e62fbf3b77, type: 3}
+  prefab: {fileID: 7991408148199228535, guid: 194add6fbac3923469932b7cc838b861, type: 3}
   maxHP: 200
   attackPower: 15
   skillPower: 20
   skillStun: 1
   moveSpeed: 2
   rewardGold: 200
+  detectRange: 10
+  attackRange: 1
+  attackCooldown: 0.1
+  hitboxPrefab: {fileID: 7645207877034328656, guid: a326fe4f8a7ee474bb5aea70f7299ff7, type: 3}
+  attackDatas:
+  - {fileID: 11400000, guid: 6561efbcf02a07c41be32f86f76ddc69, type: 2}
+  - {fileID: 11400000, guid: 4763fdaee59830a42a788709ea70d6d4, type: 2}
+  - {fileID: 11400000, guid: f718fd8c00d6c584a96af7e7cb132162, type: 2}

@@ -21,3 +21,5 @@ MonoBehaviour:
     spawnPointID: 0_0_2
   - enemyData: {fileID: 11400000, guid: a4b09aea09767184395d26fa4ff1766d, type: 2}
     spawnPointID: 0_0_3
+  - enemyData: {fileID: 11400000, guid: 7f2dc6a2d194fe24796b6b33b76c0de4, type: 2}
+    spawnPointID: 0_0_0

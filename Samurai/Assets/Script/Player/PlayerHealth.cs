@@ -11,15 +11,18 @@ public class PlayerHealth : MonoBehaviour
     public int CurrentHP => hp;
     public float HpPercent => (float)hp / PlayerStat.Instance.MaxHp;
 
+
     Animator animator;
     PlayerCharge playerCharge;
     PlayerDefend playerDefend;
+    FleshEffect fleshEffect;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         playerCharge = GetComponent<PlayerCharge>();
         playerDefend = GetComponent<PlayerDefend>();
+        fleshEffect = GetComponent<FleshEffect>();
         isDead = false;
         hp = PlayerStat.Instance.MaxHp;
     }
@@ -34,7 +37,11 @@ public class PlayerHealth : MonoBehaviour
         playerCharge.CancelCharge();
         int finalDamage = Mathf.Max(0, damage - PlayerStat.Instance.Defense);
         hp -= finalDamage;
+        Debug.Log(hp);
+        CameraStateMachine.Instance.ChangeState(CameraState.TakeDamageMove);
+        fleshEffect.Flash();
         animator.SetTrigger("hurt");
+        
 
         if(hp <= 0)
         {

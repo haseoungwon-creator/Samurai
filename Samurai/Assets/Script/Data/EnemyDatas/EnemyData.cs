@@ -24,4 +24,7 @@ public class EnemyData : ScriptableObject
     public float attackRange;
 
     public float attackCooldown;
+
+    public GameObject hitboxPrefab;
+    public EnemyAttackData[] attackDatas;
 }

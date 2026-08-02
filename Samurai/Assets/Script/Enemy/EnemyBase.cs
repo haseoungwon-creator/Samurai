@@ -13,12 +13,36 @@ public class EnemyBase : MonoBehaviour
 
     protected bool isDead;
 
-    public bool CanUpdateAi {  get; protected set; }
+    public bool CanUpdateAi { get; protected set; }
+    
 
     protected virtual void Awake()
     {
         animator = GetComponent<Animator>();
         fleshEffect = GetComponent<FleshEffect>();
+    }
+
+    protected virtual void Update()
+    {
+        UpdateVisibleState();
+    }
+
+    void UpdateVisibleState()
+    {
+        if (Camera.main == null)
+        {
+            CanUpdateAi = false;
+            return;
+        }
+
+        Vector3 view = Camera.main.WorldToViewportPoint(transform.position);
+
+        CanUpdateAi =
+            view.z > 0 &&
+            view.x >= 0 &&
+            view.x <= 1 &&
+            view.y >= 0 &&
+            view.y <= 1;
     }
 
     public virtual void Initialize(EnemyData data)
@@ -30,15 +54,12 @@ public class EnemyBase : MonoBehaviour
         rewardGold = data.rewardGold;
     }
 
-    public  virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         if (isDead) return;
 
-        if (animator != null)
-            animator.SetTrigger("hurt");
-
-        if (fleshEffect != null)
-            fleshEffect.Flash();
+        animator?.SetTrigger("hurt");
+        fleshEffect?.Flash();
 
         int finalDamage = damage + PlayerStat.Instance.Power;
 
@@ -50,43 +71,34 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void Die()
     {
-        if(isDead) return;
+        if (isDead) return;
 
-        isDead= true;
+        isDead = true;
 
-        if(animator != null)
-        {
-            animator.ResetTrigger("hurt");
-            animator.SetTrigger("die");
-        }
+        animator?.ResetTrigger("hurt");
+        animator?.SetTrigger("die");
 
-        Collider2D  col = GetComponent<Collider2D>();
-
-        if(col != null)
+        Collider2D col = GetComponent<Collider2D>();
+        if (col != null)
             col.enabled = false;
 
-        if(rewardGold > 0)
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.simulated = false;
+        }
+
+        if (rewardGold > 0)
             GoldManager.Instance.AddGold(rewardGold);
 
-        if (QuestManager.Instance != null)
-            QuestManager.Instance.AddProgress(enemyId);
+        QuestManager.Instance?.AddProgress(enemyId);
 
-        if (EnemySpawnManager.Instance != null)
-            EnemySpawnManager.Instance.RemoveEnemy(this);
+        EnemySpawnManager.Instance?.RemoveEnemy(this);
     }
 
     public virtual void DestroyEnemy()
     {
         Destroy(gameObject);
-    }
-
-    private void OnBecameVisible()
-    {
-        CanUpdateAi = true;
-    }
-
-    private void OnBecameInvisible()
-    {
-        CanUpdateAi = false;
     }
 }
