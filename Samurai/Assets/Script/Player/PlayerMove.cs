@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -17,6 +19,10 @@ public class PlayerMove : MonoBehaviour
     InventoryUI inventoryUI;
 
     float x;
+
+    [SerializeField] float footstepInterval = 0.12f;
+
+    float footstepCooldown;
 
     private void Awake()
     {
@@ -47,6 +53,26 @@ public class PlayerMove : MonoBehaviour
         else if (x < 0) transform.localScale = new Vector3(-1, 1, 1);
 
         animator.SetFloat("speed", Mathf.Abs(x));
+
+        bool canPlayFootstep =
+            Mathf.Abs(rb.linearVelocity.x) > 0.5f && !playerDash.isDashing && !playerCharge.isCharged && !playerDefen.isDefending && !playerHealth.isDead && GameManager.Instance.CurrentState == GameState.Playing;
+
+        if (canPlayFootstep)
+        {
+            footstepCooldown -= Time.deltaTime;
+
+            if (footstepCooldown <= 0f)
+            {
+                SoundManager.Instance.Emit(Sound.Run);
+                footstepCooldown = footstepInterval;
+            }
+        }
+        else
+        {
+            // 움직이지 않으면 조금 기다렸다가 다시 첫 발소리
+            if (footstepCooldown > 0.05f)
+                footstepCooldown = 0.05f;
+        }
     }
 
     public void SetMoveInput(float input)
