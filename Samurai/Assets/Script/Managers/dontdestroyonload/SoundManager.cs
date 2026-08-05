@@ -56,28 +56,32 @@ public class SoundManager : Singleton<SoundManager>
 
     IEnumerator ChangeBGM(AudioClip nextClip)
     {
-        // Fade Out
-        float startVolume = sceneryAudioSource.volume;
+        float targetVolume = 0.25f;
 
-        while (sceneryAudioSource.volume > 0)
+        // Fade Out
+        while (sceneryAudioSource.volume > 0f)
         {
-            sceneryAudioSource.volume -= Time.deltaTime / fadeTime * startVolume;
+            sceneryAudioSource.volume -= Time.deltaTime / fadeTime;
+
+            if (sceneryAudioSource.volume < 0f)
+                sceneryAudioSource.volume = 0f;
+
             yield return null;
         }
 
         sceneryAudioSource.Stop();
 
         sceneryAudioSource.clip = nextClip;
-        sceneryAudioSource.volume = 0;
+        sceneryAudioSource.volume = 0f;
         sceneryAudioSource.Play();
 
         // Fade In
-        while (sceneryAudioSource.volume < startVolume)
+        while (sceneryAudioSource.volume < targetVolume)
         {
-            sceneryAudioSource.volume += Time.deltaTime / fadeTime * startVolume;
+            sceneryAudioSource.volume += Time.deltaTime / fadeTime;
 
-            if (sceneryAudioSource.volume > startVolume)
-                sceneryAudioSource.volume = startVolume;
+            if (sceneryAudioSource.volume > targetVolume)
+                sceneryAudioSource.volume = targetVolume;
 
             yield return null;
         }
@@ -88,5 +92,15 @@ public class SoundManager : Singleton<SoundManager>
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    public void PauseBGM()
+    {
+        sceneryAudioSource.Pause();
+    }
+
+    public void ResumeBGM()
+    {
+        sceneryAudioSource.UnPause();
     }
 }

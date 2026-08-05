@@ -1,12 +1,21 @@
 public enum Sound
 {
     // heartBeat
-    HeavyHeartBeat,
     HeartBeat,
 
     // Player
     Padding,
     Run,
-    Sword
+    Sword,
+    RunSound,
+    Walk,
+    Shield,
+    Dash,
 
+
+    //Story
+    Text,
+    Text1,
+    Text2,
+    HeavyHeartBeat
 }

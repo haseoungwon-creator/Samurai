@@ -39,6 +39,8 @@ public class PlayerAttack : MonoBehaviour
     {
         float direction = transform.localScale.x > 0 ? 1 : -1;
 
+        SoundManager.Instance.Emit(Sound.Sword);
+
         GameObject hit = Instantiate(attackDatas[comboStep - 1].hitboxPrefab, transform.position,Quaternion.identity);
 
         hit.GetComponent<Hitbox>().Init(attackDatas[comboStep-1],direction);

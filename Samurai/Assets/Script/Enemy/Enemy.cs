@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Enemy : EnemyBase
 {
@@ -11,17 +12,31 @@ public class Enemy : EnemyBase
 
     private float detectRange;
     private float attackRange;
-    private float attackCooldown;
     private float moveSpeed;
 
-    private float attackTimer;
+    private float pressurDistance;
+    private float pressureSpeed;
 
-    GameObject currentHitbox;
+    private float minAttackCooldown;
+    private float maxAttackCooldown;
+
+    private float recoverTiem;
+
+    private float attackPrepareTiem;
+
+    private float attackLungeSpeed;
+    private float attackLungeTime;
+
+    private float attackTimer;
+    private float recoverTimer;
+    private bool hasAttackSlot;
+    private bool isPreparingAttack;
+    private float prepareTimer;
+    private GameObject currentHitbox;
 
     protected override void Awake()
     {
         base.Awake();
-
         rb = GetComponent<Rigidbody2D>();
         enemyManager = FindAnyObjectByType<EnemyManager>();
     }
@@ -31,15 +46,9 @@ public class Enemy : EnemyBase
         enemyManager?.Register(this);
 
         GameObject obj = GameObject.FindGameObjectWithTag("Player");
-
         if (obj != null)
         {
             player = obj.transform;
-            Debug.Log($"{name} : 플레이어 찾음");
-        }
-        else
-        {
-            Debug.LogError($"{name} : Player 태그를 찾지 못함");
         }
     }
 
@@ -49,14 +58,23 @@ public class Enemy : EnemyBase
 
         detectRange = data.detectRange;
         attackRange = data.attackRange;
-        attackCooldown = data.attackCooldown;
+
         moveSpeed = data.moveSpeed;
 
-        currentState = EnemyState.Idle;
+        pressurDistance = data.pressureDistance;
+        pressureSpeed = data.pressureSpeed;
 
-        Debug.Log($"{name} 초기화");
-        Debug.Log($"Detect : {detectRange}");
-        Debug.Log($"Attack : {attackRange}");
+        minAttackCooldown = data.minAttackCooldown;
+        maxAttackCooldown = data.maxAttackCooldown;
+
+        recoverTiem = data.recoverTime;
+
+        attackPrepareTiem = data.attackPrepareTime;
+
+        attackLungeSpeed = data.attackLungeSpeed;
+        attackLungeTime = data.attackLungeTime;
+
+        currentState = EnemyState.Idle;
     }
 
     protected override void Update()
@@ -65,34 +83,20 @@ public class Enemy : EnemyBase
 
         if (isDead) return;
 
-        if (!CanUpdateAi)
-        {
-            return;
-        }
+        if (!CanUpdateAi) return;
 
-        if (player == null)
-        {
-            Debug.Log($"{name} : player null");
-            return;
-        }
+        if (player == null) return;
 
         attackTimer -= Time.deltaTime;
 
         switch (currentState)
         {
-            case EnemyState.Idle:
-                UpdateIdle();
-                break;
-
-            case EnemyState.Chase:
-                UpdateChase();
-                break;
-
-            case EnemyState.Attack:
-                UpdateAttack();
-                break;
+            case EnemyState.Idle: UpdateIdle(); break;
+            case EnemyState.Chase: UpdateChase(); break;
+            case EnemyState.Pressure: UpdatePressure(); break;
+            case EnemyState.Attack: UpdateAttack(); break;
+            case EnemyState.Recover: UpdateRecover(); break;
         }
-
         LookAtPlayer();
     }
 
@@ -100,11 +104,8 @@ public class Enemy : EnemyBase
     {
         float distance = Vector2.Distance(transform.position, player.position);
 
-        Debug.Log($"{name} 거리 : {distance}");
-
         if (distance <= detectRange)
         {
-            Debug.Log($"{name} 추적 시작");
             currentState = EnemyState.Chase;
         }
     }
@@ -115,65 +116,163 @@ public class Enemy : EnemyBase
 
         if (distance > detectRange)
         {
-            currentState = EnemyState.Idle;
-
-            rb.linearVelocity = Vector2.zero;
-
-            animator.SetBool("run", false);
-
+            EnterIdle();
             return;
         }
 
         if (distance <= attackRange)
         {
-            currentState = EnemyState.Attack;
-
-            rb.linearVelocity = Vector2.zero;
-
-            animator.SetBool("run", false);
-
+            EnterPressure();
             return;
         }
 
         Vector2 dir = (player.position - transform.position).normalized;
 
         rb.linearVelocity = dir * moveSpeed;
-
         animator.SetBool("run", true);
     }
 
-    private void UpdateAttack()
+    private void EnterIdle()
     {
+        currentState = EnemyState.Idle;
         rb.linearVelocity = Vector2.zero;
+        animator.SetBool("run", false);
+        ExitAttackSlot();
+    }
 
+    private void EnterPressure()
+    {
+        currentState = EnemyState.Pressure;
+        animator.SetBool("run", true);
+        attackTimer = Random.Range(0.15f, 0.45f);
+    }
+
+    private void UpdatePressure()
+    {
         float distance = Vector2.Distance(transform.position, player.position);
 
-        if (distance > attackRange)
+        if (distance > detectRange)
+        {
+            EnterIdle();
+            return;
+        }
+
+        if (distance > attackRange + 0.3f)
         {
             currentState = EnemyState.Chase;
             return;
         }
 
-        if (attackTimer > 0)
+        if (!hasAttackSlot)
+        {
+            hasAttackSlot = enemyManager == null || enemyManager.RequesAttack(this);
+        }
+
+        if (!hasAttackSlot)
+        {
+            PressureMove(distance);
             return;
+        }
 
-        attackTimer = attackCooldown;
+        if (attackTimer > 0)
+        {
+            PressureMove(distance);
+            return;
+        }
 
-        int attackIndex = Random.Range(0, enemyData.attackDatas.Length);
-
-        animator.SetInteger("AttackIndex", attackIndex);
-        animator.SetTrigger("attack");
+        EnterAttack();
     }
 
-    private void LookAtPlayer()
+    private void PressureMove(float distance)
     {
-        Vector3 scale = transform.localScale;
+        float dir = player.position.x > transform.position.x ? 1f : -1f;
 
-        scale.x = player.position.x < transform.position.x
-            ? -Mathf.Abs(scale.x)
-            : Mathf.Abs(scale.x);
+        float diff = distance - pressurDistance;
 
-        transform.localScale = scale;
+        Vector2 velocity = Vector2.zero;
+
+        if (diff > 0.15f)
+        {
+            velocity.x = dir * pressureSpeed;
+        }
+
+        else if (diff < -0.15f)
+        {
+            velocity.x = -dir * pressureSpeed;
+        }
+        else
+        {
+            velocity.x = Mathf.Sin(Time.time * 6f) * 0.5f;
+        }
+
+        rb.linearVelocity = velocity;
+
+        animator.SetBool("run", Mathf.Abs(rb.linearVelocity.x) > 0.05f);
+    }
+
+    private void EnterAttack()
+    {
+        currentState = EnemyState.Attack;
+        animator.SetBool("run", false);
+        rb.linearVelocity = Vector2.zero;
+        prepareTimer = attackPrepareTiem;
+        isPreparingAttack = true;
+    }
+
+    private void UpdateAttack()
+    {
+        float distance = Vector2.Distance(transform.position, player.position);
+
+        if (distance > attackRange + 0.5f)
+        {
+            ExitAttackSlot();
+            currentState = EnemyState.Chase;
+            return;
+        }
+
+        if (isPreparingAttack)
+        {
+            prepareTimer -= Time.deltaTime;
+
+            if (prepareTimer <= 0)
+            {
+                isPreparingAttack = false;
+
+                int attackIndex = Random.Range(0, enemyData.attackDatas.Length);
+
+                animator.SetInteger("AttackIndex", attackIndex);
+                animator.SetTrigger("attack");
+                StartCoroutine(Lunge());
+            }
+            return;
+        }
+    }
+
+    private IEnumerator Lunge()
+    {
+        float timer = attackLungeTime;
+
+        float dir = transform.localScale.x > 0 ? 1f : -1f;
+
+        while (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            rb.linearVelocity = new Vector2(dir * attackLungeSpeed, rb.linearVelocity.y);
+
+            yield return null;
+        }
+
+        rb.linearVelocity = Vector2.zero;
+    }
+
+    private void UpdateRecover()
+    {
+        recoverTimer -= Time.deltaTime;
+        if (recoverTimer <= 0f)
+        {
+            attackTimer = Random.Range(minAttackCooldown, maxAttackCooldown);
+            currentState = EnemyState.Pressure;
+        }
     }
 
     public void SpawnHitbox(int index)
@@ -185,33 +284,61 @@ public class Enemy : EnemyBase
 
         EnemyHitbox hitbox = currentHitbox.GetComponent<EnemyHitbox>();
 
-        float dir = transform.localScale.x < 0 ? -1 : 1;
+        float dir = transform.localScale.x > 0 ? 1f : -1f;
 
         hitbox.Init(enemyData.attackDatas[index], enemyData, dir);
     }
 
     public void DestroyHitbox()
     {
-        if (currentHitbox != null)
-        {
-            Destroy(currentHitbox);
-            currentHitbox = null;
-        }
+        if (currentHitbox == null) return;
+
+        Destroy(currentHitbox);
+
+        currentHitbox = null;
+    }
+
+    public void AttackFinish()
+    {
+        recoverTimer = recoverTiem;
+        currentState = EnemyState.Recover;
+    }
+
+    private void ExitAttackSlot()
+    {
+        if (!hasAttackSlot) return;
+
+        enemyManager?.ReleaseAttack(this);
+
+        hasAttackSlot = false;
+    }
+
+    private void LookAtPlayer()
+    {
+        if(player == null) return;
+
+        Vector3 scale = transform.localScale;
+
+        if(player.position.x < transform.localScale.x)
+            scale.x = -Mathf.Abs(scale.x);
+        else
+            scale.x = Mathf.Abs(scale.x);
+
+        transform.localScale = scale;
     }
 
     protected override void Die()
     {
         base.Die();
-
         rb.linearVelocity = Vector2.zero;
-
+        ExitAttackSlot();
         enemyManager?.Unregister(this);
-
         currentState = EnemyState.Dead;
     }
 
     private void OnDestroy()
     {
+        ExitAttackSlot();
         enemyManager?.Unregister(this);
     }
 }

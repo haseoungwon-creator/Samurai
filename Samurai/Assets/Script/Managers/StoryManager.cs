@@ -39,6 +39,7 @@ public class StoryManager : Singleton<StoryManager>
                 yield break;
             }
             uiText.text += c;
+            SoundManager.Instance.Emit(Sound.Text2);
             yield return CoroutineManager.Wait(speed);
         }
 

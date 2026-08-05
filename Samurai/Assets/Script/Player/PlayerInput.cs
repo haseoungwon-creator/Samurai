@@ -56,6 +56,8 @@ public class PlayerInput : MonoBehaviour
 
         Pause();
 
+        if (GameManager.Instance.CurrentState == GameState.Pause) return;
+
         HandleMouveInput();
 
         if(mouseManager.ismMouse) return;

@@ -7,7 +7,7 @@ public class Portal : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
-
+        if (QuestManager.Instance.CurrentQuest.chapter == 0) return;
 
 
         if (returnVillage)

@@ -5,12 +5,9 @@ using UnityEngine.UI;
 
 public class FirstStory : MonoBehaviour
 {
-    [SerializeField] AudioSource fireBgm;
-    [SerializeField] AudioSource heartbit;
-
     [SerializeField] Text storyText;
 
-    [SerializeField] float textSpeed = 0.05f;
+    [SerializeField] float textSpeed = 2f;
     [SerializeField] string nextScene = "Village";
 
     private bool isEnding;
@@ -28,7 +25,6 @@ public class FirstStory : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.SetState(GameState.Story);
-        AudioManager.Instance.PlayBgm(fireBgm);
         StoryManager.Instance.StartTyping(introStory[index],storyText,textSpeed);
         index = 0;
 
@@ -74,10 +70,7 @@ public class FirstStory : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
-        AudioManager.Instance.StopBgm();
-
-        if (heartbit != null)
-            AudioManager.Instance.PlayEffect(heartbit);
+        SoundManager.Instance.Emit(Sound.HeavyHeartBeat);
 
         GameManager.Instance.SetState(GameState.Playing);
 

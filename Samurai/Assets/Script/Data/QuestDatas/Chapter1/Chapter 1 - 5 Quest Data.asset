@@ -23,11 +23,9 @@ MonoBehaviour:
   rewardGold: 500
   rewardItem: {fileID: 0}
   startStoryKey: village_teacher_6
-  progressStoryKey: 
-  completeStoryKey: 
   nextQuest: {fileID: 0}
   autoStartNextQuest: 1
-  targetScene: Chapter 1
+  targetScene: Chapter1
   spawnPointID: 
   returnVillage: 1
   nextStory: 0

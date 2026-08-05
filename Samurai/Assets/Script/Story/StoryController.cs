@@ -7,7 +7,7 @@ public class StoryController : Singleton<StoryController>
     [SerializeField] GameObject storyPanel;
     [SerializeField] Text speakerText;
     [SerializeField] Text dialogueText;
-    [SerializeField] float typingSpeed = 0.03f;
+    [SerializeField] float typingSpeed = 2f;
 
     [SerializeField] Canvas storyCanvas;
     [SerializeField] int basestorySortingOrder = 3;

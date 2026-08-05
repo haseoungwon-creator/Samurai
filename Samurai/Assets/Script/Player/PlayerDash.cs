@@ -46,6 +46,7 @@ public class PlayerDash : MonoBehaviour
         hitEnemies = new List<Enemy>();
 
         PlayerStateMachine.Instance.ChangeState(PlayerState.Dash);
+        SoundManager.Instance.Emit(Sound.Dash);
         playerAnimator.SetDashing(true);
 
         float dir = transform.localScale.x > 0 ? 1 : -1;

@@ -4,5 +4,7 @@ public enum EnemyState
     Chase,
     Attack,
     Hurt,
-    Dead
+    Dead,
+    Pressure,
+    Recover
 }

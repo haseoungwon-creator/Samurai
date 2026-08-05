@@ -14,8 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyID: Forest Enemy
   enemyName: Forest Grunt
-  prefab: {fileID: 7757091544001408229, guid: 045de2e0e708c344eaf815e62fbf3b77, type: 3}
+  prefab: {fileID: 4244198174322379900, guid: 86f04d776b54c4c4fa8edc4a2df0e306, type: 3}
   maxHP: 30
   attackPower: 2
+  skillPower: 0
+  skillStun: 0
   moveSpeed: 3
   rewardGold: 15
+  detectRange: 10
+  attackRange: 1
+  attackCooldown: 0.1
+  hitboxPrefab: {fileID: 316443250584434831, guid: 36dccc3ac6b496d4287c52ca048dfb8a, type: 3}
+  attackDatas:
+  - {fileID: 11400000, guid: 5bd166af28931a345aefc1970682d495, type: 2}
