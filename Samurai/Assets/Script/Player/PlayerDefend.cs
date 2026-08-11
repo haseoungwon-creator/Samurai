@@ -1,80 +1,128 @@
-using System.Runtime.CompilerServices;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerDefend : MonoBehaviour
 {
-    [SerializeField] float justGuardWindow;
-    [SerializeField] float justGuardInvincibleTime;
+    [SerializeField] private float justGuardWindow = 0.15f;
+    [SerializeField] private int justGuardDamage = 20;
+    [SerializeField] private int maxGuardCount = 3;
+    [SerializeField] private float guardBreakTime = 0.8f;
 
-    [SerializeField] int justGuardDamage;
-    [SerializeField] int maxGuardCount = 3;
-    public bool isDefending {  get; private set; }
+    public bool isDefending { get; private set; }
 
-    int guardCount;
+    private int guardCount;
+    private float defendStartTime;
 
-    float defendStartTime;
-
-    PlayerStateMachine stateMahine;
-    PlayerAnimator playerAnimator;
-    PlayerHealth playerHealth;
+    private PlayerStateMachine stateMachine;
+    private PlayerAnimator playerAnimator;
+    private PlayerHealth playerHealth;
+    private Coroutine guardBreakCoroutine;
 
     private void Awake()
     {
-        stateMahine = GetComponent<PlayerStateMachine>();
+        stateMachine = GetComponent<PlayerStateMachine>();
         playerAnimator = GetComponent<PlayerAnimator>();
         playerHealth = GetComponent<PlayerHealth>();
     }
 
     public void StartDefend()
     {
-        if (!stateMahine.CanDefend()) return;
+        if (stateMachine == null)
+            return;
+
+        if (!stateMachine.CanDefend())
+            return;
+
+        if (stateMachine.CurrentState == PlayerState.GuardBreak) return;
 
         isDefending = true;
         guardCount = 0;
         defendStartTime = Time.time;
 
-        stateMahine.ChangeState(PlayerState.Defend);
-        playerAnimator.SetDefending(true);
+        stateMachine.ChangeState(PlayerState.Defend);
 
+        if (playerAnimator != null)
+            playerAnimator.SetDefending(true);
     }
 
     public void StopDefend()
     {
-        if (isDefending)
-        {
-            isDefending = false;
+        if (!isDefending)
+            return;
+
+        isDefending = false;
+
+        if (playerAnimator != null)
             playerAnimator.SetDefending(false);
-            stateMahine.ChangeState(PlayerState.Idle);
-        }
+
+        if (stateMachine != null)
+            stateMachine.ChangeState(PlayerState.Idle);
     }
 
     public void TryGuard(Enemy attacker)
     {
-        if(!isDefending) return;
+        if (!isDefending)
+            return;
 
-        if(Time.time - defendStartTime <= justGuardWindow)
+        bool isJustGuard =
+            Time.time - defendStartTime <= justGuardWindow;
+
+        if (isJustGuard)
         {
+            if (playerAnimator != null)
+                playerAnimator.TriggerGuardReact();
+
+            if (attacker != null)
+                attacker.TakeDamage(justGuardDamage);
+
+            if (playerHealth != null)
+            {
+                playerHealth.StartCoroutine(
+                    playerHealth.InvincibleRoutine()
+                );
+            }
+
+            return;
+        }
+
+        if (playerAnimator != null)
             playerAnimator.TriggerGuardReact();
-            attacker.TakeDamage(justGuardDamage);
 
-            playerHealth.StartCoroutine(playerHealth.InvincibleRoutine());
-        }
-
-        playerAnimator.TriggerGuardReact();
         guardCount++;
+
         if (guardCount >= maxGuardCount)
-        {
             GuardBreak();
-        }
     }
 
     private void GuardBreak()
     {
         isDefending = false;
 
-        playerAnimator.SetDefending(false);
-        playerAnimator.TriggerGuardBreak();
-        stateMahine.ChangeState(PlayerState.GuardBreak);
+        if (playerAnimator != null)
+            playerAnimator.SetDefending(false);
+
+        if (playerAnimator != null)
+            playerAnimator.TriggerGuardBreak();
+
+        if (stateMachine != null)
+            stateMachine.ChangeState(PlayerState.GuardBreak);
+
+        if(guardBreakCoroutine != null)
+            StopCoroutine(guardBreakCoroutine);
+
+        guardBreakCoroutine = StartCoroutine(GuardBreakRecovery());
     }
 
+    private IEnumerator GuardBreakRecovery()
+    {
+        yield return CoroutineManager.Wait(guardBreakTime);
+
+        if(stateMachine != null && stateMachine.CurrentState == PlayerState.GuardBreak)
+        {
+            stateMachine.ChangeState(PlayerState.Idle);
+        }
+
+        guardCount = 0;
+        guardBreakCoroutine = null;
+    }
 }

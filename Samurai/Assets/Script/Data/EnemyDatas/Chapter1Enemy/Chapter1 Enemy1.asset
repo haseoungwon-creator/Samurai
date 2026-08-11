@@ -15,15 +15,41 @@ MonoBehaviour:
   enemyID: Forest Enemy
   enemyName: Forest Grunt
   prefab: {fileID: 4244198174322379900, guid: 86f04d776b54c4c4fa8edc4a2df0e306, type: 3}
-  maxHP: 30
-  attackPower: 2
-  skillPower: 0
-  skillStun: 0
-  moveSpeed: 3
+  maxHP: 50
   rewardGold: 15
+  moveSpeed: 3
   detectRange: 10
+  keepDistance: 1
+  keepDistanceSpeed: 1
+  recoverTime: 0.2
+  hurtTime: 0.2
+  attackPower: 8
   attackRange: 1
-  attackCooldown: 0.1
-  hitboxPrefab: {fileID: 316443250584434831, guid: 36dccc3ac6b496d4287c52ca048dfb8a, type: 3}
+  attackPrepareTime: 0.2
+  attackCooldownMin: 1
+  attackCooldownMax: 1
+  attackCanStun: 0
+  attackStunTime: 0.5
   attackDatas:
   - {fileID: 11400000, guid: 5bd166af28931a345aefc1970682d495, type: 2}
+  hitboxPrefab: {fileID: 316443250584434831, guid: 36dccc3ac6b496d4287c52ca048dfb8a, type: 3}
+  skillChance: 30
+  useBehindAttack: 0
+  behindAttackChance: 0
+  behindAttackCooldown: 0
+  behindAttackDamage: 0
+  behindAttackDistance: 0
+  useDashAttackCombo: 0
+  dashAttackChance: 0
+  dashAttackCooldown: 0
+  dashAttackDamage: 0
+  dashStartDistance: 4
+  dashHitDistance: 0
+  dashPauseTime: 0
+  dashIntervalStart: 0
+  dashIntervalEnd: 0
+  dashHitCount: 0
+  useInvisibility: 0
+  invisibilityChance: 0
+  invisibilityCooldown: 0
+  invisibilityDuration: 0

@@ -2,20 +2,29 @@ using UnityEngine;
 
 public class EnemyHitbox : MonoBehaviour
 {
-    EnemyData enemyData;
+    private EnemyData enemyData;
+    private EnemyAttackData attackData;
+    private bool attacked;
 
-    bool attacked;
-
-    public void Init(EnemyAttackData attack, EnemyData enemy, float direction)
+    public void Init(
+        EnemyAttackData attack,
+        EnemyData enemy,
+        float direction)
     {
+        attackData = attack;
         enemyData = enemy;
 
         transform.position += new Vector3(
             attack.offset.x * direction,
             attack.offset.y,
-            0);
+            0f
+        );
 
-        GetComponent<BoxCollider2D>().size = attack.size;
+        BoxCollider2D box =
+            GetComponent<BoxCollider2D>();
+
+        if (box != null)
+            box.size = attack.size;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -23,13 +32,41 @@ public class EnemyHitbox : MonoBehaviour
         if (attacked)
             return;
 
-        PlayerHealth player = collision.GetComponent<PlayerHealth>();
+        if (enemyData == null)
+            return;
+
+        PlayerHealth player =
+            collision.GetComponent<PlayerHealth>();
+
+        if (player == null)
+            player =
+                collision.GetComponentInParent<PlayerHealth>();
 
         if (player == null)
             return;
 
         attacked = true;
 
-        player.TakeDamage(Mathf.RoundToInt(enemyData.attackPower));
+        player.TakeDamage(
+            Mathf.RoundToInt(
+                enemyData.attackPower
+            )
+        );
+
+        if (enemyData.attackCanStun)
+        {
+            PlayerStun stun =
+                player.GetComponent<PlayerStun>();
+
+            if (stun == null)
+            {
+                stun =
+                    player.GetComponentInParent<PlayerStun>();
+            }
+
+            stun?.Stun(
+                enemyData.attackStunTime
+            );
+        }
     }
 }

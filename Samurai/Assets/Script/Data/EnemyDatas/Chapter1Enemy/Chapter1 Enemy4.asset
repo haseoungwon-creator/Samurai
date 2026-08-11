@@ -14,8 +14,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyID: Forest Enemy
   enemyName: Forest Mercenary
-  prefab: {fileID: 7757091544001408229, guid: 045de2e0e708c344eaf815e62fbf3b77, type: 3}
-  maxHP: 100
-  attackPower: 20
-  moveSpeed: 5
+  prefab: {fileID: 8936530873949595460, guid: d1ca80d139e124b45ab172ada4b893ef, type: 3}
+  maxHP: 300
   rewardGold: 100
+  moveSpeed: 3
+  detectRange: 20
+  keepDistance: 4
+  keepDistanceSpeed: 2
+  recoverTime: 0.25
+  hurtTime: 0.2
+  attackPower: 20
+  attackRange: 5
+  attackPrepareTime: 0.2
+  attackCooldownMin: 1
+  attackCooldownMax: 1.5
+  attackCanStun: 0
+  attackStunTime: 0.5
+  attackDatas: []
+  hitboxPrefab: {fileID: 4878279130267575731, guid: 6dd63f62bb45f5e43b2416175a8ed25d, type: 3}
+  skillChance: 30
+  useBehindAttack: 1
+  behindAttackChance: 50
+  behindAttackCooldown: 5
+  behindAttackDamage: 20
+  behindAttackDistance: 1
+  useDashAttackCombo: 0
+  dashAttackChance: 30
+  dashAttackCooldown: 8
+  dashAttackDamage: 30
+  dashStartDistance: 4
+  dashHitDistance: 0.6
+  dashPauseTime: 0.25
+  dashIntervalStart: 0.35
+  dashIntervalEnd: 0.08
+  dashHitCount: 5
+  useInvisibility: 0
+  invisibilityChance: 20
+  invisibilityCooldown: 10
+  invisibilityDuration: 4

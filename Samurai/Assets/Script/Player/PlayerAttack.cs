@@ -90,4 +90,21 @@ public class PlayerAttack : MonoBehaviour
         yield return CoroutineManager.Wait(attackDatas[comboStep - 1].comboWindow);
         comboStep = 1;
     }
+
+    public void CancelAttack()
+    {
+        if(comboResetCoroutine != null)
+        {
+            StopCoroutine(comboResetCoroutine);
+            comboResetCoroutine = null;
+        }
+        comboStep = 1;
+        canQueueNextAttack = false;
+        attackQueued = false;
+        playerAnimator.ResetAttack();
+        if(PlayerStateMachine.Instance.CurrentState == PlayerState.Attack)
+        {
+            PlayerStateMachine.Instance.ChangeState(PlayerState.Idle);
+        }
+    }
 }

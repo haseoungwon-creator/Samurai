@@ -19,6 +19,8 @@ public class PlayerMove : MonoBehaviour
     InventoryUI inventoryUI;
 
     float x;
+    PlayerStun playerStun;
+    
 
     private void Awake()
     {
@@ -30,11 +32,26 @@ public class PlayerMove : MonoBehaviour
         playerDefen = GetComponent<PlayerDefend>();
         GameManager.Instance.SetState(GameState.Playing);
         inventoryUI = FindAnyObjectByType<InventoryUI>();
+        playerStun = GetComponent<PlayerStun>();
 
     }
     private void Update()
     {
 
+        if (movementLocked)
+        {
+            rb.linearVelocity = Vector2.zero;
+            animator.SetFloat("speed", 0f);
+            return;
+        }
+
+        if(playerStun != null && playerStun.IsStunned)
+        {
+            rb.linearVelocity = Vector2.zero;
+            animator.SetFloat("speed", 0f);
+            return;
+
+        }
         if (GameManager.Instance.CurrentState == GameState.Story || playerHealth.isDead || playerCharge.isCharged || playerDefen.isDefending || inventoryUI.isOpen)
         {
             rb.linearVelocity = Vector2.zero;
@@ -53,12 +70,29 @@ public class PlayerMove : MonoBehaviour
 
     public void SetMoveInput(float input)
     {
+        if(playerStun != null && playerStun.IsStunned)
+        {
+            x = 0f;
+            return;
+        }
         x = input;
     }
     private void FixedUpdate()
     {
         if (GameManager.Instance.CurrentState == GameState.Story || playerHealth.isDead || playerCharge.isCharged || playerDefen.isDefending || inventoryUI.isOpen)
         {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+        if (movementLocked)
+        {
+            rb.linearVelocity = Vector2.zero;
+            animator.SetFloat("speed", 0f);
+            return;
+        }
+        if(playerStun != null && playerStun.IsStunned)
+        {
+            x = 0f;
             rb.linearVelocity = Vector2.zero;
             return;
         }
@@ -74,8 +108,21 @@ public class PlayerMove : MonoBehaviour
         if (playerDash.isDashing) return;
         if (playerCharge.isCharged) return;
         if (playerDefen.isDefending) return;
+        if (playerStun != playerStun.IsStunned) return;
         if (GameManager.Instance.CurrentState != GameState.Playing) return;
 
         SoundManager.Instance.Emit(Sound.Walk);
+    }
+
+    private bool movementLocked;
+
+    public void SetMovementLock(bool value)
+    {
+        movementLocked = value;
+
+        if (value)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
     }
 }

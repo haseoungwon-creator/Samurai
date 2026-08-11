@@ -2,24 +2,31 @@ using UnityEngine;
 
 public class EnemyBase : MonoBehaviour
 {
-    [SerializeField] protected int hp;
-    [SerializeField] protected FleshEffect fleshEffect;
+    [SerializeField] protected Rigidbody2D rb;
     [SerializeField] protected Animator animator;
+    [SerializeField] protected FleshEffect fleshEffect;
+    [SerializeField] protected int hp;
 
     protected EnemyData enemyData;
-
     protected string enemyId;
     protected int rewardGold;
-
     protected bool isDead;
 
     public bool CanUpdateAi { get; protected set; }
-    
+    public EnemyData Data => enemyData;
+    public int CurrentHP => hp;
+    public bool IsDead => isDead;
 
     protected virtual void Awake()
     {
-        animator = GetComponent<Animator>();
-        fleshEffect = GetComponent<FleshEffect>();
+        if (rb == null)
+            rb = GetComponent<Rigidbody2D>();
+
+        if (animator == null)
+            animator = GetComponentInChildren<Animator>();
+
+        if (fleshEffect == null)
+            fleshEffect = GetComponent<FleshEffect>();
     }
 
     protected virtual void Update()
@@ -27,72 +34,103 @@ public class EnemyBase : MonoBehaviour
         UpdateVisibleState();
     }
 
-    void UpdateVisibleState()
+    private void UpdateVisibleState()
     {
-        if (Camera.main == null)
+        Camera mainCamera = Camera.main;
+
+        if (mainCamera == null)
         {
             CanUpdateAi = false;
             return;
         }
 
-        Vector3 view = Camera.main.WorldToViewportPoint(transform.position);
+        Vector3 view = mainCamera.WorldToViewportPoint(transform.position);
 
         CanUpdateAi =
-            view.z > 0 &&
-            view.x >= 0 &&
-            view.x <= 1 &&
-            view.y >= 0 &&
-            view.y <= 1;
+            view.z > 0f &&
+            view.x >= 0f &&
+            view.x <= 1f &&
+            view.y >= 0f &&
+            view.y <= 1f;
     }
 
     public virtual void Initialize(EnemyData data)
     {
-        enemyData = data;
+        if (data == null)
+            return;
 
+        enemyData = data;
         hp = data.maxHP;
         enemyId = data.enemyID;
         rewardGold = data.rewardGold;
+        isDead = false;
+        CanUpdateAi = false;
     }
 
     public virtual void TakeDamage(int damage)
     {
-        if (isDead) return;
+        if (isDead || damage <= 0)
+            return;
 
-        animator?.SetTrigger("hurt");
         fleshEffect?.Flash();
 
-        int finalDamage = damage + PlayerStat.Instance.Power;
+        int finalDamage = damage;
+
+        if (PlayerStat.Instance != null)
+            finalDamage += PlayerStat.Instance.Power;
 
         hp -= finalDamage;
 
         if (hp <= 0)
+        {
+            hp = 0;
             Die();
+            return;
+        }
+
+        OnHurt();
+    }
+
+    protected virtual void OnHurt()
+    {
     }
 
     protected virtual void Die()
     {
-        if (isDead) return;
+        if (isDead)
+            return;
 
         isDead = true;
 
-        animator?.ResetTrigger("hurt");
-        animator?.SetTrigger("die");
-
-        Collider2D col = GetComponent<Collider2D>();
-        if (col != null)
-            col.enabled = false;
-
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (rb != null)
+        if (animator != null)
         {
-            rb.linearVelocity = Vector2.zero;
-            rb.simulated = false;
+            animator.ResetTrigger("hurt");
+
+            if (HasAnimatorParameter("run"))
+                animator.SetBool("run", false);
+
+            if (HasAnimatorParameter("die"))
+                animator.SetTrigger("die");
         }
 
-        if (rewardGold > 0)
+        Collider2D collider = GetComponent<Collider2D>();
+
+        if (collider != null)
+            collider.enabled = false;
+
+        Rigidbody2D body = rb != null ? rb : GetComponent<Rigidbody2D>();
+
+        if (body != null)
+        {
+            body.linearVelocity = Vector2.zero;
+            body.simulated = false;
+        }
+
+        if (rewardGold > 0 && GoldManager.Instance != null)
             GoldManager.Instance.AddGold(rewardGold);
 
-        QuestManager.Instance?.AddProgress(enemyId);
+        if (!string.IsNullOrEmpty(enemyId))
+            QuestManager.Instance?.AddProgress(enemyId);
 
         EnemySpawnManager.Instance?.RemoveEnemy(this);
     }
@@ -100,5 +138,19 @@ public class EnemyBase : MonoBehaviour
     public virtual void DestroyEnemy()
     {
         Destroy(gameObject);
+    }
+
+    protected bool HasAnimatorParameter(string parameterName)
+    {
+        if (animator == null)
+            return false;
+
+        foreach (AnimatorControllerParameter parameter in animator.parameters)
+        {
+            if (parameter.name == parameterName)
+                return true;
+        }
+
+        return false;
     }
 }

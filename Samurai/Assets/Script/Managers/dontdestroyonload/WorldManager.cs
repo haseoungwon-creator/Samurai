@@ -24,4 +24,10 @@ public class WorldManager : Singleton<WorldManager>
         CurrentStage = 1;
         NPCManager.Instance.ResetAllTalk();
     }
+
+    public void ResetWorld()
+    {
+        CurrentChapter = 0;
+        CurrentStage = 1;
+    }
 }

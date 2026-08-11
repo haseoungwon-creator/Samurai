@@ -11,6 +11,7 @@ public class GameManager : Singleton<GameManager>
     public GameObject Player { get; private set; }
 
     public event Action<GameState> OnStateChanged;
+    public int PlayerHp {  get; private set; }
 
     protected override void Awake()
     {
@@ -54,4 +55,19 @@ public class GameManager : Singleton<GameManager>
         Player = null;
     }
 
+    public void SetPlayerHP(int hp)
+    {
+        PlayerHp = hp;
+    }
+
+    public void SetInitialPlauerHp(int maxHP)
+    {
+        if(PlayerHp <= 0)
+            PlayerHp = maxHP;
+    }
+
+    public void ResetPlayerHP(int maxHP)
+    {
+        PlayerHp = maxHP;
+    }
 }

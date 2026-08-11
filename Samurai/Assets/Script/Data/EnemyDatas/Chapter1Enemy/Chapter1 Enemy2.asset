@@ -14,8 +14,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyID: Forest Enemy
   enemyName: Forest Soldier
-  prefab: {fileID: 7757091544001408229, guid: 045de2e0e708c344eaf815e62fbf3b77, type: 3}
-  maxHP: 50
-  attackPower: 5
-  moveSpeed: 2.5
+  isBoss: 0
+  prefab: {fileID: 1359930873657831002, guid: 53178de4971f954469c7c39f3c0a5afd, type: 3}
+  maxHP: 80
   rewardGold: 15
+  moveSpeed: 2.5
+  detectRange: 10
+  keepDistance: 2
+  keepDistanceSpeed: 1.5
+  recoverTime: 0.2
+  hurtTime: 0.2
+  attackPower: 15
+  attackRange: 2
+  attackPrepareTime: 0.3
+  attackCooldownMin: 0.8
+  attackCooldownMax: 1.5
+  attackCanStun: 1
+  attackStunTime: 0.2
+  attackDatas:
+  - {fileID: 11400000, guid: 29d9318587db2674ab3ff0285f013ee0, type: 2}
+  hitboxPrefab: {fileID: 5403359548854742503, guid: 02cbddff3e835244a813d701860afb7d, type: 3}
+  skillChance: 30
+  useBehindAttack: 0
+  behindAttackChance: 30
+  behindAttackCooldown: 5
+  behindAttackDamage: 20
+  behindAttackDistance: 1
+  useDashAttackCombo: 0
+  dashAttackChance: 30
+  dashAttackCooldown: 8
+  dashAttackDamage: 30
+  dashStartDistance: 4
+  dashHitDistance: 0.6
+  dashPauseTime: 0.25
+  dashIntervalStart: 0.35
+  dashIntervalEnd: 0.08
+  dashHitCount: 20
+  useInvisibility: 0
+  invisibilityChance: 20
+  invisibilityCooldown: 10
+  invisibilityDuration: 4

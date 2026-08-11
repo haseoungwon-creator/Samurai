@@ -7,6 +7,10 @@ public class PlayerInput : MonoBehaviour
     PlayerHealth playerHealth;
     PlayerMove playerMove;
     PlayerDefend playerDefend;
+    PlayerStun playerStun;
+    
+    EnemyManager enemyManager;
+
     [SerializeField]ItemData testItem;
     [SerializeField] InventoryUI inventoryUI;
     [SerializeField] PauseManager pauseManager;
@@ -22,16 +26,28 @@ public class PlayerInput : MonoBehaviour
         playerMove = GetComponent<PlayerMove>();
         playerDefend = GetComponent<PlayerDefend>();
         mouseManager = FindAnyObjectByType<MouseManager>();
+        playerStun = GetComponent<PlayerStun>();
+        
+        enemyManager = FindAnyObjectByType<EnemyManager>();
         
     }
     private void Update()
     {
+        if (GameManager.Instance == null) return;
         if(inventoryUI == null)
         {
             inventoryUI = FindAnyObjectByType<InventoryUI>();
         }
+        if(pauseManager == null)
+        {
+            pauseManager = FindAnyObjectByType<PauseManager>();
+        }
 
-        if (inventoryUI != null && inventoryUI.isOpen) return; 
+        if (inventoryUI != null && inventoryUI.isOpen) return;
+
+        if (GameManager.Instance.CurrentState == GameState.GameOver) return;
+
+        if (GameManager.Instance.CurrentState == GameState.Pause) return;
         if(Input.GetKeyDown(KeyCode.Q))
         {
             Inventory.Instance.AddItem(testItem);
@@ -53,9 +69,20 @@ public class PlayerInput : MonoBehaviour
             QuestManager.Instance.AddProgress("enemies");
         }
 
+        if (GameManager.Instance.CurrentState == GameState.GameOver) return;
 
         Pause();
 
+        if (enemyManager != null && enemyManager.IsAnyEnemyUsingDashAttackCombo())
+        {
+            playerMove.SetMoveInput(0f);
+            return;
+        }
+            
+        if (playerStun != null && playerStun.IsStunned)
+        {
+            return;
+        }
         if (GameManager.Instance.CurrentState == GameState.Pause) return;
 
         HandleMouveInput();
@@ -81,6 +108,8 @@ public class PlayerInput : MonoBehaviour
 
     private void Pause()
     {
+        if (GameManager.Instance == null || GameManager.Instance.CurrentState == GameState.GameOver) return;
+
         if (Input.GetKeyUp(KeyCode.Escape))
         {
 

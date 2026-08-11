@@ -15,7 +15,7 @@ MonoBehaviour:
   chapter: 1
   stage: 5
   spawnInfos:
-  - enemyData: {fileID: 11400000, guid: d88dce555c21507429e0a7065b51e4f9, type: 2}
+  - enemyData: {fileID: 11400000, guid: 052f74b5ea6d8d24ebff3e3cd0d824f6, type: 2}
     spawnPointID: 1_1_1
   - enemyData: {fileID: 11400000, guid: f2a0f5e689232714d8992350097a04b6, type: 2}
     spawnPointID: 1_1_3

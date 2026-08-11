@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class MouseManager : MonoBehaviour
+public class MouseManager : Singleton<MouseManager>
 {
     public bool ismMouse {  get; private set; }
     int openCount = 0;
-    private void Awake()
+    protected override void Awake()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
@@ -28,12 +28,19 @@ public class MouseManager : MonoBehaviour
         Cursor.lockState= CursorLockMode.Confined;
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         openCount = 0;
         ismMouse = false;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
 
+    }
+
+    public void ResetMouse()
+    {
+        ismMouse = false;
+        openCount = 0;
     }
 }

@@ -15,6 +15,9 @@ GameObject:
   - component: {fileID: -2079912183285248319}
   - component: {fileID: 728951479383556279}
   - component: {fileID: 1400038131776306610}
+  - component: {fileID: 8511880998809460275}
+  - component: {fileID: 3202668679285916811}
+  - component: {fileID: 7368519295446243740}
   m_Layer: 6
   m_Name: 1CBoss
   m_TagString: Enemy
@@ -203,9 +206,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aefbc3a632c55854c96b18e8434a83a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  hp: 200
-  fleshEffect: {fileID: 0}
+  rb: {fileID: 0}
   animator: {fileID: 0}
+  fleshEffect: {fileID: 0}
+  hp: 200
 --- !u!70 &1400038131776306610
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -243,3 +247,43 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.85, y: 0.85}
   m_Direction: 0
+--- !u!114 &8511880998809460275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7991408148199228535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37940d3cf27ef94468da73b7f43d910f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FleshEffect
+  spriteRenderer: {fileID: 0}
+  originarMaterial: {fileID: 0}
+  flashMaterial: {fileID: 2100000, guid: 1a3378092f18da14f9bad70ea2278dce, type: 2}
+  duraion: 0.1
+--- !u!114 &3202668679285916811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7991408148199228535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ceeac8bca70ee438056a8d5a774392, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAttackExecutor
+--- !u!114 &7368519295446243740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7991408148199228535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 674b6099510f45d47810ae2217e8af97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySkillExecutor

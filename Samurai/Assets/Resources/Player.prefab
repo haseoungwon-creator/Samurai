@@ -20,10 +20,10 @@ GameObject:
   - component: {fileID: 5341629387580372281}
   - component: {fileID: 7789975671263068793}
   - component: {fileID: 6218990926057133697}
-  - component: {fileID: 91306181594917350}
   - component: {fileID: 2590438919756577752}
   - component: {fileID: 3033780326851196830}
   - component: {fileID: 1113285935664313509}
+  - component: {fileID: -6292695101585147781}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -325,18 +325,6 @@ MonoBehaviour:
   inventoryUI: {fileID: 0}
   pauseManager: {fileID: 0}
   quest: {fileID: 11400000, guid: c96bec41c22170440ac6e428377aa4ac, type: 2}
---- !u!114 &91306181594917350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 101972271750789295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1ce08a3f8ccaf148af7d55fff3918db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerStateMachine
 --- !u!114 &2590438919756577752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,9 +350,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDefend
   justGuardWindow: 0.2
-  justGuardInvincibleTime: 0
   justGuardDamage: 5
   maxGuardCount: 3
+  guardBreakTime: 0.8
 --- !u!114 &1113285935664313509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,3 +369,15 @@ MonoBehaviour:
   originarMaterial: {fileID: 0}
   flashMaterial: {fileID: 2100000, guid: 1a3378092f18da14f9bad70ea2278dce, type: 2}
   duraion: 0.1
+--- !u!114 &-6292695101585147781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101972271750789295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4a9fbea48d4a644db180101e26074da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStun

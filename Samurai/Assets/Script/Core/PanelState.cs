@@ -5,5 +5,6 @@ public enum panel
     Shop,
     Dialogue,
     Quest,
-    DeleteConfirm
+    DeleteConfirm,
+    GameOver
 }

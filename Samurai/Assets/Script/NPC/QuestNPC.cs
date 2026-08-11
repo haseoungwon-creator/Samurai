@@ -107,6 +107,7 @@ public class QuestNPC : NPCBase
         {
            GameObject obj = GameObject.FindGameObjectWithTag("Player");
 
+            if (obj == null) return;
             if (obj != null)
                 player = obj.transform;
         }

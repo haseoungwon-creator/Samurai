@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Combo2
   m_EditorClassIdentifier: Assembly-CSharp::AttackData
   damage: 8
-  size: {x: 1.7, y: 1}
+  size: {x: 1.42, y: 1}
   offset: {x: 0.1, y: 0}
   duration: 0.2
   comboWindow: 0.5

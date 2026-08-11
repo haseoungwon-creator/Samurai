@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5738053dbe39e384c9f8f9ff9a307ccd, type: 3}
+  m_Name: Chapter1 Enemy1-2
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  enemyID: Forest Enemy
+  enemyName: Forest Grunt
+  isBoss: 0
+  prefab: {fileID: 4244198174322379900, guid: 86f04d776b54c4c4fa8edc4a2df0e306, type: 3}
+  maxHP: 75
+  rewardGold: 15
+  moveSpeed: 3
+  detectRange: 10
+  keepDistance: 1
+  keepDistanceSpeed: 1
+  recoverTime: 0.2
+  hurtTime: 0.2
+  attackPower: 12
+  attackRange: 1
+  attackPrepareTime: 0.18
+  attackCooldownMin: 0.8
+  attackCooldownMax: 1.3
+  attackCanStun: 0
+  attackStunTime: 0.5
+  attackDatas:
+  - {fileID: 11400000, guid: 5bd166af28931a345aefc1970682d495, type: 2}
+  hitboxPrefab: {fileID: 316443250584434831, guid: 36dccc3ac6b496d4287c52ca048dfb8a, type: 3}
+  skillChance: 30
+  useBehindAttack: 0
+  behindAttackChance: 0
+  behindAttackCooldown: 0
+  behindAttackDamage: 0
+  behindAttackDistance: 0
+  useDashAttackCombo: 0
+  dashAttackChance: 0
+  dashAttackCooldown: 0
+  dashAttackDamage: 0
+  dashStartDistance: 4
+  dashHitDistance: 0
+  dashPauseTime: 0
+  dashIntervalStart: 0
+  dashIntervalEnd: 0
+  dashHitCount: 0
+  useInvisibility: 0
+  invisibilityChance: 0
+  invisibilityCooldown: 0
+  invisibilityDuration: 0

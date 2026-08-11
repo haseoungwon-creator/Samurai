@@ -10,19 +10,17 @@ public class PlayerCharge : MonoBehaviour
     float chargeTimer;
 
     PlayerAnimator playerAnimator;
-    PlayerStateMachine stateMachine;
     
 
     private void Awake()
     {
         playerAnimator = GetComponent<PlayerAnimator>();
-        stateMachine = GetComponent<PlayerStateMachine>();
     }
 
     public void StartCharge()
     {
 
-        if (!stateMachine.CanCharge()) return;
+        if (!PlayerStateMachine.Instance.CanCharge()) return;
         if(isCharging) return;
         chargeTimer = 0;
         isCharging = true;
@@ -31,15 +29,15 @@ public class PlayerCharge : MonoBehaviour
 
     public void Charging()
     {
-        if (stateMachine.CurrentState != PlayerState.Idle && stateMachine.CurrentState != PlayerState.Charge) return;
+        if (PlayerStateMachine.Instance.CurrentState != PlayerState.Idle && PlayerStateMachine.Instance.CurrentState != PlayerState.Charge) return;
         
         if(!isCharging || isCharged) return;
-        stateMachine.ChangeState(PlayerState.Charge);
+        PlayerStateMachine.Instance.ChangeState(PlayerState.Charge);
         chargeTimer += Time.deltaTime;
         if(chargeTimer >= chargeTime)
         {
             isCharged = true;
-            stateMachine.ChangeState(PlayerState.ChargeFull);
+            PlayerStateMachine.Instance.ChangeState(PlayerState.ChargeFull);
             playerAnimator.TriggerChargeAttack();
         }
     }
@@ -51,9 +49,9 @@ public class PlayerCharge : MonoBehaviour
         isCharging = false;
         isCharged= false;
 
-        stateMachine.ChangeState(PlayerState.ChargeAttack);
+        PlayerStateMachine.Instance.ChangeState(PlayerState.ChargeAttack);
 
-        Debug.Log("stateMachine 상태: " + stateMachine.CurrentState);
+        Debug.Log("stateMachine 상태: " + PlayerStateMachine.Instance.CurrentState);
         Debug.Log("Instance 상태: " + PlayerStateMachine.Instance.CurrentState);
         playerAnimator.TriggerChargeAttack();
     }
@@ -68,7 +66,7 @@ public class PlayerCharge : MonoBehaviour
 
     public void EndChargeAttack()
     {
-        stateMachine.ChangeState(PlayerState.Idle);
+        PlayerStateMachine.Instance.ChangeState(PlayerState.Idle);
         ResetCharge();
     }
     public void CancelCharge()
@@ -83,6 +81,6 @@ public class PlayerCharge : MonoBehaviour
         isCharging = false;
         chargeTimer = 0;
         playerAnimator.ResetTriggerCharge();
-        stateMachine.ChangeState(PlayerState.Idle);
+        PlayerStateMachine.Instance.ChangeState(PlayerState.Idle);
     }
 }

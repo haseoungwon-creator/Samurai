@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class PlayerStateMachine : Singleton<PlayerStateMachine>
 {
@@ -32,5 +33,10 @@ public class PlayerStateMachine : Singleton<PlayerStateMachine>
     {
         if (CurrentState == PlayerState.Idle || CurrentState == PlayerState.Attack) return true;
         return false;
+    }
+
+    public void ResetState()
+    {
+        CurrentState = PlayerState.Idle;
     }
 }

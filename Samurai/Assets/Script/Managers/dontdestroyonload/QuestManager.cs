@@ -122,4 +122,14 @@ public class QuestManager : Singleton<QuestManager>
         CurrentCount = 0;
         IsCompleted = false;
     }
+
+    public void ResetAllQuests()
+    {
+        CurrentQuest = null;
+        NextQuest = null;
+        CompletedQuest.Clear();
+        CurrentCount = 0;
+        IsCompleted = false;
+        CanTeacherTalk = true;
+    }
 }

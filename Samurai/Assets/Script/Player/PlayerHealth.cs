@@ -14,6 +14,7 @@ public class PlayerHealth : MonoBehaviour
 
     Animator animator;
     PlayerCharge playerCharge;
+    PlayerAttack playerAttack;
     PlayerDefend playerDefend;
     FleshEffect fleshEffect;
 
@@ -21,10 +22,26 @@ public class PlayerHealth : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         playerCharge = GetComponent<PlayerCharge>();
+        playerAttack = GetComponent<PlayerAttack>();
         playerDefend = GetComponent<PlayerDefend>();
         fleshEffect = GetComponent<FleshEffect>();
         isDead = false;
-        hp = PlayerStat.Instance.MaxHp;
+
+        if(GameManager.Instance.PlayerHp <= 0)
+        {
+            hp = PlayerStat.Instance.MaxHp;
+            GameManager.Instance.SetInitialPlauerHp(hp);
+        }
+        else
+        {
+            hp = GameManager.Instance.PlayerHp;
+        }
+        
+    }
+
+    private void Start()
+    {
+        GameManager.Instance.SetPlayer(gameObject);
     }
     public void TakeDamage(int damage, Enemy attacker = null)
     {
@@ -34,9 +51,12 @@ public class PlayerHealth : MonoBehaviour
             return;
         }
         if(isDead||isInvincible) { return; }
+        animator.SetInteger("attackstate", 0);
         playerCharge.CancelCharge();
+        playerAttack.CancelAttack();
         int finalDamage = Mathf.Max(0, damage - PlayerStat.Instance.Defense);
         hp -= finalDamage;
+        GameManager.Instance.SetPlayerHP(hp);
         Debug.Log(hp);
         CameraStateMachine.Instance.ChangeState(CameraState.TakeDamageMove);
         fleshEffect.Flash();
@@ -45,6 +65,7 @@ public class PlayerHealth : MonoBehaviour
 
         if(hp <= 0)
         {
+            GameManager.Instance.SetPlayerHP(hp);
             Die();
             return;
         }
@@ -58,10 +79,13 @@ public class PlayerHealth : MonoBehaviour
         animator.SetTrigger("die");
     }
 
-    private void DestroyPlayer()
+    public void TriggerGameOver()
     {
-        Destroy(gameObject);
-    }
+
+        animator.speed = 0f;
+        GameOverManager.Instance.ShowGameOver();
+    
+}
 
     public IEnumerator InvincibleRoutine()
     {
@@ -85,5 +109,7 @@ public class PlayerHealth : MonoBehaviour
         {
             hp = PlayerStat.Instance.MaxHp;
         }
+
+        GameManager.Instance.SetPlayerHP(hp);
     }
 }

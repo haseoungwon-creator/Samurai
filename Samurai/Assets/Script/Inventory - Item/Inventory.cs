@@ -90,4 +90,14 @@ public class Inventory : Singleton<Inventory>
 
     }
 
+    public void ResetInventory()
+    {
+        foreach(ItemSlot slot in inventorySlots)
+            slot.Clear();
+        foreach (ItemSlot slot in quickSlots) slot.Clear();
+
+        weaponSlot.Clear();
+        armorSlot.Clear();
+    }
+
 }

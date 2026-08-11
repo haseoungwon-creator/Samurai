@@ -32,4 +32,9 @@ public class GoldManager : Singleton<GoldManager>
 
         return true;
     }
+
+    public void ResetGold()
+    {
+        gold = startGold;
+    }
 }

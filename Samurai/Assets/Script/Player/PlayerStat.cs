@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class PlayerStat : Singleton<PlayerStat>
@@ -110,5 +111,20 @@ public class PlayerStat : Singleton<PlayerStat>
 
         speedMultiplier = 1f;
         speedRoutine = null;
+    }
+
+    public void ResetStat()
+    {
+        if(powerRoutine != null) StopCoroutine(powerRoutine);
+        if(speedRoutine != null) StopCoroutine(speedRoutine);
+
+        bonusHp = 0;
+        bonusPower = 0;
+        bonusDefense = 0;
+        bonusSpeed = 0;
+        powerRoutine = null;
+        speedRoutine = null;
+        powerMultiplier = 1f;
+        speedMultiplier = 1f;
     }
 }

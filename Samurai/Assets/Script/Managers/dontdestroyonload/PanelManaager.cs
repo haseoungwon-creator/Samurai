@@ -43,7 +43,8 @@ public class PanelManaager : Singleton<PanelManaager>
         {
             GameObject prefab = Resources.Load<GameObject>(panelType.ToString());
 
-            if (prefab == null) return;
+            if (prefab == null)
+                return;
 
             panelObject = Instantiate(prefab);
             panelObject.name = panelType.ToString();
