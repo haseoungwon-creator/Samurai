@@ -14,25 +14,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyID: Forest Enemy
   enemyName: Forest Soldier
+  isBoss: 0
   prefab: {fileID: 1359930873657831002, guid: 53178de4971f954469c7c39f3c0a5afd, type: 3}
-  maxHP: 100
-  rewardGold: 25
-  moveSpeed: 2.5
-  detectRange: 12
-  keepDistance: 4.5
-  keepDistanceSpeed: 4
-  recoverTime: 0.2
-  hurtTime: 0.2
-  attackPower: 17
-  attackRange: 4
-  attackPrepareTime: 0.25
-  attackCooldownMin: 0.65
-  attackCooldownMax: 1
+  maxHP: 150
+  rewardGold: 35
+  moveSpeed: 4
+  detectRange: 10
+  keepDistance: 3.5
+  keepDistanceSpeed: 1
+  recoverTime: 0.15
+  hurtTime: 0.15
+  attackPower: 15
+  attackRange: 1.8
+  attackPrepareTime: 0.15
+  attackCooldownMin: 1
+  attackCooldownMax: 1.5
   attackCanStun: 1
-  attackStunTime: 0.5
+  attackStunTime: 0.6
   attackDatas:
   - {fileID: 11400000, guid: 29d9318587db2674ab3ff0285f013ee0, type: 2}
-  hitboxPrefab: {fileID: 5403359548854742503, guid: 02cbddff3e835244a813d701860afb7d, type: 3}
+  hitboxPrefab: {fileID: 316443250584434831, guid: 36dccc3ac6b496d4287c52ca048dfb8a, type: 3}
   skillChance: 30
   useBehindAttack: 0
   behindAttackChance: 30

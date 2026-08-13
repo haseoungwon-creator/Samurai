@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5738053dbe39e384c9f8f9ff9a307ccd, type: 3}
-  m_Name: Chapter1 Enemy2
+  m_Name: Chapter2 Enemy2
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyID: Forest Enemy
   enemyName: Forest Soldier
   isBoss: 0
   prefab: {fileID: 1359930873657831002, guid: 53178de4971f954469c7c39f3c0a5afd, type: 3}
-  maxHP: 80
-  rewardGold: 15
+  maxHP: 185
+  rewardGold: 100
   moveSpeed: 2.5
   detectRange: 10
   keepDistance: 3.5

@@ -19,19 +19,19 @@ MonoBehaviour:
     spawnPointID: 1_1_1
   - enemyData: {fileID: 11400000, guid: 3d0b8a68a48925b4e89bf7aad2f7d599, type: 2}
     spawnPointID: 1_1_3
-  - enemyData: {fileID: 11400000, guid: 052f74b5ea6d8d24ebff3e3cd0d824f6, type: 2}
+  - enemyData: {fileID: 11400000, guid: 600a3d45fed932841a41f8d980c98070, type: 2}
     spawnPointID: 1_1_5
-  - enemyData: {fileID: 11400000, guid: 052f74b5ea6d8d24ebff3e3cd0d824f6, type: 2}
+  - enemyData: {fileID: 11400000, guid: 600a3d45fed932841a41f8d980c98070, type: 2}
     spawnPointID: 1_2_1
   - enemyData: {fileID: 11400000, guid: 3d0b8a68a48925b4e89bf7aad2f7d599, type: 2}
     spawnPointID: 1_2_3
   - enemyData: {fileID: 11400000, guid: 3d0b8a68a48925b4e89bf7aad2f7d599, type: 2}
     spawnPointID: 1_2_5
-  - enemyData: {fileID: 11400000, guid: 052f74b5ea6d8d24ebff3e3cd0d824f6, type: 2}
+  - enemyData: {fileID: 11400000, guid: 600a3d45fed932841a41f8d980c98070, type: 2}
     spawnPointID: 1_3_2
-  - enemyData: {fileID: 11400000, guid: f2a0f5e689232714d8992350097a04b6, type: 2}
+  - enemyData: {fileID: 11400000, guid: ba58ee76faabf4b47984c94ab8c2c87a, type: 2}
     spawnPointID: 1_3_4
-  - enemyData: {fileID: 11400000, guid: 052f74b5ea6d8d24ebff3e3cd0d824f6, type: 2}
+  - enemyData: {fileID: 11400000, guid: 600a3d45fed932841a41f8d980c98070, type: 2}
     spawnPointID: 1_4_2
-  - enemyData: {fileID: 11400000, guid: f2a0f5e689232714d8992350097a04b6, type: 2}
+  - enemyData: {fileID: 11400000, guid: ba58ee76faabf4b47984c94ab8c2c87a, type: 2}
     spawnPointID: 1_4_4

@@ -10,47 +10,47 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5738053dbe39e384c9f8f9ff9a307ccd, type: 3}
-  m_Name: Chapter1 Enemy2
+  m_Name: Chapter2 Enemy 4
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyID: Forest Enemy
-  enemyName: Forest Soldier
+  enemyName: Forest Mercenary
   isBoss: 0
-  prefab: {fileID: 1359930873657831002, guid: 53178de4971f954469c7c39f3c0a5afd, type: 3}
-  maxHP: 80
-  rewardGold: 15
-  moveSpeed: 2.5
-  detectRange: 10
+  prefab: {fileID: 8936530873949595460, guid: d1ca80d139e124b45ab172ada4b893ef, type: 3}
+  maxHP: 500
+  rewardGold: 200
+  moveSpeed: 3.5
+  detectRange: 30
   keepDistance: 3.5
   keepDistanceSpeed: 2.5
   recoverTime: 0.15
   hurtTime: 0.15
-  attackPower: 15
-  attackRange: 1.8
+  attackPower: 20
+  attackRange: 1
   attackPrepareTime: 0.15
-  attackCooldownMin: 1
-  attackCooldownMax: 1.5
+  attackCooldownMin: 0.45
+  attackCooldownMax: 0.8
   attackCanStun: 1
-  attackStunTime: 0.2
+  attackStunTime: 1
   attackDatas:
-  - {fileID: 11400000, guid: 29d9318587db2674ab3ff0285f013ee0, type: 2}
-  hitboxPrefab: {fileID: 316443250584434831, guid: 36dccc3ac6b496d4287c52ca048dfb8a, type: 3}
-  skillChance: 30
-  useBehindAttack: 0
+  - {fileID: 11400000, guid: e681019f58f58ce408f6cfb7dae048d9, type: 2}
+  hitboxPrefab: {fileID: 4878279130267575731, guid: 6dd63f62bb45f5e43b2416175a8ed25d, type: 3}
+  skillChance: 60
+  useBehindAttack: 1
   behindAttackChance: 30
-  behindAttackCooldown: 5
-  behindAttackDamage: 20
+  behindAttackCooldown: 10
+  behindAttackDamage: 3
   behindAttackDistance: 1
   useDashAttackCombo: 0
-  dashAttackChance: 30
-  dashAttackCooldown: 8
-  dashAttackDamage: 30
+  dashAttackChance: 50
+  dashAttackCooldown: 10
+  dashAttackDamage: 20
   dashStartDistance: 4
-  dashHitDistance: 0.6
+  dashHitDistance: 1
   dashPauseTime: 0.25
   dashIntervalStart: 0.35
-  dashIntervalEnd: 0.08
+  dashIntervalEnd: 0.1
   dashHitCount: 20
   useInvisibility: 0
-  invisibilityChance: 20
+  invisibilityChance: 80.6
   invisibilityCooldown: 10
-  invisibilityDuration: 4
+  invisibilityDuration: 5

@@ -104,12 +104,12 @@ public class PlayerMove : MonoBehaviour
 
     public void PlayFootstep()
     {
-        if (playerHealth.isDead) return;
-        if (playerDash.isDashing) return;
-        if (playerCharge.isCharged) return;
-        if (playerDefen.isDefending) return;
-        if (playerStun != playerStun.IsStunned) return;
-        if (GameManager.Instance.CurrentState != GameState.Playing) return;
+        //if (playerHealth.isDead) return;
+        //if (playerDash.isDashing) return;
+        //if (playerCharge.isCharged) return;
+        //if (playerDefen.isDefending) return;
+        //if (playerStun != playerStun.IsStunned) return;
+        //if (GameManager.Instance.CurrentState != GameState.Playing) return;
 
         SoundManager.Instance.Emit(Sound.Walk);
     }
