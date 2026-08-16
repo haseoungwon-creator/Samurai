@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::QuestData
   questId: 
   questName: 1-5 Boss
-  description: "\uC232\uC5D0\uC11C \uBCF4\uC2A4\uB97C \uCC98\uCE58\uD558\uB77C"
+  description: "\uB300\uB098\uBB34 \uC232\uC5D0\uC11C \uBCF4\uC2A4\uB97C \uCC98\uCE58\uD558\uB77C"
   chapter: 1
   stage: 5
   questType: 0
@@ -23,7 +23,7 @@ MonoBehaviour:
   rewardGold: 500
   rewardItem: {fileID: 0}
   startStoryKey: village_teacher_6
-  nextQuest: {fileID: 0}
+  nextQuest: {fileID: 11400000, guid: 49b626f12e4e18c4b802a3b561cb2bf4, type: 2}
   autoStartNextQuest: 1
   targetScene: Chapter1
   spawnPointID: 

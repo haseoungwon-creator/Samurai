@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a30de978fba5e3847b949885754227b9, type: 3}
   m_Name: 2-2
   m_EditorClassIdentifier: Assembly-CSharp::StageData
-  chapter: 1
+  chapter: 2
   stage: 2
   spawnInfos:
-  - enemyData: {fileID: 11400000, guid: 7e331e891c4a7f0499f53268cfea8a79, type: 2}
-    spawnPointID: 1_1_1
-  - enemyData: {fileID: 11400000, guid: 3d0b8a68a48925b4e89bf7aad2f7d599, type: 2}
-    spawnPointID: 1_1_3
-  - enemyData: {fileID: 11400000, guid: 3d0b8a68a48925b4e89bf7aad2f7d599, type: 2}
-    spawnPointID: 1_2_1
-  - enemyData: {fileID: 11400000, guid: 7e331e891c4a7f0499f53268cfea8a79, type: 2}
-    spawnPointID: 1_2_3
-  - enemyData: {fileID: 11400000, guid: 3d0b8a68a48925b4e89bf7aad2f7d599, type: 2}
-    spawnPointID: 1_2_5
-  - enemyData: {fileID: 11400000, guid: 3d0b8a68a48925b4e89bf7aad2f7d599, type: 2}
-    spawnPointID: 1_3_2
-  - enemyData: {fileID: 11400000, guid: ce214436fa6adc74c8989ff0e87bea0e, type: 2}
-    spawnPointID: 1_3_4
+  - enemyData: {fileID: 11400000, guid: 3c748d52db4bba945a9588cef8fce2a6, type: 2}
+    spawnPointID: 2_1_1
+  - enemyData: {fileID: 11400000, guid: 051c6a513b421eb47ad0c1b820eccf72, type: 2}
+    spawnPointID: 2_1_3
+  - enemyData: {fileID: 11400000, guid: 051c6a513b421eb47ad0c1b820eccf72, type: 2}
+    spawnPointID: 2_2_1
+  - enemyData: {fileID: 11400000, guid: 3c748d52db4bba945a9588cef8fce2a6, type: 2}
+    spawnPointID: 2_2_3
+  - enemyData: {fileID: 11400000, guid: 051c6a513b421eb47ad0c1b820eccf72, type: 2}
+    spawnPointID: 2_2_5
+  - enemyData: {fileID: 11400000, guid: 051c6a513b421eb47ad0c1b820eccf72, type: 2}
+    spawnPointID: 2_3_2
+  - enemyData: {fileID: 11400000, guid: 8743e1c41e2b3214fa3d0757959157a5, type: 2}
+    spawnPointID: 2_3_4

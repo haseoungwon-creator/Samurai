@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class BossHPUI : MonoBehaviour
 {
+    [SerializeField] GameObject HpBg;
     [SerializeField] Transform hpImage;
     [SerializeField] Text bossNameText;
     [SerializeField] Text hpText;
@@ -20,17 +21,18 @@ public class BossHPUI : MonoBehaviour
 
         if (boss.IsDead)
         {
-            gameObject.SetActive(false);
+            SetUIAlpha(0f);
+            boss = null;
             return;
         }
 
         if (!IsBossInView())
         {
-            gameObject.SetActive(false);
+            SetUIAlpha(0f);
             return;
         }
 
-        gameObject.SetActive(true);
+        SetUIAlpha(1f);
         UpdateHPUI();
     }
 
@@ -47,12 +49,17 @@ public class BossHPUI : MonoBehaviour
                 continue;
 
             boss = enemy;
-            gameObject.SetActive(IsBossInView());
+
+            if (IsBossInView())
+                SetUIAlpha(1f);
+            else
+                SetUIAlpha(0f);
+
             UpdateHPUI();
             return;
         }
 
-        gameObject.SetActive(false);
+        SetUIAlpha(0f);
     }
 
     private bool IsBossInView()
@@ -96,5 +103,42 @@ public class BossHPUI : MonoBehaviour
 
         if (hpText != null)
             hpText.text = $"{currentHP} / {maxHP}";
+    }
+
+    private void SetUIAlpha(float alpha)
+    {
+        if(HpBg != null)
+        {
+            Image imageHpBg = HpBg.GetComponent<Image>();
+            Color color = imageHpBg.color;
+            color.a = alpha;
+            imageHpBg.color = color;
+        }
+
+        if (hpImage != null)
+        {
+            Image image = hpImage.GetComponent<Image>();
+
+            if (image != null)
+            {
+                Color color = image.color;
+                color.a = alpha;
+                image.color = color;
+            }
+        }
+
+        if (bossNameText != null)
+        {
+            Color color = bossNameText.color;
+            color.a = alpha;
+            bossNameText.color = color;
+        }
+
+        if (hpText != null)
+        {
+            Color color = hpText.color;
+            color.a = alpha;
+            hpText.color = color;
+        }
     }
 }

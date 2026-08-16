@@ -15,8 +15,8 @@ MonoBehaviour:
   enemyID: Forest Boss
   enemyName: Forest Boss
   isBoss: 1
-  prefab: {fileID: 7991408148199228535, guid: 194add6fbac3923469932b7cc838b861, type: 3}
-  maxHP: 100
+  prefab: {fileID: 1247749116366717680, guid: 38a887bed94ca6e47be5e975c5a8cdc9, type: 3}
+  maxHP: 800
   rewardGold: 1200
   moveSpeed: 2
   detectRange: 30
@@ -30,12 +30,12 @@ MonoBehaviour:
   attackCooldownMin: 1
   attackCooldownMax: 1
   attackCanStun: 1
-  attackStunTime: 1
+  attackStunTime: 0.3
   attackDatas:
-  - {fileID: 11400000, guid: 6561efbcf02a07c41be32f86f76ddc69, type: 2}
-  - {fileID: 11400000, guid: 4763fdaee59830a42a788709ea70d6d4, type: 2}
-  - {fileID: 11400000, guid: f718fd8c00d6c584a96af7e7cb132162, type: 2}
-  hitboxPrefab: {fileID: 7645207877034328656, guid: a326fe4f8a7ee474bb5aea70f7299ff7, type: 3}
+  - {fileID: 11400000, guid: a2abb73b2089e5a4b997c277c1529e05, type: 2}
+  - {fileID: 11400000, guid: b8652c4838bda7c4f9725eb6105fdc6d, type: 2}
+  - {fileID: 11400000, guid: bd9eb600831796c45b9036ae68321b85, type: 2}
+  hitboxPrefab: {fileID: 7877067041584958374, guid: 06f8bcee35f11a6439b0d37d5e0fccbf, type: 3}
   skillChance: 50
   useBehindAttack: 0
   behindAttackChance: 50

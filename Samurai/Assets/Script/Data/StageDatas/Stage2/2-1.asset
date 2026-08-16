@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a30de978fba5e3847b949885754227b9, type: 3}
   m_Name: 2-1
   m_EditorClassIdentifier: Assembly-CSharp::StageData
-  chapter: 1
+  chapter: 2
   stage: 1
   spawnInfos:
   - enemyData: {fileID: 11400000, guid: 3c748d52db4bba945a9588cef8fce2a6, type: 2}

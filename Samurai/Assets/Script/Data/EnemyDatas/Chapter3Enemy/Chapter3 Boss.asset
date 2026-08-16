@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5738053dbe39e384c9f8f9ff9a307ccd, type: 3}
+  m_Name: Chapter3 Boss
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  enemyID: Forest Boss
+  enemyName: Forest Boss
+  isBoss: 1
+  prefab: {fileID: 5314209180985580366, guid: b9e0108e2fc0b9a4bbfccd2ca73cb12c, type: 3}
+  maxHP: 1500
+  rewardGold: 2500
+  moveSpeed: 3
+  detectRange: 30
+  keepDistance: 1
+  keepDistanceSpeed: 1
+  recoverTime: 0.2
+  hurtTime: 0.2
+  attackPower: 35
+  attackRange: 1
+  attackPrepareTime: 0.2
+  attackCooldownMin: 1
+  attackCooldownMax: 1
+  attackCanStun: 1
+  attackStunTime: 0.3
+  attackDatas:
+  - {fileID: 11400000, guid: 3045b4d28d5df4242bbdb75007b1b58e, type: 2}
+  - {fileID: 11400000, guid: fafc4c15a2c767549b5e4c870aa1f001, type: 2}
+  - {fileID: 11400000, guid: 0949dac0e613a2742b4e8b915e296629, type: 2}
+  hitboxPrefab: {fileID: 8981577396775958459, guid: 631b71e14514d1845bbb306781fa86b5, type: 3}
+  skillChance: 50
+  useBehindAttack: 0
+  behindAttackChance: 50
+  behindAttackCooldown: 5
+  behindAttackDamage: 3
+  behindAttackDistance: 1
+  useDashAttackCombo: 0
+  dashAttackChance: 50
+  dashAttackCooldown: 10
+  dashAttackDamage: 20
+  dashStartDistance: 4
+  dashHitDistance: 1
+  dashPauseTime: 0.25
+  dashIntervalStart: 0.35
+  dashIntervalEnd: 0.1
+  dashHitCount: 20
+  useInvisibility: 1
+  invisibilityChance: 80.6
+  invisibilityCooldown: 10
+  invisibilityDuration: 5

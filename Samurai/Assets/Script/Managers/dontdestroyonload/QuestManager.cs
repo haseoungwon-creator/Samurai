@@ -38,6 +38,11 @@ public class QuestManager : Singleton<QuestManager>
         }
     }
 
+    public void TopkeyCompleteQuest()
+    {
+        AddProgress(CurrentQuest.targetID);
+    }
+
     private void CompleteQuest()
     {
         IsCompleted = true;

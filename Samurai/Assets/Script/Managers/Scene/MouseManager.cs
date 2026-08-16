@@ -7,7 +7,7 @@ public class MouseManager : Singleton<MouseManager>
     protected override void Awake()
     {
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.Locked;
         ismMouse = false;
     }
 
@@ -25,7 +25,7 @@ public class MouseManager : Singleton<MouseManager>
         if (openCount > 0) return;
         ismMouse = false;
         Cursor.visible = false;
-        Cursor.lockState= CursorLockMode.Confined;
+        Cursor.lockState= CursorLockMode.Locked;
     }
 
     protected override void OnDestroy()
@@ -34,7 +34,7 @@ public class MouseManager : Singleton<MouseManager>
         openCount = 0;
         ismMouse = false;
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.Locked;
 
     }
 

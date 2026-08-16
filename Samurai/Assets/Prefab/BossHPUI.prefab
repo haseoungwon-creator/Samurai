@@ -426,6 +426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67cb5ed36701d7d47b5a01e77208d65f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossHPUI
+  HpBg: {fileID: 9002571357060471835}
   hpImage: {fileID: 797451730670274640}
   bossNameText: {fileID: 2433996699672947908}
   hpText: {fileID: 5333685770150070377}

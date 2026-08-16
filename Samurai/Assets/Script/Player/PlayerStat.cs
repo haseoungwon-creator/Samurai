@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Xml.Serialization;
 using UnityEngine;
 
 public class PlayerStat : Singleton<PlayerStat>
@@ -8,7 +6,6 @@ public class PlayerStat : Singleton<PlayerStat>
     [SerializeField] int baseHP = 100;
     [SerializeField] int baseDefense = 0;
     [SerializeField] int baseSpeed = 4;
-
     int bonusHp;
     int bonusPower;
     int bonusDefense;

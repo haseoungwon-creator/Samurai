@@ -34,6 +34,18 @@ public class PlayerInput : MonoBehaviour
     private void Update()
     {
         if (GameManager.Instance == null) return;
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            QuestManager.Instance.TopkeyCompleteQuest();
+        }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            transform.position = new Vector3(66, -2, 0);
+        } 
+        if(Input.GetKeyDown(KeyCode.Z))
+        {
+            transform.position = new Vector3(90, -2, 0);
+        }
         if(inventoryUI == null)
         {
             inventoryUI = FindAnyObjectByType<InventoryUI>();

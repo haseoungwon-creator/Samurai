@@ -28,4 +28,4 @@ MonoBehaviour:
   targetScene: Chapter1
   spawnPointID: 
   returnVillage: 1
-  nextStory: 1
+  nextStory: 0

@@ -143,7 +143,7 @@ public class Enemy : EnemyBase
 
     private float DistanceToPlayer()
     {
-        return Vector2.Distance(transform.position, player.position);
+        return Mathf.Abs(player.position.x - transform.position.x);
     }
 
     private void UpdateIdle()
@@ -408,20 +408,6 @@ public class Enemy : EnemyBase
 
         animator.SetBool("run", value);
     }
-
-    //private bool HasAnimatorParameter(string parameterName)
-    //{
-    //    if (animator == null)
-    //        return false;
-
-    //    for (int i = 0; i < animator.parameters.Length; i++)
-    //    {
-    //        if (animator.parameters[i].name == parameterName)
-    //            return true;
-    //    }
-
-    //    return false;
-    //}
 
     private void ExitAttackSlot()
     {

@@ -321,7 +321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 787aa2372d97509458e76747ca000aa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttackInput
-  testItem: {fileID: 11400000, guid: 59be6d44c73d8ca4ab360424cb9ba794, type: 2}
+  testItem: {fileID: 11400000, guid: 33c0372bf0b23f04f841983428ffabb3, type: 2}
   inventoryUI: {fileID: 0}
   pauseManager: {fileID: 0}
   quest: {fileID: 11400000, guid: c96bec41c22170440ac6e428377aa4ac, type: 2}

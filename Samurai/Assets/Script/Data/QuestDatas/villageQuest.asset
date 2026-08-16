@@ -23,8 +23,6 @@ MonoBehaviour:
   rewardGold: 100
   rewardItem: {fileID: 11400000, guid: cfeb48a750648704eb9eeb868113f79c, type: 2}
   startStoryKey: village_teacher_1
-  progressStoryKey: ...
-  completeStoryKey: good
   nextQuest: {fileID: 11400000, guid: c96bec41c22170440ac6e428377aa4ac, type: 2}
   autoStartNextQuest: 1
   targetScene: 

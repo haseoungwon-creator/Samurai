@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5738053dbe39e384c9f8f9ff9a307ccd, type: 3}
+  m_Name: Chapter3 Enemy 4
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  enemyID: Forest Enemy
+  enemyName: Forest Mercenary
+  isBoss: 0
+  prefab: {fileID: 8936530873949595460, guid: d1ca80d139e124b45ab172ada4b893ef, type: 3}
+  maxHP: 700
+  rewardGold: 450
+  moveSpeed: 3.5
+  detectRange: 30
+  keepDistance: 3.5
+  keepDistanceSpeed: 2.5
+  recoverTime: 0.15
+  hurtTime: 0.15
+  attackPower: 20
+  attackRange: 1
+  attackPrepareTime: 0.15
+  attackCooldownMin: 0.45
+  attackCooldownMax: 0.8
+  attackCanStun: 1
+  attackStunTime: 1
+  attackDatas:
+  - {fileID: 11400000, guid: e681019f58f58ce408f6cfb7dae048d9, type: 2}
+  hitboxPrefab: {fileID: 4878279130267575731, guid: 6dd63f62bb45f5e43b2416175a8ed25d, type: 3}
+  skillChance: 60
+  useBehindAttack: 1
+  behindAttackChance: 30
+  behindAttackCooldown: 10
+  behindAttackDamage: 3
+  behindAttackDistance: 1
+  useDashAttackCombo: 0
+  dashAttackChance: 50
+  dashAttackCooldown: 10
+  dashAttackDamage: 20
+  dashStartDistance: 4
+  dashHitDistance: 1
+  dashPauseTime: 0.25
+  dashIntervalStart: 0.35
+  dashIntervalEnd: 0.1
+  dashHitCount: 20
+  useInvisibility: 0
+  invisibilityChance: 80.6
+  invisibilityCooldown: 10
+  invisibilityDuration: 5
