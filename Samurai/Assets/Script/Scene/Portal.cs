@@ -9,14 +9,6 @@ public class Portal : MonoBehaviour
         if (!other.CompareTag("Player")) return;
         if (QuestManager.Instance.CurrentQuest.chapter == 0) return;
 
-
-        if (returnVillage)
-        {
-            if(QuestManager.Instance.IsCompleted)
-                SceneryManager.Instance.LoadScene("Village");
-        }
-        else
-        {
             QuestData quest = QuestManager.Instance.CurrentQuest;
 
             if(quest == null) return;
@@ -24,6 +16,5 @@ public class Portal : MonoBehaviour
             WorldManager.Instance.SetStage(quest.chapter,quest.stage);
 
             SceneryManager.Instance.LoadScene(quest.targetScene);
-        }
     }
 }

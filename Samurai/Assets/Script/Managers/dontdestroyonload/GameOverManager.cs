@@ -246,6 +246,7 @@ public class GameOverManager : Singleton<GameOverManager>
         GameManager.Instance?.ClearPlayer();
         GameManager.Instance?.ResetPlayerHP(0);
         MouseManager.Instance?.ResetMouse();
+        StoryManager.Instance?.ResetStoryManager();
     }
 
     public void QuitGame()

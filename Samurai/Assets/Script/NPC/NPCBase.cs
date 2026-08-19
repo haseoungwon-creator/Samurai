@@ -44,12 +44,7 @@ public class NPCBase : MonoBehaviour
 
         talked = true;
 
-        StoryController.Instance.Play(storyKey, EndDialogue);
-    }
-
-    protected virtual void EndDialogue()
-    {
-
+        StoryController.Instance.Play(storyKey);
     }
 
     public void ResetTalk()

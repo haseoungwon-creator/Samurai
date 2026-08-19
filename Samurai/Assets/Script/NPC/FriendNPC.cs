@@ -14,16 +14,11 @@ public class FriendNPC : NPCBase
 
         string storyKey = GetStoryKey();
 
-        StoryController.Instance.Play(storyKey, EndDialogue);
+        StoryController.Instance.Play(storyKey);
     }
 
     private string GetStoryKey()
     {
         return $"{storyPrefix}_{StoryManager.Instance.FriendStoryIndex}";
-    }
-
-    protected override void EndDialogue()
-    {
-        
     }
 }

@@ -97,6 +97,13 @@ public class StoryManager : Singleton<StoryManager>
     {
         CanTeachTalk= true;
     }
+
+    public void ResetStoryManager()
+    {
+        FriendStoryIndex = 1;
+        CanFriendTalk = true;
+        CanTeachTalk = true;
+    }
 }
 
 

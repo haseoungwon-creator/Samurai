@@ -42,7 +42,6 @@ public class QuestNPC : NPCBase
         if(nextQuest == null)
         {
             QuestManager.Instance.SubmitQuest();
-            EndDialogue();
             return;
         }
 
@@ -56,8 +55,6 @@ public class QuestNPC : NPCBase
                 {
                     QuestManager.Instance.StartNextQuest();
                 }
-
-                EndDialogue();
             });
     }
 
@@ -74,8 +71,6 @@ public class QuestNPC : NPCBase
             () =>
             {
                 QuestManager.Instance.StartQuest(quest);
-
-                EndDialogue();
             });
     }
 
@@ -96,10 +91,6 @@ public class QuestNPC : NPCBase
         return null;
     }
 
-    protected override void EndDialogue()
-    {
-            
-    }
 
     private void LookAtPlayer()
     {
